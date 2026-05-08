@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What Is cm/360? FPS Sensitivity Guide - AimScale</title>
+  <meta name="description" content="Learn what cm/360 means in FPS games, how to calculate it, why it matters, and how to use it when comparing sensitivity settings." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://aimscale.top/what-is-cm-360.html" />
+  <style>
+    :root {
+      --bg: #f7f8f3;
+      --surface: #ffffff;
+      --fg: #181c1a;
+      --muted: #626b66;
+      --border: #dfe5dd;
+      --accent: #247861;
+      --font-display: 'Iowan Old Style', 'Charter', Georgia, 'Times New Roman', serif;
+      --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --font-mono: ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 920px; margin: 0 auto; padding: 0 28px; }
+    .topnav { position: sticky; top: 0; background: color-mix(in oklch, var(--bg) 92%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .topnav-inner { max-width: 1160px; margin: 0 auto; padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo, h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0; }
+    .logo { font-size: 20px; font-weight: 600; }
+    nav { display: flex; gap: 28px; flex-wrap: wrap; }
+    nav a, .pagefoot a { color: var(--muted); font-size: 14px; }
+    nav a:hover, .pagefoot a:hover { color: var(--fg); }
+    main { padding: clamp(56px, 10vw, 112px) 0; }
+    .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--accent); margin: 0 0 20px; }
+    h1 { font-size: clamp(42px, 6vw, 72px); line-height: 1.04; margin: 0; max-width: 12ch; }
+    h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.12; margin: 56px 0 0; }
+    h3 { font-size: 22px; margin: 0; }
+    p, li { color: var(--muted); font-size: 16px; }
+    p { margin: 16px 0 0; max-width: 72ch; text-wrap: pretty; }
+    ul { margin: 16px 0 0; padding-left: 22px; }
+    li + li { margin-top: 8px; }
+    code { font-family: var(--font-mono); color: var(--fg); }
+    .notice { margin-top: 32px; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+    .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
+    .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .link-list { display: grid; gap: 12px; margin-top: 18px; }
+    .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
+    .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footlinks { display: flex; gap: 18px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <header class="topnav">
+    <div class="topnav-inner">
+      <a class="logo" href="/">AimScale</a>
+      <nav aria-label="Primary">
+        <a href="/">Calculator</a>
+        <a href="/cs2-to-valorant-sensitivity.html">CS2 to Valorant</a>
+        <a href="/dpi-vs-edpi.html">DPI vs eDPI</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <article class="container">
+      <p class="eyebrow">FPS sensitivity basics</p>
+      <h1>What is cm/360?</h1>
+      <p class="notice">cm/360 means how many centimeters you move your mouse on the mousepad to turn your in-game view exactly 360 degrees.</p>
+
+      <section aria-labelledby="why">
+        <h2 id="why">Why cm/360 Matters</h2>
+        <p>In-game sensitivity values are not directly comparable across games. A sensitivity of 1.0 in one shooter can feel very different from 1.0 in another. cm/360 gives you a physical measurement that is easier to compare.</p>
+        <p>Lower cm/360 means faster sensitivity because you need less mouse movement to turn. Higher cm/360 means slower sensitivity because you need more mouse movement to turn.</p>
+      </section>
+
+      <section aria-labelledby="formula">
+        <h2 id="formula">Basic Formula</h2>
+        <p>For games that use a yaw value, the common formula is:</p>
+        <p><code>cm/360 = 360 / (sensitivity x DPI x yaw) x 2.54</code></p>
+        <p>The yaw value is game-specific. That is why a converter should account for the game, not only the sensitivity number.</p>
+      </section>
+
+      <section aria-labelledby="ranges">
+        <h2 id="ranges">Example Ranges</h2>
+        <table class="table" aria-label="cm/360 example ranges">
+          <thead><tr><th>cm/360</th><th>Feel</th><th>Common tradeoff</th></tr></thead>
+          <tbody>
+            <tr><td>20 to 30 cm</td><td>Fast</td><td>Easier turns, harder micro control</td></tr>
+            <tr><td>30 to 50 cm</td><td>Medium</td><td>Balanced for many players</td></tr>
+            <tr><td>50 cm and higher</td><td>Slow</td><td>Precise aim, bigger arm movement</td></tr>
+          </tbody>
+        </table>
+        <p>These ranges are not rules. Desk space, mousepad size, role, FOV, and personal comfort matter more than copying a number from another player.</p>
+      </section>
+
+      <section aria-labelledby="use">
+        <h2 id="use">How To Use It</h2>
+        <ul>
+          <li>Find your current cm/360 in the game where your aim feels most comfortable.</li>
+          <li>Use that physical distance as a target when converting to a new game.</li>
+          <li>After conversion, tune by feel in small steps because scoped and FOV settings may differ.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="related">
+        <h2 id="related">Related Calculators</h2>
+        <div class="link-list">
+          <a href="/cs2-to-valorant-sensitivity.html">CS2 to Valorant sensitivity converter</a>
+          <a href="/valorant-to-cs2-sensitivity.html">Valorant to CS2 sensitivity converter</a>
+          <a href="/dpi-vs-edpi.html">DPI vs eDPI for FPS games</a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="pagefoot">
+    <div class="container footer-inner">
+      <span>&copy; 2026 AimScale</span>
+      <div class="footlinks" aria-label="Footer links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/about.html">About</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

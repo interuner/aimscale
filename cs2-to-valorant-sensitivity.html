@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CS2 to Valorant Sensitivity Converter - AimScale</title>
+  <meta name="description" content="Convert CS2 sensitivity to Valorant sensitivity with DPI adjustment, cm/360, eDPI, formula, and quick examples." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://aimscale.top/cs2-to-valorant-sensitivity.html" />
+  <style>
+    :root {
+      --bg: #f7f8f3;
+      --surface: #ffffff;
+      --fg: #181c1a;
+      --muted: #626b66;
+      --border: #dfe5dd;
+      --accent: #247861;
+      --accent-soft: color-mix(in oklch, var(--accent) 13%, transparent);
+      --fg-soft: color-mix(in oklch, var(--fg) 5%, transparent);
+      --font-display: 'Iowan Old Style', 'Charter', Georgia, 'Times New Roman', serif;
+      --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --font-mono: ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+    .topnav { position: sticky; top: 0; z-index: 10; background: color-mix(in oklch, var(--bg) 92%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .topnav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 28px; max-width: 1160px; margin: 0 auto; }
+    .logo, h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0; }
+    .logo { font-size: 20px; font-weight: 600; }
+    nav { display: flex; gap: 28px; flex-wrap: wrap; }
+    nav a, .pagefoot a { color: var(--muted); font-size: 14px; }
+    nav a:hover, .pagefoot a:hover { color: var(--fg); }
+    main { padding: clamp(48px, 8vw, 96px) 0; }
+    .grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr); gap: 48px; align-items: start; }
+    .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--accent); margin: 0 0 18px; }
+    h1 { font-size: clamp(42px, 6vw, 72px); line-height: 1.04; margin: 0; max-width: 12ch; }
+    h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.12; margin: 56px 0 0; }
+    h3 { font-size: 22px; margin: 0; }
+    p, li { color: var(--muted); font-size: 16px; }
+    p { margin: 16px 0 0; max-width: 68ch; text-wrap: pretty; }
+    ul { margin: 16px 0 0; padding-left: 22px; }
+    li + li { margin-top: 8px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+    .field { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
+    .field label { color: var(--muted); font-size: 13px; }
+    input { width: 100%; min-height: 42px; padding: 10px 13px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--fg); font: inherit; }
+    input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+    .result { margin-top: 20px; padding: 18px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklch, var(--bg) 70%, var(--surface)); }
+    .result strong { display: block; font-family: var(--font-display); font-size: 46px; line-height: 1; margin-top: 8px; }
+    .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
+    .metric { border-top: 1px solid var(--border); padding-top: 10px; }
+    .metric span { display: block; color: var(--muted); font-size: 13px; }
+    .metric b, code { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
+    .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .table td:last-child, .table th:last-child { text-align: right; font-family: var(--font-mono); }
+    .link-list { display: grid; gap: 12px; margin-top: 18px; }
+    .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
+    .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footlinks { display: flex; gap: 18px; flex-wrap: wrap; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } h1 { max-width: 100%; } }
+  </style>
+</head>
+<body>
+  <header class="topnav">
+    <div class="topnav-inner">
+      <a class="logo" href="/">AimScale</a>
+      <nav aria-label="Primary">
+        <a href="/">Calculator</a>
+        <a href="/what-is-cm-360.html">cm/360</a>
+        <a href="/dpi-vs-edpi.html">DPI vs eDPI</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container grid">
+      <article>
+        <p class="eyebrow">CS2 to Valorant</p>
+        <h1>Convert CS2 sensitivity to Valorant.</h1>
+        <p>Use this converter when you want to keep a similar 360 turn distance after moving from Counter-Strike 2 to Valorant. Enter your CS2 sensitivity and DPI, then adjust the target DPI if your Valorant setup uses a different mouse DPI.</p>
+
+        <h2>Formula</h2>
+        <p>Using common yaw values, CS2 uses <code>0.022</code> and Valorant uses <code>0.07</code>. At the same DPI, the practical starting formula is:</p>
+        <p><code>Valorant sensitivity = CS2 sensitivity x 0.3142857</code></p>
+        <p>If you change DPI at the same time, multiply by <code>source DPI / target DPI</code>.</p>
+
+        <h2>Quick Examples</h2>
+        <table class="table" aria-label="CS2 to Valorant examples">
+          <thead><tr><th>CS2 sens</th><th>DPI</th><th>Valorant sens</th></tr></thead>
+          <tbody>
+            <tr><td>1.00</td><td>800</td><td>0.314</td></tr>
+            <tr><td>1.50</td><td>800</td><td>0.471</td></tr>
+            <tr><td>2.00</td><td>800</td><td>0.629</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Important Notes</h2>
+        <ul>
+          <li>This is a hip-fire baseline. Scoped modes and ADS settings may need separate tuning.</li>
+          <li>Keep your mouse acceleration off if you want a cleaner comparison.</li>
+          <li>After converting, play a short routine and adjust in small steps instead of copying blindly.</li>
+        </ul>
+
+        <h2>Related Pages</h2>
+        <div class="link-list">
+          <a href="/valorant-to-cs2-sensitivity.html">Valorant to CS2 sensitivity converter</a>
+          <a href="/what-is-cm-360.html">What is cm/360?</a>
+          <a href="/dpi-vs-edpi.html">DPI vs eDPI for FPS games</a>
+        </div>
+      </article>
+
+      <aside class="card" aria-labelledby="calculator-title">
+        <p class="eyebrow">Calculator</p>
+        <h2 id="calculator-title" style="margin-top: 0; font-size: 30px;">CS2 to Valorant</h2>
+        <div class="field">
+          <label for="source-sens">CS2 sensitivity</label>
+          <input id="source-sens" inputmode="decimal" value="1.00" />
+        </div>
+        <div class="field">
+          <label for="source-dpi">CS2 DPI</label>
+          <input id="source-dpi" inputmode="numeric" value="800" />
+        </div>
+        <div class="field">
+          <label for="target-dpi">Valorant DPI</label>
+          <input id="target-dpi" inputmode="numeric" value="800" />
+        </div>
+        <div class="result" aria-live="polite">
+          <span>Valorant sensitivity</span>
+          <strong id="target-sens">0.314</strong>
+          <div class="metrics">
+            <div class="metric"><span>cm/360</span><b id="cm360">51.95</b></div>
+            <div class="metric"><span>CS2 eDPI</span><b id="edpi">800</b></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="pagefoot">
+    <div class="container footer-inner">
+      <span>&copy; 2026 AimScale</span>
+      <div class="footlinks" aria-label="Footer links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/about.html">About</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const sourceSens = document.getElementById('source-sens');
+    const sourceDpi = document.getElementById('source-dpi');
+    const targetDpi = document.getElementById('target-dpi');
+    const targetSens = document.getElementById('target-sens');
+    const cm360 = document.getElementById('cm360');
+    const edpi = document.getElementById('edpi');
+    function number(value) {
+      const parsed = Number.parseFloat(String(value).replace(',', '.'));
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+    function update() {
+      const sens = number(sourceSens.value);
+      const dpi = number(sourceDpi.value);
+      const nextDpi = number(targetDpi.value) || dpi;
+      if (sens <= 0 || dpi <= 0 || nextDpi <= 0) return;
+      const inches = 360 / (sens * dpi * 0.022);
+      const next = 360 / (inches * nextDpi * 0.07);
+      targetSens.textContent = next.toFixed(3);
+      cm360.textContent = (inches * 2.54).toFixed(2);
+      edpi.textContent = Math.round(sens * dpi).toLocaleString('en-US');
+    }
+    [sourceSens, sourceDpi, targetDpi].forEach((input) => input.addEventListener('input', update));
+    update();
+  </script>
+</body>
+</html>
