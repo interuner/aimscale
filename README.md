@@ -9,6 +9,9 @@ AimScale is a small static website experiment for English search traffic. The fi
 - `scripts/test-formulas.js` - formula smoke tests for eDPI, cm/360, and core conversions.
 - `scripts/check-site.js` - static site quality checks for SEO basics, sitemap coverage, internal links, and risky claims.
 - `methodology.html` - formula, scope, limitations, and review process.
+- `edpi-calculator.html` - focused eDPI calculator and guide.
+- `cm-360-calculator.html` - focused cm/360 calculator and guide.
+- `dpi-sensitivity-converter.html` - DPI change sensitivity converter.
 - `AGENTS.md` - maintenance rules for Codex and other coding agents.
 - `README.md` - deployment and launch notes.
 
