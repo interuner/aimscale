@@ -1,0 +1,82 @@
+{
+  "games": [
+    {
+      "id": "cs2",
+      "name": "CS2 / CS:GO",
+      "yaw": 0.022,
+      "inputType": "decimal",
+      "supportsAimDownSights": false,
+      "conversionScope": "hip-fire cm/360 baseline",
+      "confidence": "experimental",
+      "sourceUrls": [],
+      "lastReviewed": "2026-05-11",
+      "lastReviewedBy": "site-maintainer",
+      "notes": "Current MVP baseline used by the calculator. Verify against reliable public references before scaling more CS2-specific pages."
+    },
+    {
+      "id": "valorant",
+      "name": "Valorant",
+      "yaw": 0.07,
+      "inputType": "decimal",
+      "supportsAimDownSights": true,
+      "conversionScope": "hip-fire cm/360 baseline",
+      "confidence": "experimental",
+      "sourceUrls": [],
+      "lastReviewed": "2026-05-11",
+      "lastReviewedBy": "site-maintainer",
+      "notes": "Current MVP baseline used by the calculator. ADS and scoped sensitivity are not included in the main conversion result."
+    },
+    {
+      "id": "apex",
+      "name": "Apex Legends",
+      "yaw": 0.022,
+      "inputType": "decimal",
+      "supportsAimDownSights": true,
+      "conversionScope": "hip-fire cm/360 baseline",
+      "confidence": "experimental",
+      "sourceUrls": [],
+      "lastReviewed": "2026-05-11",
+      "lastReviewedBy": "site-maintainer",
+      "notes": "Current MVP baseline used by the calculator. ADS multipliers and FOV behavior may require separate tuning."
+    },
+    {
+      "id": "finals",
+      "name": "The Finals",
+      "yaw": 0.022,
+      "inputType": "decimal",
+      "supportsAimDownSights": true,
+      "conversionScope": "hip-fire cm/360 baseline",
+      "confidence": "experimental",
+      "sourceUrls": [],
+      "lastReviewed": "2026-05-11",
+      "lastReviewedBy": "site-maintainer",
+      "notes": "Current MVP baseline used by the calculator. Verify before creating dedicated SEO pages."
+    },
+    {
+      "id": "overwatch2",
+      "name": "Overwatch 2",
+      "yaw": 0.0066,
+      "inputType": "decimal",
+      "supportsAimDownSights": true,
+      "conversionScope": "hip-fire cm/360 baseline",
+      "confidence": "experimental",
+      "sourceUrls": [],
+      "lastReviewed": "2026-05-11",
+      "lastReviewedBy": "site-maintainer",
+      "notes": "Current MVP baseline used by the calculator. Hero-specific scoped behavior is not included."
+    },
+    {
+      "id": "r6",
+      "name": "Rainbow Six Siege",
+      "yaw": 0.02,
+      "inputType": "decimal",
+      "supportsAimDownSights": true,
+      "conversionScope": "hip-fire cm/360 baseline",
+      "confidence": "experimental",
+      "sourceUrls": [],
+      "lastReviewed": "2026-05-11",
+      "lastReviewedBy": "site-maintainer",
+      "notes": "Current MVP baseline used by the calculator. Siege ADS behavior should be handled separately."
+    }
+  ]
+}

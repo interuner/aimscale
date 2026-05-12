@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How AimScale Calculates FPS Sensitivity</title>
+  <meta name="description" content="Learn how AimScale calculates FPS mouse sensitivity, eDPI, cm/360, yaw values, and why converted sensitivity can still feel different across games." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://aimscale.top/methodology" />
+  <style>
+    :root {
+      --bg: #f7f8f3;
+      --surface: #ffffff;
+      --fg: #181c1a;
+      --muted: #626b66;
+      --border: #dfe5dd;
+      --accent: #247861;
+      --font-display: 'Iowan Old Style', 'Charter', Georgia, 'Times New Roman', serif;
+      --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --font-mono: ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    code { font-family: var(--font-mono); color: var(--fg); }
+    .container { max-width: 920px; margin: 0 auto; padding: 0 28px; }
+    .topnav { position: sticky; top: 0; background: color-mix(in oklch, var(--bg) 92%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .topnav-inner { max-width: 1160px; margin: 0 auto; padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { font-family: var(--font-display); font-size: 20px; font-weight: 600; }
+    nav { display: flex; gap: 28px; flex-wrap: wrap; }
+    nav a, .pagefoot a { color: var(--muted); font-size: 14px; }
+    nav a:hover, .pagefoot a:hover { color: var(--fg); }
+    main { padding: clamp(56px, 10vw, 112px) 0; }
+    .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--accent); margin: 0 0 20px; }
+    h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0; line-height: 1.08; margin: 0; }
+    h1 { font-size: clamp(42px, 6vw, 70px); max-width: 13ch; }
+    h2 { font-size: clamp(28px, 4vw, 42px); margin-top: 56px; }
+    h3 { font-size: 22px; margin-top: 28px; }
+    p, li { color: var(--muted); font-size: 17px; }
+    p { margin: 18px 0 0; max-width: 70ch; text-wrap: pretty; }
+    ul { margin: 18px 0 0; padding-left: 22px; color: var(--muted); }
+    li + li { margin-top: 8px; }
+    .card { margin-top: 32px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+    .formula { display: grid; gap: 10px; margin-top: 18px; }
+    .formula code { display: block; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow-wrap: anywhere; }
+    .notice { border-left: 3px solid var(--accent); padding-left: 18px; color: var(--fg); }
+    .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
+    .footer-inner { max-width: 1160px; margin: 0 auto; padding: 0 28px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footlinks { display: flex; gap: 18px; flex-wrap: wrap; }
+    @media (max-width: 720px) { nav { gap: 16px; } h1 { max-width: 100%; } }
+  </style>
+</head>
+<body>
+  <header class="topnav">
+    <div class="topnav-inner">
+      <a class="logo" href="/">AimScale</a>
+      <nav aria-label="Primary">
+        <a href="/">Calculator</a>
+        <a href="/what-is-cm-360">cm/360</a>
+        <a href="/dpi-vs-edpi">DPI vs eDPI</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <p class="eyebrow">Methodology</p>
+      <h1>How AimScale calculates FPS sensitivity.</h1>
+      <p>AimScale is designed to give players a clean starting point when moving mouse sensitivity between FPS games. The calculator focuses on hip-fire turn distance, eDPI, and cm/360 rather than promising that every in-game aiming mode will feel identical.</p>
+
+      <section class="card" aria-labelledby="scope">
+        <h2 id="scope">What The Calculator Covers</h2>
+        <p>AimScale matches hip-fire cm/360. That means it estimates how many centimeters your mouse travels to rotate your view by 360 degrees in each game.</p>
+        <p class="notice">This calculator does not guarantee identical feel across games because FOV, ADS sensitivity, scoped sensitivity, mouse acceleration, resolution, and game engine behavior can affect aiming feel.</p>
+      </section>
+
+      <section aria-labelledby="terms">
+        <h2 id="terms">Core Terms</h2>
+        <h3>eDPI</h3>
+        <p>eDPI is your mouse DPI multiplied by your in-game sensitivity. It is useful for comparing settings inside the same game, but it is not enough for cross-game conversion because different games can use different yaw values.</p>
+        <div class="formula">
+          <code>eDPI = DPI * sensitivity</code>
+        </div>
+
+        <h3>cm/360</h3>
+        <p>cm/360 is the physical mouse distance needed for a full 360-degree turn. It is often more useful than raw sensitivity when comparing settings across different games.</p>
+
+        <h3>Yaw</h3>
+        <p>Yaw describes how much your view rotates for a unit of in-game sensitivity and mouse movement. AimScale uses yaw values as constants in the conversion formula and treats those constants as reviewable data, not as free-form AI guesses.</p>
+      </section>
+
+      <section aria-labelledby="formula">
+        <h2 id="formula">Formula</h2>
+        <p>The calculator first converts your current setting into inches/360, then converts that same turn distance into the target game's sensitivity scale.</p>
+        <div class="formula">
+          <code>inches/360 = 360 / (DPI * sensitivity * source yaw)</code>
+          <code>cm/360 = inches/360 * 2.54</code>
+          <code>target sensitivity = 360 / (target DPI * target yaw * inches/360)</code>
+        </div>
+      </section>
+
+      <section aria-labelledby="limitations">
+        <h2 id="limitations">Limitations</h2>
+        <ul>
+          <li>ADS and scoped sensitivity may use separate multipliers.</li>
+          <li>Different FOV settings can change perceived aim feel.</li>
+          <li>Mouse acceleration, raw input settings, and operating system settings can affect consistency.</li>
+          <li>Game updates can change how settings behave, so constants should be reviewed over time.</li>
+          <li>The result is a practical baseline, not a final setting that every player should keep unchanged.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="maintenance">
+        <h2 id="maintenance">How Constants Are Maintained</h2>
+        <p>Each game constant should have a review status, source references, and a last reviewed date before it becomes part of a serious converter page. If a constant is uncertain, it should be marked experimental or kept out of SEO pages until reviewed.</p>
+        <p>To report a calculation issue, send the source game, target game, DPI, sensitivity, result shown, and the result you expected through the <a href="/contact">contact page</a>.</p>
+        <p class="notice">Last reviewed: May 11, 2026.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pagefoot">
+    <div class="footer-inner">
+      <span>&copy; 2026 AimScale</span>
+      <div class="footlinks" aria-label="Footer links">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/contact">Contact</a>
+        <a href="/methodology">Methodology</a>
+        <a href="/about">About</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

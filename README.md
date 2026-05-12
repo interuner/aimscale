@@ -5,7 +5,32 @@ AimScale is a small static website experiment for English search traffic. The fi
 ## Files
 
 - `index.html` - single-file static site with styles and calculator logic.
+- `data/games.json` - game constants, review status, and calculation scope.
+- `scripts/test-formulas.js` - formula smoke tests for eDPI, cm/360, and core conversions.
+- `scripts/check-site.js` - static site quality checks for SEO basics, sitemap coverage, internal links, and risky claims.
+- `methodology.html` - formula, scope, limitations, and review process.
+- `AGENTS.md` - maintenance rules for Codex and other coding agents.
 - `README.md` - deployment and launch notes.
+
+## Formula Tests
+
+Run:
+
+```bash
+node scripts/test-formulas.js
+```
+
+The tests cover eDPI, cm/360, CS2 to Valorant, Valorant to CS2, DPI changes, and invalid input handling.
+
+## Site Quality Check
+
+Run:
+
+```bash
+node scripts/check-site.js
+```
+
+The checker validates titles, meta descriptions, canonical URLs, one H1 per page, sitemap coverage, internal links, Methodology links, early-stage placeholders, premature ad code, and high-risk claims.
 
 ## Deploy
 
@@ -38,6 +63,8 @@ Then add:
 - Cookie consent for EEA, UK, and Switzerland traffic
 - `ads.txt` after AdSense gives the publisher ID
 - A sitemap once the final domain is known
+
+Do not show visible ad placeholders before applying for AdSense. Keep ads away from the calculator area.
 
 ## Next Pages To Build
 
