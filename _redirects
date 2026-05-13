@@ -1,0 +1,3 @@
+# Keep historical .html URLs on the extensionless canonical path.
+/index.html / 301
+/:slug.html /:slug 301

@@ -151,6 +151,22 @@ function checkRobots(errors) {
   }
 }
 
+function checkRedirects(errors) {
+  const redirectsPath = path.join(ROOT, '_redirects');
+  if (!fs.existsSync(redirectsPath)) {
+    errors.push('_redirects: missing Cloudflare Pages redirect file');
+    return;
+  }
+
+  const redirects = read(redirectsPath);
+  if (!redirects.includes('/index.html / 301')) {
+    errors.push('_redirects: missing /index.html canonical redirect');
+  }
+  if (!redirects.includes('/:slug.html /:slug 301')) {
+    errors.push('_redirects: missing top-level .html canonical redirect');
+  }
+}
+
 function run() {
   assert.ok(fs.existsSync(path.join(ROOT, 'sitemap.xml')), 'Missing sitemap.xml');
   assert.ok(fs.existsSync(path.join(ROOT, 'robots.txt')), 'Missing robots.txt');
@@ -164,6 +180,7 @@ function run() {
   }
   checkSitemapOnlyListsExistingPages(sitemapUrls, htmlFiles, errors);
   checkRobots(errors);
+  checkRedirects(errors);
 
   if (errors.length) {
     console.error(`Site quality check failed with ${errors.length} issue(s):`);
