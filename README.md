@@ -10,7 +10,10 @@ AimScale is a small static website experiment for English search traffic. The fi
 - `scripts/check-site.js` - static site quality checks for SEO basics, sitemap coverage, internal links, and risky claims.
 - `methodology.html` - formula, scope, limitations, and review process.
 - `edpi-calculator.html` - focused eDPI calculator and guide.
+- `valorant-edpi-calculator.html` - Valorant-specific eDPI calculator and cm/360 estimate.
+- `cs2-edpi-calculator.html` - CS2-specific eDPI calculator and cm/360 estimate.
 - `cm-360-calculator.html` - focused cm/360 calculator and guide.
+- `valorant-cm-360-calculator.html` - Valorant-specific cm/360 calculator.
 - `dpi-sensitivity-converter.html` - DPI change sensitivity converter.
 - `AGENTS.md` - maintenance rules for Codex and other coding agents.
 - `README.md` - deployment and launch notes.
@@ -77,6 +80,9 @@ Do not show visible ad placeholders before applying for AdSense. Keep ads away f
 - What is cm/360?
 - DPI vs eDPI for FPS games
 - Best sensitivity ranges by game, with clear sourcing and caveats
+- CS2 cm/360 calculator
+- Valorant scoped sensitivity explainer
+- CS2 to Apex sensitivity converter
 
 ## Notes
 

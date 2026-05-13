@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valorant cm/360 Calculator - AimScale</title>
+  <meta name="description" content="Calculate Valorant cm/360 from DPI and sensitivity, estimate eDPI, compare practical ranges, and tune Valorant sensitivity by turn distance." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://aimscale.top/valorant-cm-360-calculator" />
+  <style>
+    :root {
+      --bg: #f7f8f3;
+      --surface: #ffffff;
+      --fg: #181c1a;
+      --muted: #626b66;
+      --border: #dfe5dd;
+      --accent: #247861;
+      --accent-soft: color-mix(in oklch, var(--accent) 13%, transparent);
+      --font-display: 'Iowan Old Style', 'Charter', Georgia, 'Times New Roman', serif;
+      --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --font-mono: ui-monospace, 'JetBrains Mono', Menlo, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    code { font-family: var(--font-mono); color: var(--fg); }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+    .topnav { position: sticky; top: 0; z-index: 10; background: color-mix(in oklch, var(--bg) 92%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .topnav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 28px; max-width: 1160px; margin: 0 auto; }
+    .logo, h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0; }
+    .logo { font-size: 20px; font-weight: 600; }
+    nav { display: flex; gap: 28px; flex-wrap: wrap; }
+    nav a, .pagefoot a { color: var(--muted); font-size: 14px; }
+    nav a:hover, .pagefoot a:hover { color: var(--fg); }
+    main { padding: clamp(48px, 8vw, 96px) 0; }
+    .grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr); gap: 48px; align-items: start; }
+    .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--accent); margin: 0 0 18px; }
+    h1 { font-size: clamp(42px, 6vw, 72px); line-height: 1.04; margin: 0; max-width: 12ch; }
+    h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.12; margin: 56px 0 0; }
+    h3 { font-size: 22px; margin: 0; }
+    p, li { color: var(--muted); font-size: 16px; }
+    p { margin: 16px 0 0; max-width: 72ch; text-wrap: pretty; }
+    ul { margin: 16px 0 0; padding-left: 22px; }
+    li + li { margin-top: 8px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+    .field { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
+    .field label { color: var(--muted); font-size: 13px; }
+    input { width: 100%; min-height: 42px; padding: 10px 13px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--fg); font: inherit; }
+    input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+    .result { margin-top: 20px; padding: 18px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklch, var(--bg) 70%, var(--surface)); }
+    .result strong { display: block; font-family: var(--font-display); font-size: 46px; line-height: 1; margin-top: 8px; }
+    .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
+    .metric { border-top: 1px solid var(--border); padding-top: 10px; }
+    .metric span { display: block; color: var(--muted); font-size: 13px; }
+    .metric b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
+    .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .link-list { display: grid; gap: 12px; margin-top: 18px; }
+    .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
+    .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footlinks { display: flex; gap: 18px; flex-wrap: wrap; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } h1 { max-width: 100%; } }
+  </style>
+</head>
+<body>
+  <header class="topnav">
+    <div class="topnav-inner">
+      <a class="logo" href="/">AimScale</a>
+      <nav aria-label="Primary">
+        <a href="/">Calculator</a>
+        <a href="/valorant-edpi-calculator">Valorant eDPI</a>
+        <a href="/what-is-cm-360">What is cm/360?</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container grid">
+      <article>
+        <p class="eyebrow">Valorant turn distance</p>
+        <h1>Valorant cm/360 calculator.</h1>
+        <p>Use this Valorant cm/360 calculator to convert DPI and Valorant sensitivity into a physical turn distance. It helps you tune aim by how far your mouse moves, not only by the in-game number.</p>
+
+        <h2>Formula</h2>
+        <p>AimScale uses this Valorant hip-fire baseline:</p>
+        <p><code>cm/360 = 360 / (DPI x Valorant sensitivity x 0.07) x 2.54</code></p>
+        <p>The result is a useful starting point for hip-fire aim. Scoped sensitivity and FOV can still affect how a setting feels.</p>
+
+        <h2>Quick Examples</h2>
+        <table class="table" aria-label="Valorant cm/360 examples">
+          <thead><tr><th>DPI</th><th>Valorant sens</th><th>eDPI</th><th>cm/360</th></tr></thead>
+          <tbody>
+            <tr><td>800</td><td>0.25</td><td>200</td><td>65.31</td></tr>
+            <tr><td>800</td><td>0.30</td><td>240</td><td>54.43</td></tr>
+            <tr><td>800</td><td>0.40</td><td>320</td><td>40.82</td></tr>
+          </tbody>
+        </table>
+
+        <h2>How To Tune Valorant Sensitivity</h2>
+        <ul>
+          <li>If you over-flick or shake during small corrections, try a higher cm/360.</li>
+          <li>If angle clearing feels heavy or you run out of mousepad, try a lower cm/360.</li>
+          <li>Change sensitivity in small steps and keep DPI unchanged while testing.</li>
+        </ul>
+
+        <h2>Common Questions</h2>
+        <h3>What does Valorant cm/360 measure?</h3>
+        <p>It estimates how many centimeters your mouse moves for one full 360-degree turn in Valorant hip-fire.</p>
+        <h3>Is cm/360 better than Valorant eDPI?</h3>
+        <p>They answer different questions. eDPI compares Valorant settings inside Valorant, while cm/360 is better for physical feel and cross-game comparison.</p>
+        <h3>Can I use the same cm/360 from CS2?</h3>
+        <p>You can use it as a starting point, then tune after testing Valorant movement, weapons, and scoped settings.</p>
+        <p>Last reviewed: May 13, 2026.</p>
+
+        <h2>Related Pages</h2>
+        <div class="link-list">
+          <a href="/valorant-edpi-calculator">Valorant eDPI calculator</a>
+          <a href="/best-cm-360-for-valorant">Best cm/360 range for Valorant</a>
+          <a href="/cs2-to-valorant-sensitivity">CS2 to Valorant sensitivity converter</a>
+          <a href="/what-is-cm-360">What is cm/360?</a>
+          <a href="/methodology">How AimScale calculates sensitivity</a>
+        </div>
+      </article>
+
+      <aside class="card" aria-labelledby="calculator-title">
+        <p class="eyebrow">Calculator</p>
+        <h2 id="calculator-title" style="margin-top: 0; font-size: 30px;">Calculate Valorant cm/360</h2>
+        <div class="field">
+          <label for="dpi">Mouse DPI</label>
+          <input id="dpi" inputmode="numeric" value="800" />
+        </div>
+        <div class="field">
+          <label for="sens">Valorant sensitivity</label>
+          <input id="sens" inputmode="decimal" value="0.30" />
+        </div>
+        <div class="result" aria-live="polite">
+          <span>cm/360</span>
+          <strong id="cm360">54.43</strong>
+          <div class="metrics">
+            <div class="metric"><span>Valorant eDPI</span><b id="edpi">240</b></div>
+            <div class="metric"><span>inches/360</span><b id="inches">21.43</b></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="pagefoot">
+    <div class="container footer-inner">
+      <span>&copy; 2026 AimScale</span>
+      <div class="footlinks" aria-label="Footer links">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/contact">Contact</a>
+        <a href="/methodology">Methodology</a>
+        <a href="/about">About</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const dpi = document.getElementById('dpi');
+    const sens = document.getElementById('sens');
+    const cm360 = document.getElementById('cm360');
+    const edpi = document.getElementById('edpi');
+    const inches = document.getElementById('inches');
+    function number(value) {
+      const parsed = Number.parseFloat(String(value).replace(',', '.'));
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+    function update() {
+      const nextDpi = number(dpi.value);
+      const nextSens = number(sens.value);
+      if (nextDpi <= 0 || nextSens <= 0) {
+        cm360.textContent = '-';
+        edpi.textContent = '-';
+        inches.textContent = '-';
+        return;
+      }
+      const inchValue = 360 / (nextDpi * nextSens * 0.07);
+      inches.textContent = inchValue.toFixed(2);
+      cm360.textContent = (inchValue * 2.54).toFixed(2);
+      edpi.textContent = Math.round(nextDpi * nextSens).toLocaleString('en-US');
+    }
+    [dpi, sens].forEach((input) => input.addEventListener('input', update));
+    update();
+  </script>
+</body>
+</html>
