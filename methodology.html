@@ -43,6 +43,12 @@
     .card { margin-top: 32px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
     .formula { display: grid; gap: 10px; margin-top: 18px; }
     .formula code { display: block; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow-wrap: anywhere; }
+    .table-scroll { margin-top: 22px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .confidence-table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 15px; }
+    .table-scroll .confidence-table { min-width: 680px; margin-top: 0; }
+    .confidence-table th, .confidence-table td { padding: 12px 10px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+    .confidence-table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .confidence-table a { color: var(--accent); }
     .notice { border-left: 3px solid var(--accent); padding-left: 18px; color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
     .footer-inner { max-width: 1160px; margin: 0 auto; padding: 0 28px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
@@ -125,11 +131,56 @@
         </ul>
       </section>
 
+      <section aria-labelledby="confidence">
+        <h2 id="confidence">Parameter Confidence</h2>
+        <p>AimScale separates reviewed hip-fire constants from experimental game support. Verified or reviewed values can appear in the main converter. Experimental values should stay de-emphasized until stronger source agreement is available.</p>
+        <div class="table-scroll">
+          <table class="confidence-table" aria-label="AimScale game parameter confidence">
+            <thead>
+              <tr><th>Game</th><th>Status</th><th>Scope</th><th>Reference</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CS2 / CS:GO</td>
+                <td>Verified</td>
+                <td>Hip-fire baseline</td>
+                <td><a href="https://developer.valvesoftware.com/wiki/List_of_Counter-Strike_2_console_commands_and_variables">Valve command reference</a></td>
+              </tr>
+              <tr>
+                <td>Valorant</td>
+                <td>Reviewed</td>
+                <td>Hip-fire baseline, not ADS/scoped</td>
+                <td><a href="https://www.recharge.com/blog/en-gb/valorant-sensitivity-converter-cs2-apex-ow2-fortnite">Conversion reference</a></td>
+              </tr>
+              <tr>
+                <td>Apex Legends</td>
+                <td>Reviewed</td>
+                <td>Hip-fire baseline, ADS/FOV separate</td>
+                <td><a href="https://edpi-calculator.org/tools/apex-edpi-calculator">Apex eDPI reference</a></td>
+              </tr>
+              <tr>
+                <td>Overwatch 2</td>
+                <td>Reviewed</td>
+                <td>Hip-fire baseline, hero scopes separate</td>
+                <td><a href="https://sensconverter.org/">Yaw-aware converter reference</a></td>
+              </tr>
+              <tr>
+                <td>Rainbow Six Siege</td>
+                <td>Experimental</td>
+                <td>Hip-fire baseline only</td>
+                <td><a href="https://www.ubisoft.com/en-gb/game/rainbow-six/siege/news-updates/6kY6b5JByBY3P6vQWWinla/fov-and-input-sensitivity">Ubisoft ADS/FOV notes</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="notice">The Finals is currently kept out of the primary homepage converter because the yaw baseline is not strong enough for first-round promotion pages.</p>
+      </section>
+
       <section aria-labelledby="maintenance">
         <h2 id="maintenance">How Constants Are Maintained</h2>
         <p>Each game constant should have a review status, source references, and a last reviewed date before it becomes part of a serious converter page. If a constant is uncertain, it should be marked experimental or kept out of SEO pages until reviewed.</p>
         <p>To report a calculation issue, send the source game, target game, DPI, sensitivity, result shown, and the result you expected through the <a href="/contact">contact page</a>.</p>
-        <p class="notice">Last reviewed: May 11, 2026.</p>
+        <p class="notice">Last reviewed: May 14, 2026.</p>
       </section>
     </div>
   </main>

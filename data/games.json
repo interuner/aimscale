@@ -7,11 +7,14 @@
       "inputType": "decimal",
       "supportsAimDownSights": false,
       "conversionScope": "hip-fire cm/360 baseline",
-      "confidence": "experimental",
-      "sourceUrls": [],
-      "lastReviewed": "2026-05-11",
+      "confidence": "verified",
+      "sourceUrls": [
+        "https://developer.valvesoftware.com/wiki/List_of_Counter-Strike_2_console_commands_and_variables",
+        "https://csdb.gg/command/m-yaw/"
+      ],
+      "lastReviewed": "2026-05-14",
       "lastReviewedBy": "site-maintainer",
-      "notes": "Current MVP baseline used by the calculator. Verify against reliable public references before scaling more CS2-specific pages."
+      "notes": "CS2 uses the Source-style m_yaw baseline. Treat custom m_yaw changes as outside the standard calculator scope."
     },
     {
       "id": "valorant",
@@ -20,11 +23,14 @@
       "inputType": "decimal",
       "supportsAimDownSights": true,
       "conversionScope": "hip-fire cm/360 baseline",
-      "confidence": "experimental",
-      "sourceUrls": [],
-      "lastReviewed": "2026-05-11",
+      "confidence": "reviewed",
+      "sourceUrls": [
+        "https://www.recharge.com/blog/en-gb/valorant-sensitivity-converter-cs2-apex-ow2-fortnite",
+        "https://valorantsensconverter.com/"
+      ],
+      "lastReviewed": "2026-05-14",
       "lastReviewedBy": "site-maintainer",
-      "notes": "Current MVP baseline used by the calculator. ADS and scoped sensitivity are not included in the main conversion result."
+      "notes": "Valorant hip-fire conversion is widely documented, but ADS and scoped multipliers are not included in the main result."
     },
     {
       "id": "apex",
@@ -33,11 +39,14 @@
       "inputType": "decimal",
       "supportsAimDownSights": true,
       "conversionScope": "hip-fire cm/360 baseline",
-      "confidence": "experimental",
-      "sourceUrls": [],
-      "lastReviewed": "2026-05-11",
+      "confidence": "reviewed",
+      "sourceUrls": [
+        "https://edpi-calculator.org/tools/apex-edpi-calculator",
+        "https://trocador.info/"
+      ],
+      "lastReviewed": "2026-05-14",
       "lastReviewedBy": "site-maintainer",
-      "notes": "Current MVP baseline used by the calculator. ADS multipliers and FOV behavior may require separate tuning."
+      "notes": "Apex Legends is treated as a Source-style hip-fire baseline. ADS multipliers and FOV behavior may require separate tuning."
     },
     {
       "id": "finals",
@@ -47,10 +56,13 @@
       "supportsAimDownSights": true,
       "conversionScope": "hip-fire cm/360 baseline",
       "confidence": "experimental",
-      "sourceUrls": [],
-      "lastReviewed": "2026-05-11",
+      "sourceUrls": [
+        "https://trocador.info/",
+        "https://tradeit.gg/calculator/mouse-sensitivity/the-finals/"
+      ],
+      "lastReviewed": "2026-05-14",
       "lastReviewedBy": "site-maintainer",
-      "notes": "Current MVP baseline used by the calculator. Verify before creating dedicated SEO pages."
+      "notes": "Keep out of the primary homepage converter until stronger source agreement is available."
     },
     {
       "id": "overwatch2",
@@ -59,11 +71,14 @@
       "inputType": "decimal",
       "supportsAimDownSights": true,
       "conversionScope": "hip-fire cm/360 baseline",
-      "confidence": "experimental",
-      "sourceUrls": [],
-      "lastReviewed": "2026-05-11",
+      "confidence": "reviewed",
+      "sourceUrls": [
+        "https://trocador.info/",
+        "https://sensconverter.org/"
+      ],
+      "lastReviewed": "2026-05-14",
       "lastReviewedBy": "site-maintainer",
-      "notes": "Current MVP baseline used by the calculator. Hero-specific scoped behavior is not included."
+      "notes": "Overwatch 2 hip-fire conversion is reviewed through third-party sensitivity references. Hero-specific scoped behavior is not included."
     },
     {
       "id": "r6",
@@ -73,10 +88,13 @@
       "supportsAimDownSights": true,
       "conversionScope": "hip-fire cm/360 baseline",
       "confidence": "experimental",
-      "sourceUrls": [],
-      "lastReviewed": "2026-05-11",
+      "sourceUrls": [
+        "https://www.ubisoft.com/en-gb/game/rainbow-six/siege/news-updates/6kY6b5JByBY3P6vQWWinla/fov-and-input-sensitivity",
+        "https://trocador.info/"
+      ],
+      "lastReviewed": "2026-05-14",
       "lastReviewedBy": "site-maintainer",
-      "notes": "Current MVP baseline used by the calculator. Siege ADS behavior should be handled separately."
+      "notes": "Siege has separate ADS and optic behavior. Keep the dedicated page framed as a hip-fire baseline rather than a full ADS profile."
     }
   ]
 }
