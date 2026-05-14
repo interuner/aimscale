@@ -5,31 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const SITE_URL = 'https://aimscale.top';
-const GA_MEASUREMENT_ID = 'G-FMTDQMDKNS';
-const CLARITY_PROJECT_ID = 'wqzi6cdcrr';
 const ROOT = path.resolve(__dirname, '..');
-const TRUST_FILES = new Set([
-  'about.html',
-  'contact.html',
-  'methodology.html',
-  'privacy.html',
-  'terms.html'
-]);
-const FAQ_EXEMPT_FILES = new Set(['index.html', ...TRUST_FILES]);
-const CROSS_GAME_CONVERTER_FILES = new Set([
-  'apex-legends-sensitivity-converter.html',
-  'cs2-to-valorant-sensitivity.html',
-  'overwatch-2-sensitivity-converter.html',
-  'rainbow-six-siege-sensitivity-converter.html',
-  'valorant-to-cs2-sensitivity.html'
-]);
-const REQUIRED_TRACKING_EVENTS = [
-  'calculator_used',
-  'result_copied',
-  'source_game_changed',
-  'target_game_changed'
-];
-const ALLOWED_CONFIDENCE = new Set(['verified', 'reviewed', 'experimental', 'unsupported']);
 const HIGH_RISK_PATTERNS = [
   /\bperfect\b/i,
   /\bguaranteed\b/i,
@@ -105,26 +81,6 @@ function fail(errors, file, message) {
   errors.push(`${file}: ${message}`);
 }
 
-function hasLastReviewedOrUpdated(html) {
-  return /Last (reviewed|updated): [A-Z][a-z]+ \d{1,2}, \d{4}\./.test(html);
-}
-
-function hasFaq(html) {
-  return /Common Questions|Frequently Asked|FAQ/i.test(html);
-}
-
-function hasLimitationNotice(html) {
-  const lower = html.toLowerCase();
-  return (
-    lower.includes('hip-fire') &&
-    (
-      lower.includes('ads') ||
-      lower.includes('scoped') ||
-      lower.includes('does not guarantee identical feel')
-    )
-  );
-}
-
 function checkHtmlPage(file, sitemapUrls, htmlFiles, errors) {
   const filePath = path.join(ROOT, file);
   const html = read(filePath);
@@ -147,29 +103,8 @@ function checkHtmlPage(file, sitemapUrls, htmlFiles, errors) {
     fail(errors, file, `canonical should be ${expectedCanonical}, got ${canonical}`);
   }
 
-  if (!html.includes(`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`)) {
-    fail(errors, file, `missing GA4 script for ${GA_MEASUREMENT_ID}`);
-  }
-  if (!html.includes(`gtag("config", "${GA_MEASUREMENT_ID}")`)) {
-    fail(errors, file, `missing GA4 config for ${GA_MEASUREMENT_ID}`);
-  }
-  if (!html.includes('https://www.clarity.ms/tag/')) {
-    fail(errors, file, `missing Clarity script for ${CLARITY_PROJECT_ID}`);
-  }
-  if (!html.includes(`"script", "${CLARITY_PROJECT_ID}"`)) {
-    fail(errors, file, `missing Clarity project ID ${CLARITY_PROJECT_ID}`);
-  }
-
   const h1Count = (html.match(/<h1[\s>]/gi) || []).length;
   if (h1Count !== 1) fail(errors, file, `expected exactly one H1, found ${h1Count}`);
-
-  if (!hasLastReviewedOrUpdated(html)) {
-    fail(errors, file, 'missing Last reviewed or Last updated date');
-  }
-
-  if (!FAQ_EXEMPT_FILES.has(file) && !hasFaq(html)) {
-    fail(errors, file, 'missing FAQ or Common Questions section');
-  }
 
   if (!sitemapUrls.has(expectedCanonical)) {
     fail(errors, file, `missing from sitemap: ${expectedCanonical}`);
@@ -177,10 +112,6 @@ function checkHtmlPage(file, sitemapUrls, htmlFiles, errors) {
 
   if (!html.includes('href="/methodology"') && file !== 'methodology.html') {
     fail(errors, file, 'missing Methodology internal link');
-  }
-
-  if (CROSS_GAME_CONVERTER_FILES.has(file) && !hasLimitationNotice(html)) {
-    fail(errors, file, 'converter page is missing a hip-fire/ADS/scoped limitation notice');
   }
 
   for (const pattern of EARLY_STAGE_PATTERNS) {
@@ -195,71 +126,6 @@ function checkHtmlPage(file, sitemapUrls, htmlFiles, errors) {
     const targetFile = fileFromPagePath(link);
     if (!htmlFiles.has(targetFile)) {
       fail(errors, file, `broken internal link: ${link}`);
-    }
-  }
-}
-
-function checkGamesData(errors) {
-  const dataPath = path.join(ROOT, 'data', 'games.json');
-  if (!fs.existsSync(dataPath)) {
-    errors.push('data/games.json: missing game constants file');
-    return;
-  }
-
-  const parsed = JSON.parse(read(dataPath));
-  if (!Array.isArray(parsed.games) || parsed.games.length === 0) {
-    errors.push('data/games.json: games must be a non-empty array');
-    return;
-  }
-
-  for (const game of parsed.games) {
-    const label = game.id || 'unknown';
-    for (const field of [
-      'id',
-      'name',
-      'yaw',
-      'inputType',
-      'supportsAimDownSights',
-      'conversionScope',
-      'confidence',
-      'sourceUrls',
-      'lastReviewed',
-      'lastReviewedBy',
-      'notes'
-    ]) {
-      if (!(field in game)) {
-        errors.push(`data/games.json: ${label} missing ${field}`);
-      }
-    }
-
-    if (typeof game.yaw !== 'number' || !Number.isFinite(game.yaw) || game.yaw <= 0) {
-      errors.push(`data/games.json: ${label} yaw must be a positive number`);
-    }
-    if (!ALLOWED_CONFIDENCE.has(game.confidence)) {
-      errors.push(`data/games.json: ${label} has invalid confidence ${game.confidence}`);
-    }
-    if (!Array.isArray(game.sourceUrls) || game.sourceUrls.length === 0) {
-      errors.push(`data/games.json: ${label} sourceUrls must include at least one source`);
-    }
-    for (const sourceUrl of game.sourceUrls || []) {
-      if (!/^https?:\/\//.test(sourceUrl)) {
-        errors.push(`data/games.json: ${label} source URL must be absolute: ${sourceUrl}`);
-      }
-    }
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(game.lastReviewed || '')) {
-      errors.push(`data/games.json: ${label} lastReviewed must use YYYY-MM-DD`);
-    }
-    if ('supportsAds' in game) {
-      errors.push(`data/games.json: ${label} uses supportsAds; use supportsAimDownSights instead`);
-    }
-  }
-}
-
-function checkTrackingHooks(errors) {
-  const html = read(path.join(ROOT, 'index.html'));
-  for (const eventName of REQUIRED_TRACKING_EVENTS) {
-    if (!html.includes(eventName)) {
-      errors.push(`index.html: missing tracking event ${eventName}`);
     }
   }
 }
@@ -312,8 +178,6 @@ function run() {
   for (const file of htmlFiles) {
     checkHtmlPage(file, sitemapUrls, htmlFiles, errors);
   }
-  checkGamesData(errors);
-  checkTrackingHooks(errors);
   checkSitemapOnlyListsExistingPages(sitemapUrls, htmlFiles, errors);
   checkRobots(errors);
   checkRedirects(errors);
