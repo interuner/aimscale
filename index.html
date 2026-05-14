@@ -756,6 +756,26 @@
       });
     }
 
+    function trackEvent(name, params = {}) {
+      const detail = {
+        source_game: fromGame.value,
+        target_game: toGame.value,
+        ...params
+      };
+
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', name, detail);
+      }
+
+      if (typeof window.clarity === 'function') {
+        window.clarity('event', name);
+      }
+
+      window.dispatchEvent(new CustomEvent('aimscale:event', {
+        detail: { name, ...detail }
+      }));
+    }
+
     function calculate() {
       const source = games[fromGame.value];
       const target = games[toGame.value];
@@ -782,8 +802,28 @@
       targetEdpi.textContent = Math.round(nextSens * nextDpi).toLocaleString('en-US');
     }
 
-    form.addEventListener('input', calculate);
-    form.addEventListener('change', calculate);
+    let calculatorUseTracked = false;
+
+    function trackCalculatorUse() {
+      if (calculatorUseTracked) return;
+      if (targetSens.textContent === '-') return;
+
+      calculatorUseTracked = true;
+      trackEvent('calculator_used', {
+        tool: 'homepage_converter',
+        source_dpi: sourceDpi.value,
+        target_dpi: targetDpi.value || sourceDpi.value
+      });
+    }
+
+    form.addEventListener('input', () => {
+      calculate();
+      trackCalculatorUse();
+    });
+    form.addEventListener('change', () => {
+      calculate();
+      trackCalculatorUse();
+    });
     form.addEventListener('reset', () => {
       setTimeout(() => {
         fromGame.value = 'cs2';
@@ -801,6 +841,11 @@
       try {
         await navigator.clipboard.writeText(text);
         copyResult.lastChild.textContent = 'Copied';
+        trackEvent('result_copied', {
+          tool: 'homepage_converter',
+          target_sensitivity: targetSens.textContent,
+          cm360: cm360.textContent
+        });
       } catch (error) {
         copyResult.lastChild.textContent = 'Ready';
       }
