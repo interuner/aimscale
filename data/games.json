@@ -7,11 +7,14 @@
       "inputType": "decimal",
       "supportsAimDownSights": false,
       "conversionScope": "hip-fire cm/360 baseline",
-      "confidence": "experimental",
-      "sourceUrls": [],
-      "lastReviewed": "2026-05-11",
+      "confidence": "verified",
+      "sourceUrls": [
+        "https://developer.valvesoftware.com/wiki/List_of_Counter-Strike_2_console_commands_and_variables",
+        "https://csdb.gg/command/m-yaw/"
+      ],
+      "lastReviewed": "2026-05-14",
       "lastReviewedBy": "site-maintainer",
-      "notes": "Current MVP baseline used by the calculator. Verify against reliable public references before scaling more CS2-specific pages."
+      "notes": "Valve Developer Community lists m_yaw default 0.022 for CS2. Hip-fire baseline only; custom m_yaw values are outside the default calculator scope."
     },
     {
       "id": "valorant",
@@ -20,11 +23,14 @@
       "inputType": "decimal",
       "supportsAimDownSights": true,
       "conversionScope": "hip-fire cm/360 baseline",
-      "confidence": "experimental",
-      "sourceUrls": [],
-      "lastReviewed": "2026-05-11",
+      "confidence": "reviewed",
+      "sourceUrls": [
+        "https://www.recharge.com/blog/en-gb/valorant-sensitivity-converter-cs2-apex-ow2-fortnite",
+        "https://valorantsensconverter.com/valorant-sensitivity-yaw/"
+      ],
+      "lastReviewed": "2026-05-14",
       "lastReviewedBy": "site-maintainer",
-      "notes": "Current MVP baseline used by the calculator. ADS and scoped sensitivity are not included in the main conversion result."
+      "notes": "Multiple public sensitivity references use Valorant yaw 0.07. Treat as reviewed rather than verified because Riot does not expose a canonical public yaw table. ADS and scoped sensitivity are not included."
     },
     {
       "id": "apex",
@@ -33,11 +39,14 @@
       "inputType": "decimal",
       "supportsAimDownSights": true,
       "conversionScope": "hip-fire cm/360 baseline",
-      "confidence": "experimental",
-      "sourceUrls": [],
-      "lastReviewed": "2026-05-11",
+      "confidence": "reviewed",
+      "sourceUrls": [
+        "https://www.sensai.games/guia/apex-legends",
+        "https://edpi-calculator.org/tools/apex-edpi-calculator"
+      ],
+      "lastReviewed": "2026-05-14",
       "lastReviewedBy": "site-maintainer",
-      "notes": "Current MVP baseline used by the calculator. ADS multipliers and FOV behavior may require separate tuning."
+      "notes": "Reviewed as a Source-engine hip-fire baseline matching 0.022 in multiple public sensitivity references. ADS multipliers and FOV behavior may require separate tuning."
     },
     {
       "id": "finals",
@@ -47,10 +56,13 @@
       "supportsAimDownSights": true,
       "conversionScope": "hip-fire cm/360 baseline",
       "confidence": "experimental",
-      "sourceUrls": [],
-      "lastReviewed": "2026-05-11",
+      "sourceUrls": [
+        "https://trocador.info/",
+        "https://tradeit.gg/calculator/mouse-sensitivity/the-finals/"
+      ],
+      "lastReviewed": "2026-05-14",
       "lastReviewedBy": "site-maintainer",
-      "notes": "Current MVP baseline used by the calculator. Verify before creating dedicated SEO pages."
+      "notes": "Public converter references are mixed for The Finals. Keep experimental and do not create dedicated SEO pages until measured or better sourced."
     },
     {
       "id": "overwatch2",
@@ -59,11 +71,14 @@
       "inputType": "decimal",
       "supportsAimDownSights": true,
       "conversionScope": "hip-fire cm/360 baseline",
-      "confidence": "experimental",
-      "sourceUrls": [],
-      "lastReviewed": "2026-05-11",
+      "confidence": "reviewed",
+      "sourceUrls": [
+        "https://sensconverter.app/best-overwatch-2-sensitivity/",
+        "https://sensconverterfree.com/mouse-sensitivity-converter/overwatch-2"
+      ],
+      "lastReviewed": "2026-05-14",
       "lastReviewedBy": "site-maintainer",
-      "notes": "Current MVP baseline used by the calculator. Hero-specific scoped behavior is not included."
+      "notes": "Multiple public sensitivity references use Overwatch 2 yaw 0.0066. Treat as reviewed rather than verified because Blizzard does not publish a canonical public yaw table. Hero-specific scoped behavior is not included."
     },
     {
       "id": "r6",
@@ -73,10 +88,12 @@
       "supportsAimDownSights": true,
       "conversionScope": "hip-fire cm/360 baseline",
       "confidence": "experimental",
-      "sourceUrls": [],
-      "lastReviewed": "2026-05-11",
+      "sourceUrls": [
+        "https://www.ubisoft.com/en-gb/game/rainbow-six/siege/news-updates/6kY6b5JByBY3P6vQWWinla/fov-and-input-sensitivity"
+      ],
+      "lastReviewed": "2026-05-14",
       "lastReviewedBy": "site-maintainer",
-      "notes": "Current MVP baseline used by the calculator. Siege ADS behavior should be handled separately."
+      "notes": "Ubisoft documents the default MouseSensitivityMultiplierUnit as 0.02 and explains Siege hip-fire and ADS sensitivity formulas. Keep experimental because Siege slider, multiplier, optic, and ADS behavior are more complex than a single yaw constant."
     }
   ]
 }

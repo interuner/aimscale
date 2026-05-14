@@ -318,6 +318,20 @@
       .card { padding: 22px; }
     }
   </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FMTDQMDKNS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-FMTDQMDKNS");
+  </script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wqzi6cdcrr");
+  </script>
 </head>
 <body>
   <header class="topnav" data-od-id="topnav">
@@ -450,7 +464,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 16l5-8 4 5 3-4 4 7"/><path d="M4 20h16"/></svg>
             </div>
             <h3>Battle royale games</h3>
-            <p>Move settings from Apex Legends or The Finals into a consistent baseline before fine tuning.</p>
+            <p>Move settings from Apex Legends into a consistent baseline before fine tuning.</p>
           </div>
           <div class="feature card-flat">
             <div class="feature-mark">
@@ -697,7 +711,6 @@
       cs2: { name: 'CS2 / CS:GO', yaw: 0.022, use: 'Tactical baseline' },
       valorant: { name: 'Valorant', yaw: 0.07, use: 'CS2 to Valorant' },
       apex: { name: 'Apex Legends', yaw: 0.022, use: 'Battle royale' },
-      finals: { name: 'The Finals', yaw: 0.022, use: 'Fast tracking' },
       overwatch2: { name: 'Overwatch 2', yaw: 0.0066, use: 'Hero shooter' },
       r6: { name: 'Rainbow Six Siege', yaw: 0.02, use: 'Tactical ads check' }
     };
@@ -715,6 +728,11 @@
     const targetEdpi = document.getElementById('target-edpi');
     const copyResult = document.getElementById('copy-result');
     const gameTable = document.getElementById('game-table');
+    const lastTracked = {
+      calculator: '',
+      sourceGame: '',
+      targetGame: ''
+    };
 
     Object.entries(games).forEach(([key, game]) => {
       const fromOption = new Option(game.name, key);
@@ -739,6 +757,49 @@
       return Number(value).toLocaleString('en-US', {
         maximumFractionDigits: digits,
         minimumFractionDigits: digits
+      });
+    }
+
+    function trackEvent(name, params = {}) {
+      const payload = {
+        page_path: window.location.pathname,
+        ...params
+      };
+
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', name, payload);
+      }
+      if (typeof window.clarity === 'function') {
+        window.clarity('event', name);
+      }
+
+      window.dispatchEvent(new CustomEvent('aimscale:event', {
+        detail: { name, params: payload }
+      }));
+    }
+
+    function currentCalculationKey() {
+      return [
+        fromGame.value,
+        toGame.value,
+        sourceSens.value,
+        sourceDpi.value,
+        targetDpi.value,
+        precision.value
+      ].join('|');
+    }
+
+    function trackCalculatorUsed() {
+      const key = currentCalculationKey();
+      if (key === lastTracked.calculator || targetSens.textContent === '-') return;
+
+      lastTracked.calculator = key;
+      trackEvent('calculator_used', {
+        source_game: fromGame.value,
+        target_game: toGame.value,
+        source_dpi: toNumber(sourceDpi.value),
+        target_dpi: toNumber(targetDpi.value) || toNumber(sourceDpi.value),
+        precision: Number.parseInt(precision.value, 10)
       });
     }
 
@@ -768,8 +829,27 @@
       targetEdpi.textContent = Math.round(nextSens * nextDpi).toLocaleString('en-US');
     }
 
-    form.addEventListener('input', calculate);
-    form.addEventListener('change', calculate);
+    lastTracked.sourceGame = fromGame.value;
+    lastTracked.targetGame = toGame.value;
+
+    form.addEventListener('input', () => {
+      calculate();
+      trackCalculatorUsed();
+    });
+    form.addEventListener('change', (event) => {
+      calculate();
+
+      if (event.target === fromGame && fromGame.value !== lastTracked.sourceGame) {
+        lastTracked.sourceGame = fromGame.value;
+        trackEvent('source_game_changed', { source_game: fromGame.value });
+      }
+      if (event.target === toGame && toGame.value !== lastTracked.targetGame) {
+        lastTracked.targetGame = toGame.value;
+        trackEvent('target_game_changed', { target_game: toGame.value });
+      }
+
+      trackCalculatorUsed();
+    });
     form.addEventListener('reset', () => {
       setTimeout(() => {
         fromGame.value = 'cs2';
@@ -778,6 +858,9 @@
         sourceDpi.value = '800';
         targetDpi.value = '800';
         precision.value = '3';
+        lastTracked.calculator = '';
+        lastTracked.sourceGame = fromGame.value;
+        lastTracked.targetGame = toGame.value;
         calculate();
       }, 0);
     });
@@ -787,6 +870,10 @@
       try {
         await navigator.clipboard.writeText(text);
         copyResult.lastChild.textContent = 'Copied';
+        trackEvent('result_copied', {
+          source_game: fromGame.value,
+          target_game: toGame.value
+        });
       } catch (error) {
         copyResult.lastChild.textContent = 'Ready';
       }
