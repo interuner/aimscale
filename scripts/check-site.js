@@ -5,6 +5,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const SITE_URL = 'https://aimscale.top';
+const GA_MEASUREMENT_ID = 'G-FMTDQMDKNS';
+const CLARITY_PROJECT_ID = 'wqzi6cdcrr';
 const ROOT = path.resolve(__dirname, '..');
 const HIGH_RISK_PATTERNS = [
   /\bperfect\b/i,
@@ -114,6 +116,31 @@ function checkHtmlPage(file, sitemapUrls, htmlFiles, errors) {
     fail(errors, file, 'missing Methodology internal link');
   }
 
+  if (!html.includes(`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`)) {
+    fail(errors, file, 'missing GA4 script tag');
+  }
+  if (!html.includes(`gtag("config", "${GA_MEASUREMENT_ID}")`)) {
+    fail(errors, file, 'missing GA4 config call');
+  }
+  if (!html.includes(`"clarity", "script", "${CLARITY_PROJECT_ID}"`)) {
+    fail(errors, file, 'missing Clarity project tag');
+  }
+
+  if (file === 'index.html') {
+    if (!html.includes('id="faq"')) fail(errors, file, 'missing homepage FAQ section');
+    if (!html.includes("trackEvent('calculator_used'")) fail(errors, file, 'missing calculator_used event');
+    if (!html.includes("trackEvent('result_copied'")) fail(errors, file, 'missing result_copied event');
+    if (/finals\s*:/.test(html)) {
+      fail(errors, file, 'experimental The Finals support should not be in the homepage converter');
+    }
+  }
+
+  if (file === 'privacy.html') {
+    for (const text of ['Google Analytics', 'Microsoft Clarity', 'non-identifying analytics events']) {
+      if (!html.includes(text)) fail(errors, file, `missing analytics privacy disclosure: ${text}`);
+    }
+  }
+
   for (const pattern of EARLY_STAGE_PATTERNS) {
     if (pattern.test(html)) fail(errors, file, `contains early-stage placeholder or premature ad code: ${pattern}`);
   }
@@ -127,6 +154,50 @@ function checkHtmlPage(file, sitemapUrls, htmlFiles, errors) {
     if (!htmlFiles.has(targetFile)) {
       fail(errors, file, `broken internal link: ${link}`);
     }
+  }
+}
+
+function checkGameData(errors) {
+  const dataPath = path.join(ROOT, 'data', 'games.json');
+  if (!fs.existsSync(dataPath)) {
+    errors.push('data/games.json: missing game data file');
+    return;
+  }
+
+  let data;
+  try {
+    data = JSON.parse(read(dataPath));
+  } catch (error) {
+    errors.push(`data/games.json: invalid JSON: ${error.message}`);
+    return;
+  }
+
+  const allowedConfidence = new Set(['verified', 'reviewed', 'experimental']);
+  for (const game of data.games || []) {
+    if (!game.id) errors.push('data/games.json: game missing id');
+    if (!game.name) errors.push(`data/games.json: ${game.id || 'unknown'} missing name`);
+    if (!Number.isFinite(game.yaw) || game.yaw <= 0) {
+      errors.push(`data/games.json: ${game.id} has invalid yaw`);
+    }
+    if (!allowedConfidence.has(game.confidence)) {
+      errors.push(`data/games.json: ${game.id} has invalid confidence: ${game.confidence}`);
+    }
+    if (!Array.isArray(game.sourceUrls) || game.sourceUrls.length === 0) {
+      errors.push(`data/games.json: ${game.id} missing sourceUrls`);
+    }
+    for (const sourceUrl of game.sourceUrls || []) {
+      if (!/^https:\/\/[^ ]+$/i.test(sourceUrl)) {
+        errors.push(`data/games.json: ${game.id} source URL should be absolute HTTPS: ${sourceUrl}`);
+      }
+    }
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(game.lastReviewed || '')) {
+      errors.push(`data/games.json: ${game.id} has invalid lastReviewed date`);
+    }
+  }
+
+  const finals = (data.games || []).find((game) => game.id === 'finals');
+  if (finals && finals.confidence !== 'experimental') {
+    errors.push('data/games.json: The Finals should remain experimental until source agreement improves');
   }
 }
 
@@ -181,6 +252,7 @@ function run() {
   checkSitemapOnlyListsExistingPages(sitemapUrls, htmlFiles, errors);
   checkRobots(errors);
   checkRedirects(errors);
+  checkGameData(errors);
 
   if (errors.length) {
     console.error(`Site quality check failed with ${errors.length} issue(s):`);

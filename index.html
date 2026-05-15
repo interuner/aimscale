@@ -221,6 +221,8 @@
     .ds-table th { color: var(--muted); font-weight: 500; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0; text-transform: uppercase; }
     .ds-table tbody tr:hover { background: var(--fg-soft); }
     .ds-table .num-col { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-scroll .ds-table { min-width: 540px; }
 
     .rule { border: 0; border-top: 1px solid var(--border); margin: 0; }
     .rule-strong { border: 0; border-top: 1px solid var(--fg); margin: 0; }
@@ -307,12 +309,28 @@
     }
 
     @media (max-width: 760px) {
-      .topnav nav { display: none; }
+      :root {
+        --gutter: 20px;
+        --fs-h1: 40px;
+        --fs-h2: 30px;
+        --fs-lead: 17px;
+      }
+      .topnav-inner { align-items: flex-start; flex-direction: column; gap: 10px; }
+      .topnav nav {
+        display: flex;
+        width: 100%;
+        gap: 16px;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+      }
+      .topnav nav::-webkit-scrollbar { display: none; }
       .topnav .btn { display: none; }
       .topnav-inner { padding-block: 12px; }
       .calc-grid, .metric-grid { grid-template-columns: 1fr; }
       .result-main { display: block; }
       .result-value { margin-top: 8px; }
+      .actions .btn { flex: 1 1 150px; }
       .log-row { grid-template-columns: 1fr; gap: 6px; }
       .log-row .pull { text-align: left; }
       .card { padding: 22px; }
@@ -533,16 +551,18 @@
         </div>
         <div class="stack">
           <p class="lead">The calculator matches cm/360 using each game's yaw value, then adjusts for your target DPI. It gives a practical starting point, not a promise that every scoped mode or FOV setting will feel identical.</p>
-          <table class="ds-table" aria-label="Game yaw reference table">
-            <thead>
-              <tr>
-                <th>Game</th>
-                <th class="num-col">Yaw</th>
-                <th class="num-col">Example use</th>
-              </tr>
-            </thead>
-            <tbody id="game-table"></tbody>
-          </table>
+          <div class="table-scroll">
+            <table class="ds-table" aria-label="Game yaw reference table">
+              <thead>
+                <tr>
+                  <th>Game</th>
+                  <th class="num-col">Yaw</th>
+                  <th class="num-col">Example use</th>
+                </tr>
+              </thead>
+              <tbody id="game-table"></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
@@ -686,8 +706,31 @@
         </div>
         <div class="stack">
           <p class="lead">AimScale matches hip-fire cm/360 as a practical starting point. FOV, ADS sensitivity, scoped sensitivity, mouse acceleration, resolution, and engine behavior can still affect how a converted setting feels.</p>
-          <p class="meta">Last reviewed: May 13, 2026.</p>
+          <p class="meta">Last reviewed: May 15, 2026.</p>
           <a class="btn btn-secondary btn-arrow" href="/methodology">Read the methodology</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq" data-od-id="faq">
+      <div class="container stack" style="gap: 42px;">
+        <div style="max-width: 56ch;">
+          <p class="eyebrow">FAQ</p>
+          <h2>Use the result as a baseline, then test it in-game.</h2>
+        </div>
+        <div class="grid-3">
+          <article class="feature card-flat">
+            <h3>How accurate is the converter?</h3>
+            <p>It matches hip-fire cm/360 using reviewed yaw values. FOV, scoped modes, ADS multipliers, acceleration, and game updates can still change how the result feels.</p>
+          </article>
+          <article class="feature card-flat">
+            <h3>Does it convert ADS or scoped sensitivity?</h3>
+            <p>No. Treat the result as a base turn-distance match. Tune ADS, scopes, optics, and hero-specific settings after the hip-fire baseline feels comfortable.</p>
+          </article>
+          <article class="feature card-flat">
+            <h3>Why is The Finals not in the main converter?</h3>
+            <p>It is still marked experimental. AimScale keeps lower-confidence games out of the primary converter until the parameter source agreement is stronger.</p>
+          </article>
         </div>
       </div>
     </section>
