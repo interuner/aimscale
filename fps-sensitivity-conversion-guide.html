@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FPS Sensitivity Conversion Guide - AimScale</title>
+  <meta name="description" content="Learn a practical FPS sensitivity conversion workflow using DPI, eDPI, cm/360, yaw values, and in-game testing steps." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://aimscale.top/fps-sensitivity-conversion-guide" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://aimscale.top/fps-sensitivity-conversion-guide#webpage",
+        "url": "https://aimscale.top/fps-sensitivity-conversion-guide",
+        "name": "FPS Sensitivity Conversion Guide",
+        "description": "Learn a practical FPS sensitivity conversion workflow using DPI, eDPI, cm/360, yaw values, and in-game testing steps.",
+        "isPartOf": {
+          "@id": "https://aimscale.top/#website"
+        },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://aimscale.top/fps-sensitivity-conversion-guide#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "AimScale",
+            "item": "https://aimscale.top/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "FPS Sensitivity Conversion Guide",
+            "item": "https://aimscale.top/fps-sensitivity-conversion-guide"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f7f8f3;
+      --surface: #ffffff;
+      --fg: #181c1a;
+      --muted: #626b66;
+      --border: #dfe5dd;
+      --accent: #247861;
+      --font-display: 'Iowan Old Style', 'Charter', Georgia, 'Times New Roman', serif;
+      --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --font-mono: ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 920px; margin: 0 auto; padding: 0 28px; }
+    .topnav { position: sticky; top: 0; background: color-mix(in oklch, var(--bg) 92%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .topnav-inner { max-width: 1160px; margin: 0 auto; padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo, h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0; }
+    .logo { font-size: 20px; font-weight: 600; }
+    nav { display: flex; gap: 28px; flex-wrap: wrap; }
+    nav a, .pagefoot a { color: var(--muted); font-size: 14px; }
+    nav a:hover, .pagefoot a:hover { color: var(--fg); }
+    main { padding: clamp(56px, 10vw, 112px) 0; }
+    .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--accent); margin: 0 0 20px; }
+    h1 { font-size: clamp(42px, 6vw, 72px); line-height: 1.04; margin: 0; max-width: 12ch; }
+    h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.12; margin: 56px 0 0; }
+    h3 { font-size: 22px; margin: 0; }
+    p, li { color: var(--muted); font-size: 16px; }
+    p { margin: 16px 0 0; max-width: 72ch; text-wrap: pretty; }
+    ul, ol { margin: 16px 0 0; padding-left: 22px; }
+    li + li { margin-top: 8px; }
+    code { font-family: var(--font-mono); color: var(--fg); }
+    .notice { margin-top: 32px; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+    .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
+    .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .link-list { display: grid; gap: 12px; margin-top: 18px; }
+    .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
+    .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footlinks { display: flex; gap: 18px; flex-wrap: wrap; }
+  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FMTDQMDKNS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-FMTDQMDKNS");
+  </script>
+  <script>
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wqzi6cdcrr");
+  </script>
+</head>
+<body>
+  <header class="topnav">
+    <div class="topnav-inner">
+      <a class="logo" href="/">AimScale</a>
+      <nav aria-label="Primary">
+        <a href="/">Calculator</a>
+        <a href="/cm-360-calculator">cm/360</a>
+        <a href="/edpi-calculator">eDPI</a>
+        <a href="/methodology">Methodology</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <article class="container">
+      <p class="eyebrow">FPS sensitivity workflow</p>
+      <h1>FPS sensitivity conversion guide.</h1>
+      <p class="notice">The safest way to convert sensitivity is to preserve your physical turn distance first, then test the result in the new game's training range.</p>
+
+      <section aria-labelledby="workflow">
+        <h2 id="workflow">The Practical Workflow</h2>
+        <ol>
+          <li>Write down your source game, in-game sensitivity, and mouse DPI.</li>
+          <li>Convert that setting into cm/360 so you know the physical distance you are trying to preserve.</li>
+          <li>Use a game-aware converter for the target game because each game can use a different yaw value.</li>
+          <li>Keep the same DPI if possible during the first test. Change one variable at a time.</li>
+          <li>Play a short routine and adjust in small steps if tracking or micro-corrections feel off.</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="metric">
+        <h2 id="metric">Which Metric Should You Use?</h2>
+        <table class="table" aria-label="Sensitivity metric comparison">
+          <thead><tr><th>Metric</th><th>Use it for</th><th>Main limit</th></tr></thead>
+          <tbody>
+            <tr><td>In-game sensitivity</td><td>Changing settings inside one game.</td><td>Not comparable across most games.</td></tr>
+            <tr><td>eDPI</td><td>Comparing DPI and sensitivity pairs inside the same game.</td><td>Does not account for different yaw scales.</td></tr>
+            <tr><td>cm/360</td><td>Comparing physical turn distance across games.</td><td>Does not fully describe ADS, scoped modes, or FOV feel.</td></tr>
+          </tbody>
+        </table>
+        <p>For cross-game conversion, cm/360 is the clearest baseline. eDPI is still useful, but mostly inside one game or one sensitivity scale.</p>
+      </section>
+
+      <section aria-labelledby="example">
+        <h2 id="example">Example: CS2 To Valorant</h2>
+        <p>CS2 and Valorant use different yaw values, so copying the same sensitivity number will not preserve the same turn distance. At the same DPI, a common starting formula is:</p>
+        <p><code>Valorant sensitivity = CS2 sensitivity x 0.3142857</code></p>
+        <p>That means CS2 sensitivity 1.00 at 800 DPI becomes about Valorant 0.314 at 800 DPI. If the target DPI changes, the converter also needs to account for the source DPI and target DPI.</p>
+      </section>
+
+      <section aria-labelledby="mistakes">
+        <h2 id="mistakes">Common Conversion Mistakes</h2>
+        <ul>
+          <li>Copying another player's sensitivity without checking DPI or cm/360.</li>
+          <li>Using eDPI alone to compare games with different yaw values.</li>
+          <li>Changing DPI, sensitivity, FOV, and ADS multipliers at the same time.</li>
+          <li>Expecting scoped sensitivity to match just because hip-fire cm/360 matches.</li>
+          <li>Judging a new setting after one bad round instead of testing a repeatable routine.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="test">
+        <h2 id="test">A Simple 10-Minute Test</h2>
+        <ol>
+          <li>Spend two minutes on slow target tracking.</li>
+          <li>Spend two minutes on small flicks and corrections.</li>
+          <li>Spend two minutes clearing wide angles or doing large turns.</li>
+          <li>Play one short deathmatch or practice round.</li>
+          <li>If the setting feels wrong, adjust by 2 to 5 percent and repeat the same test.</li>
+        </ol>
+        <p>If small corrections overshoot, lower sensitivity slightly. If wide turns feel heavy or you run out of mousepad, raise it slightly.</p>
+      </section>
+
+      <section aria-labelledby="faq">
+        <h2 id="faq">Common Questions</h2>
+        <h3>Should every game use the same cm/360?</h3>
+        <p>Not necessarily. The same cm/360 is a useful starting point, but some games may feel better slightly faster or slower because of pacing, FOV, and weapon behavior.</p>
+        <h3>Should I change DPI or in-game sensitivity?</h3>
+        <p>If your desktop DPI already feels comfortable, change in-game sensitivity first. If you change DPI, use a DPI converter to preserve the same effective result.</p>
+        <h3>Why does the converted setting still feel different?</h3>
+        <p>Hip-fire turn distance is only one part of aiming feel. ADS multipliers, scopes, FOV, recoil, movement speed, and input processing can all change the final feel.</p>
+        <p>Last reviewed: May 29, 2026.</p>
+      </section>
+
+      <section aria-labelledby="related">
+        <h2 id="related">Related Tools</h2>
+        <div class="link-list">
+          <a href="/cm-360-calculator">cm/360 calculator</a>
+          <a href="/edpi-calculator">eDPI calculator</a>
+          <a href="/dpi-sensitivity-converter">DPI sensitivity converter</a>
+          <a href="/cs2-to-valorant-sensitivity">CS2 to Valorant sensitivity converter</a>
+          <a href="/rainbow-six-siege-sensitivity-converter">Rainbow Six Siege sensitivity converter</a>
+          <a href="/methodology">How AimScale calculates sensitivity</a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="pagefoot">
+    <div class="container footer-inner">
+      <span>&copy; 2026 AimScale</span>
+      <div class="footlinks" aria-label="Footer links">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/contact">Contact</a>
+        <a href="/methodology">Methodology</a>
+        <a href="/about">About</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

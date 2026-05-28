@@ -5,7 +5,9 @@ const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE_URL = 'https://aimscale.top';
-const LASTMOD = '2026-05-28';
+const DEFAULT_LASTMOD = '2026-05-28';
+const UPDATED_LASTMOD = '2026-05-29';
+const updatedPages = new Set(['/', '/fps-sensitivity-conversion-guide']);
 
 const featuredPages = [
   ['/', 'FPS sensitivity calculator'],
@@ -14,7 +16,8 @@ const featuredPages = [
   ['/dpi-sensitivity-converter', 'DPI sensitivity converter'],
   ['/cs2-to-valorant-sensitivity', 'CS2 to Valorant sensitivity converter'],
   ['/valorant-to-cs2-sensitivity', 'Valorant to CS2 sensitivity converter'],
-  ['/rainbow-six-siege-sensitivity-converter', 'Rainbow Six Siege sensitivity converter']
+  ['/rainbow-six-siege-sensitivity-converter', 'Rainbow Six Siege sensitivity converter'],
+  ['/fps-sensitivity-conversion-guide', 'FPS sensitivity conversion guide']
 ];
 
 function listHtmlFiles() {
@@ -172,7 +175,14 @@ function upsertJsonLd(file) {
 function refreshSitemap() {
   const sitemapPath = path.join(ROOT, 'sitemap.xml');
   let sitemap = fs.readFileSync(sitemapPath, 'utf8');
-  sitemap = sitemap.replace(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g, `<lastmod>${LASTMOD}</lastmod>`);
+  sitemap = sitemap.replace(
+    /(<url>\s*<loc>([^<]+)<\/loc>\s*<lastmod>)([^<]+)(<\/lastmod>)/g,
+    (match, prefix, loc, currentLastmod, suffix) => {
+      const pagePath = loc.replace(SITE_URL, '') || '/';
+      const nextLastmod = updatedPages.has(pagePath) ? UPDATED_LASTMOD : DEFAULT_LASTMOD;
+      return `${prefix}${nextLastmod}${suffix}`;
+    }
+  );
   fs.writeFileSync(sitemapPath, sitemap);
 }
 
