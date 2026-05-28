@@ -8,6 +8,7 @@ AimScale is a small static website experiment for English search traffic. The fi
 - `data/games.json` - game constants, review status, and calculation scope.
 - `scripts/test-formulas.js` - formula smoke tests for eDPI, cm/360, and core conversions.
 - `scripts/check-site.js` - static site quality checks for SEO basics, sitemap coverage, internal links, and risky claims.
+- `scripts/refresh-seo-metadata.js` - refreshes JSON-LD structured data and sitemap lastmod values after SEO/content updates.
 - `methodology.html` - formula, scope, limitations, and review process.
 - `edpi-calculator.html` - focused eDPI calculator and guide.
 - `valorant-edpi-calculator.html` - Valorant-specific eDPI calculator and cm/360 estimate.

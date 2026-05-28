@@ -73,6 +73,28 @@ function extractInternalLinks(html) {
   return links;
 }
 
+function extractJsonLdBlocks(html) {
+  return [...html.matchAll(/<script\s+type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/gi)]
+    .map((match) => match[1].trim());
+}
+
+function flattenSchemaTypes(value, types = []) {
+  if (Array.isArray(value)) {
+    for (const item of value) flattenSchemaTypes(item, types);
+    return types;
+  }
+  if (!value || typeof value !== 'object') return types;
+
+  if (value['@type']) {
+    if (Array.isArray(value['@type'])) types.push(...value['@type']);
+    else types.push(value['@type']);
+  }
+  for (const child of Object.values(value)) {
+    flattenSchemaTypes(child, types);
+  }
+  return types;
+}
+
 function parseSitemap() {
   const sitemap = read(path.join(ROOT, 'sitemap.xml'));
   const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
@@ -114,6 +136,29 @@ function checkHtmlPage(file, sitemapUrls, htmlFiles, errors) {
 
   if (!html.includes('href="/methodology"') && file !== 'methodology.html') {
     fail(errors, file, 'missing Methodology internal link');
+  }
+
+  const jsonLdBlocks = extractJsonLdBlocks(html);
+  if (jsonLdBlocks.length === 0) {
+    fail(errors, file, 'missing JSON-LD structured data');
+  } else {
+    const schemaTypes = [];
+    for (const block of jsonLdBlocks) {
+      try {
+        schemaTypes.push(...flattenSchemaTypes(JSON.parse(block)));
+      } catch (error) {
+        fail(errors, file, `invalid JSON-LD: ${error.message}`);
+      }
+    }
+    if (file === 'index.html') {
+      for (const type of ['WebSite', 'Organization', 'WebApplication', 'ItemList']) {
+        if (!schemaTypes.includes(type)) fail(errors, file, `missing homepage schema type: ${type}`);
+      }
+    } else {
+      for (const type of ['WebPage', 'BreadcrumbList']) {
+        if (!schemaTypes.includes(type)) fail(errors, file, `missing page schema type: ${type}`);
+      }
+    }
   }
 
   if (!html.includes(`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`)) {
@@ -202,6 +247,7 @@ function checkGameData(errors) {
 }
 
 function checkSitemapOnlyListsExistingPages(sitemapUrls, htmlFiles, errors) {
+  const sitemap = read(path.join(ROOT, 'sitemap.xml'));
   for (const url of sitemapUrls) {
     if (!url.startsWith(SITE_URL)) {
       errors.push(`sitemap.xml: external or invalid URL listed: ${url}`);
@@ -211,6 +257,15 @@ function checkSitemapOnlyListsExistingPages(sitemapUrls, htmlFiles, errors) {
     const targetFile = fileFromPagePath(pagePath);
     if (!htmlFiles.has(targetFile)) {
       errors.push(`sitemap.xml: URL has no matching HTML file: ${url}`);
+    }
+  }
+  const lastmods = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
+  if (lastmods.length !== sitemapUrls.size) {
+    errors.push('sitemap.xml: every URL should have a lastmod value');
+  }
+  for (const lastmod of lastmods) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(lastmod)) {
+      errors.push(`sitemap.xml: invalid lastmod date: ${lastmod}`);
     }
   }
 }
