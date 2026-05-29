@@ -21,7 +21,9 @@ const updatedPages = new Set([
   '/valorant-cm-360-calculator',
   '/apex-legends-sensitivity-converter',
   '/overwatch-2-sensitivity-converter',
-  '/rainbow-six-siege-sensitivity-converter'
+  '/rainbow-six-siege-sensitivity-converter',
+  '/best-cm-360-for-valorant',
+  '/best-cm-360-for-cs2'
 ]);
 
 const featuredPages = [

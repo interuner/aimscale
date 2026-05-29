@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Best cm/360 for CS2 - AimScale</title>
-  <meta name="description" content="A practical guide to choosing a CS2 cm/360 range, with fast, balanced, and slow sensitivity tradeoffs for tactical aim." />
+  <title>Best cm/360 for CS2 | DPI & eDPI Guide - AimScale</title>
+  <meta name="description" content="Choose a practical CS2 cm/360 range with DPI, eDPI, sensitivity examples, testing steps, and Counter-Strike aim tradeoffs." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://aimscale.top/best-cm-360-for-cs2" />
   <script type="application/ld+json">
@@ -16,11 +16,11 @@
         "@id": "https://aimscale.top/best-cm-360-for-cs2#webpage",
         "url": "https://aimscale.top/best-cm-360-for-cs2",
         "name": "Best cm/360 for CS2",
-        "description": "A practical guide to choosing a CS2 cm/360 range, with fast, balanced, and slow sensitivity tradeoffs for tactical aim.",
+        "description": "Choose a practical CS2 cm/360 range with DPI, eDPI, sensitivity examples, testing steps, and Counter-Strike aim tradeoffs.",
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
-        "dateModified": "2026-05-28",
+        "dateModified": "2026-05-29",
         "inLanguage": "en"
       },
       {
@@ -68,6 +68,22 @@
               "@type": "Answer",
               "text": "If you lift the mouse constantly, struggle to clear wide angles, or cannot react to targets outside your crosshair placement, test a slightly lower cm/360."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "Is CS2 eDPI enough to compare settings?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "CS2 eDPI is useful inside CS2, but cm/360 is clearer when comparing physical turn distance or converting between games."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I convert cm/360 into CS2 sensitivity?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the cm/360 calculator with your DPI and CS2 yaw. At 800 DPI, 52 cm/360 is roughly CS2 1.00 sensitivity."
+            }
           }
         ]
       }
@@ -100,6 +116,8 @@
     .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
     .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
     .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .table td:last-child, .table th:last-child { text-align: right; font-family: var(--font-mono); }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .link-list { display: grid; gap: 12px; margin-top: 18px; }
     .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
@@ -137,18 +155,38 @@
     <article class="container">
       <p class="eyebrow">CS2 guide</p>
       <h1>Best cm/360 for CS2.</h1>
-      <p class="notice">CS2 rewards crosshair placement, small corrections, and predictable movement. Many players are comfortable in a medium to slow cm/360 range, but the best setting is the one you can control under pressure.</p>
+      <p class="notice">CS2 rewards crosshair placement, small corrections, and predictable movement. There is no universal setting for everyone, so use cm/360 to find a controlled starting point and then test it under real match pressure.</p>
 
       <section aria-labelledby="ranges">
         <h2 id="ranges">Practical Starting Ranges</h2>
-        <table class="table" aria-label="CS2 cm/360 ranges">
-          <thead><tr><th>Range</th><th>Feel</th><th>Common tradeoff</th></tr></thead>
-          <tbody>
-            <tr><td>25 to 40 cm</td><td>Fast</td><td>Easy clearing and turning, but can make pixel corrections harder.</td></tr>
-            <tr><td>40 to 65 cm</td><td>Balanced</td><td>Often comfortable for rifling, angle holding, and controlled sprays.</td></tr>
-            <tr><td>65 cm and higher</td><td>Slow</td><td>Very stable aim, but requires more arm movement and desk space.</td></tr>
-          </tbody>
-        </table>
+        <p>Counter-Strike has slower time-to-kill pressure, recoil control, and many narrow angle fights. A lower raw sensitivity is not automatically better, but the setting should make small corrections repeatable.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="CS2 cm/360 ranges">
+            <thead><tr><th>Range</th><th>Feel</th><th>Good for</th><th>Watch out for</th></tr></thead>
+            <tbody>
+              <tr><td>25 to 40 cm</td><td>Fast</td><td>Wide clears, fast turns, smaller mousepads</td><td>Pixel adjustments can feel jumpy</td></tr>
+              <tr><td>40 to 65 cm</td><td>Balanced</td><td>Rifling, angle holding, spray control</td><td>May need arm movement for sharp turns</td></tr>
+              <tr><td>65 to 85+ cm</td><td>Slow</td><td>Stable taps, narrow holds, controlled micro-corrections</td><td>Quick clears and flash turns can feel heavy</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="examples">
+        <h2 id="examples">CS2 Sensitivity Examples At 800 DPI</h2>
+        <p>These examples convert target cm/360 into CS2 sensitivity at 800 DPI. Use them as checkpoints, then use the calculator if your DPI is different.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="CS2 cm/360 to sensitivity examples at 800 DPI">
+            <thead><tr><th>Target cm/360</th><th>CS2 sens</th><th>CS2 eDPI</th></tr></thead>
+            <tbody>
+              <tr><td>25 cm</td><td>2.078</td><td>1662</td></tr>
+              <tr><td>40 cm</td><td>1.299</td><td>1039</td></tr>
+              <tr><td>52 cm</td><td>0.999</td><td>799</td></tr>
+              <tr><td>65 cm</td><td>0.799</td><td>639</td></tr>
+              <tr><td>80 cm</td><td>0.649</td><td>519</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section aria-labelledby="test">
@@ -157,12 +195,35 @@
           <li>Check whether you can clear common angles without lifting too often.</li>
           <li>Spray, counter-strafe, and adjust onto small targets before deciding.</li>
           <li>Keep the same setting for several sessions before judging it too harshly.</li>
+          <li>Test pistol micro-corrections separately from rifle spray control.</li>
+          <li>If you often die while turning into a second angle, your cm/360 may be too high for your desk space.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="routine">
+        <h2 id="routine">A Simple 15-Minute Test</h2>
+        <p>Use the same value for the whole test. The goal is to find repeated problems, not to chase a flawless first impression.</p>
+        <ul>
+          <li>Five minutes: clear common angles on a map you know well.</li>
+          <li>Five minutes: practice counter-strafe taps and small target corrections.</li>
+          <li>Five minutes: test spray transfers and wide turns after utility or flashes.</li>
+          <li>Adjust by 5 to 10 percent only if the same issue shows up in multiple drills.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="mistakes">
+        <h2 id="mistakes">Common Mistakes</h2>
+        <ul>
+          <li>Assuming a slow setting is automatically better for rifles.</li>
+          <li>Copying a setting without checking mousepad size and lift habits.</li>
+          <li>Changing DPI and sensitivity together without calculating the final cm/360.</li>
+          <li>Judging a new value after one match instead of testing consistent scenarios.</li>
         </ul>
       </section>
 
       <section aria-labelledby="convert">
         <h2 id="convert">Convert From Valorant</h2>
-        <p>If you are moving from Valorant, start with the <a href="/valorant-to-cs2-sensitivity">Valorant to CS2 converter</a>. If the result feels too heavy for fast peeks, lower your cm/360 slightly by raising sensitivity in small steps.</p>
+        <p>If you are moving from Valorant, start with the <a href="/valorant-to-cs2-sensitivity">Valorant to CS2 converter</a>. If the result feels too heavy for fast peeks, lower your cm/360 slightly by raising sensitivity in small steps. For direct calculations, use the <a href="/cs2-edpi-calculator">CS2 eDPI calculator</a> and the <a href="/cm-360-calculator">cm/360 calculator</a>.</p>
       </section>
 
       <section aria-labelledby="faq">
@@ -173,15 +234,24 @@
         <p>No. Slower settings can help with precision, but they can also make quick clears and flash turns harder if you lack desk space.</p>
         <h3>How do I know if my CS2 sensitivity is too low?</h3>
         <p>If you lift the mouse constantly, struggle to clear wide angles, or cannot react to targets outside your crosshair placement, test a slightly lower cm/360.</p>
-        <p>Last reviewed: May 13, 2026.</p>
+        <h3>Is CS2 eDPI enough to compare settings?</h3>
+        <p>CS2 eDPI is useful inside CS2, but cm/360 is clearer when comparing physical turn distance or converting between games.</p>
+        <h3>How do I convert cm/360 into CS2 sensitivity?</h3>
+        <p>Use the cm/360 calculator with your DPI and CS2 yaw. At 800 DPI, 52 cm/360 is roughly CS2 1.00 sensitivity.</p>
+        <p>Last reviewed: May 29, 2026.</p>
       </section>
 
       <section aria-labelledby="related">
         <h2 id="related">Related Pages</h2>
         <div class="link-list">
           <a href="/what-is-cm-360">What is cm/360?</a>
+          <a href="/cm-360-calculator">cm/360 calculator</a>
+          <a href="/cs2-edpi-calculator">CS2 eDPI calculator</a>
+          <a href="/valorant-to-cs2-sensitivity">Valorant to CS2 sensitivity converter</a>
+          <a href="/cs2-to-valorant-sensitivity">CS2 to Valorant sensitivity converter</a>
           <a href="/dpi-vs-edpi">DPI vs eDPI for FPS games</a>
           <a href="/best-cm-360-for-valorant">Best cm/360 range for Valorant</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/methodology">How AimScale calculates sensitivity</a>
         </div>
       </section>
