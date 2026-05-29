@@ -89,6 +89,11 @@
     .metric { border-top: 1px solid var(--border); padding-top: 10px; }
     .metric span { display: block; color: var(--muted); font-size: 13px; }
     .metric b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
+    .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-wrap .table { min-width: 680px; }
     .link-list { display: grid; gap: 12px; margin-top: 18px; }
     .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
@@ -141,6 +146,41 @@
           <li>Use the result as a baseline, then tune in-game by feel.</li>
         </ul>
 
+        <h2>Example cm/360 Ranges</h2>
+        <div class="table-wrap">
+          <table class="table" aria-label="cm/360 example ranges">
+            <thead><tr><th>cm/360</th><th>Feel</th><th>Often useful for</th><th>Main tradeoff</th></tr></thead>
+            <tbody>
+              <tr><td>20-30 cm</td><td>Fast</td><td>Wide turns and limited mousepad space</td><td>Harder micro-corrections</td></tr>
+              <tr><td>30-45 cm</td><td>Medium</td><td>General FPS play and mixed tracking/flicking</td><td>May need tuning by game</td></tr>
+              <tr><td>45-65 cm</td><td>Slow</td><td>Tactical shooters and precise angle holding</td><td>Requires more arm movement</td></tr>
+              <tr><td>65+ cm</td><td>Very slow</td><td>Large mousepads and precision-heavy setups</td><td>Large turns can feel heavy</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Same cm/360 Across Games At 800 DPI</h2>
+        <p>This table shows example sensitivities that target roughly the same physical turn distance in different games. Use it as a starting point, not a rule.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Same cm/360 across games at 800 DPI">
+            <thead><tr><th>Target cm/360</th><th>CS2 / Apex sens</th><th>Valorant sens</th><th>Overwatch 2 sens</th><th>R6 sens</th></tr></thead>
+            <tbody>
+              <tr><td>30 cm</td><td>1.732</td><td>0.544</td><td>5.77</td><td>1.905</td></tr>
+              <tr><td>40 cm</td><td>1.299</td><td>0.408</td><td>4.33</td><td>1.429</td></tr>
+              <tr><td>50 cm</td><td>1.039</td><td>0.327</td><td>3.46</td><td>1.143</td></tr>
+              <tr><td>60 cm</td><td>0.866</td><td>0.272</td><td>2.89</td><td>0.953</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>How To Check cm/360 Manually</h2>
+        <ul>
+          <li>Open a practice range or empty map.</li>
+          <li>Place your mouse at a known point on the mousepad.</li>
+          <li>Move horizontally until your view turns exactly 360 degrees.</li>
+          <li>Measure the distance in centimeters and compare it with the calculator.</li>
+        </ul>
+
         <h2>Limitations</h2>
         <p>This calculator matches hip-fire cm/360. It does not guarantee identical feel across games because FOV, ADS sensitivity, scoped sensitivity, mouse acceleration, resolution, and game engine behavior can affect aiming feel.</p>
         <h2>Common Questions</h2>
@@ -150,13 +190,15 @@
         <p>Choose the game you are measuring. If you are unsure about a game's exact behavior, treat the result as a baseline and confirm it in a training range.</p>
         <h3>Does a higher cm/360 mean slower aim?</h3>
         <p>Yes. A higher cm/360 means you need more mousepad distance for one full turn, so the sensitivity feels slower.</p>
-        <p>Last reviewed: May 13, 2026.</p>
+        <p>Last reviewed: May 29, 2026.</p>
 
         <h2>Related Pages</h2>
         <div class="link-list">
           <a href="/what-is-cm-360">What is cm/360?</a>
           <a href="/edpi-calculator">eDPI calculator</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/cs2-to-valorant-sensitivity">CS2 to Valorant sensitivity converter</a>
+          <a href="/valorant-to-cs2-sensitivity">Valorant to CS2 sensitivity converter</a>
           <a href="/methodology">How AimScale calculates sensitivity</a>
         </div>
       </article>

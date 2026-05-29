@@ -92,6 +92,8 @@
     .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
     .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
     .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-wrap .table { min-width: 620px; }
     .link-list { display: grid; gap: 12px; margin-top: 18px; }
     .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
@@ -138,15 +140,36 @@
         <p><code>CS2 eDPI = mouse DPI x CS2 sensitivity</code></p>
         <p>For the cm/360 estimate, AimScale uses the common CS2 yaw value of <code>0.022</code>.</p>
 
-        <h2>Quick Examples</h2>
-        <table class="table" aria-label="CS2 eDPI examples">
-          <thead><tr><th>DPI</th><th>CS2 sens</th><th>eDPI</th><th>Approx. cm/360</th></tr></thead>
-          <tbody>
-            <tr><td>400</td><td>2.00</td><td>800</td><td>51.95</td></tr>
-            <tr><td>800</td><td>1.00</td><td>800</td><td>51.95</td></tr>
-            <tr><td>800</td><td>1.50</td><td>1200</td><td>34.63</td></tr>
-          </tbody>
-        </table>
+        <h2>CS2 eDPI Examples</h2>
+        <p>These examples show how CS2 eDPI and cm/360 change across common DPI and sensitivity pairs.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="CS2 eDPI examples">
+            <thead><tr><th>DPI</th><th>CS2 sens</th><th>eDPI</th><th>Approx. cm/360</th></tr></thead>
+            <tbody>
+              <tr><td>400</td><td>1.50</td><td>600</td><td>69.27</td></tr>
+              <tr><td>400</td><td>2.00</td><td>800</td><td>51.95</td></tr>
+              <tr><td>800</td><td>0.80</td><td>640</td><td>64.94</td></tr>
+              <tr><td>800</td><td>1.00</td><td>800</td><td>51.95</td></tr>
+              <tr><td>800</td><td>1.20</td><td>960</td><td>43.30</td></tr>
+              <tr><td>1600</td><td>0.40</td><td>640</td><td>64.94</td></tr>
+              <tr><td>1600</td><td>0.50</td><td>800</td><td>51.95</td></tr>
+              <tr><td>1600</td><td>0.60</td><td>960</td><td>43.30</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Equivalent CS2 Settings</h2>
+        <p>If your target is 800 eDPI, these settings are equivalent on paper:</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Equivalent CS2 settings for 800 eDPI">
+            <thead><tr><th>Mouse DPI</th><th>CS2 sensitivity</th><th>eDPI</th><th>Approx. cm/360</th></tr></thead>
+            <tbody>
+              <tr><td>400</td><td>2.000</td><td>800</td><td>51.95</td></tr>
+              <tr><td>800</td><td>1.000</td><td>800</td><td>51.95</td></tr>
+              <tr><td>1600</td><td>0.500</td><td>800</td><td>51.95</td></tr>
+            </tbody>
+          </table>
+        </div>
 
         <h2>How To Use The Result</h2>
         <ul>
@@ -155,20 +178,32 @@
           <li>Test spray control, angle clearing, and small corrections before changing again.</li>
         </ul>
 
+        <h2>Common Mistakes</h2>
+        <ul>
+          <li>Comparing CS2 eDPI directly with Valorant eDPI. The games use different sensitivity scales.</li>
+          <li>Changing DPI and CS2 sensitivity at the same time without checking whether eDPI stayed the same.</li>
+          <li>Copying a pro player's eDPI without considering your mousepad size, role, and arm movement.</li>
+          <li>Ignoring cm/360 when switching from CS2 to another FPS game.</li>
+        </ul>
+
         <h2>Common Questions</h2>
         <h3>Is 400 DPI at 2.0 the same as 800 DPI at 1.0?</h3>
         <p>Inside CS2, both settings produce 800 eDPI and should be close as a hip-fire baseline if your mouse and system input are consistent.</p>
         <h3>Can I compare CS2 eDPI with Valorant eDPI?</h3>
         <p>Not directly. Valorant and CS2 use different sensitivity scales, so cm/360 or a game-aware converter is better.</p>
+        <h3>How do I keep the same CS2 eDPI after changing DPI?</h3>
+        <p>Divide your target eDPI by the new mouse DPI. For example, 800 eDPI at 1600 DPI uses 0.500 sensitivity.</p>
         <h3>Why include cm/360 on an eDPI page?</h3>
         <p>cm/360 turns the CS2 setting into a physical distance, which makes the number easier to interpret and compare.</p>
-        <p>Last reviewed: May 13, 2026.</p>
+        <p>Last reviewed: May 29, 2026.</p>
 
         <h2>Related Pages</h2>
         <div class="link-list">
           <a href="/valorant-edpi-calculator">Valorant eDPI calculator</a>
           <a href="/best-cm-360-for-cs2">Best cm/360 range for CS2</a>
+          <a href="/cs2-to-valorant-sensitivity">CS2 to Valorant sensitivity converter</a>
           <a href="/valorant-to-cs2-sensitivity">Valorant to CS2 sensitivity converter</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/cm-360-calculator">cm/360 calculator</a>
           <a href="/methodology">How AimScale calculates sensitivity</a>
         </div>

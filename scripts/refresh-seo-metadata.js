@@ -9,6 +9,8 @@ const DEFAULT_LASTMOD = '2026-05-28';
 const UPDATED_LASTMOD = '2026-05-29';
 const updatedPages = new Set([
   '/',
+  '/cm-360-calculator',
+  '/cs2-edpi-calculator',
   '/cs2-to-valorant-sensitivity',
   '/valorant-edpi-calculator',
   '/valorant-to-cs2-sensitivity',
