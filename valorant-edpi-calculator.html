@@ -92,6 +92,8 @@
     .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
     .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
     .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-wrap .table { min-width: 620px; }
     .link-list { display: grid; gap: 12px; margin-top: 18px; }
     .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
@@ -138,15 +140,36 @@
         <p><code>Valorant eDPI = mouse DPI x Valorant sensitivity</code></p>
         <p>For the cm/360 estimate, AimScale uses the common Valorant hip-fire yaw value of <code>0.07</code>.</p>
 
-        <h2>Quick Examples</h2>
-        <table class="table" aria-label="Valorant eDPI examples">
-          <thead><tr><th>DPI</th><th>Valorant sens</th><th>eDPI</th><th>Approx. cm/360</th></tr></thead>
-          <tbody>
-            <tr><td>800</td><td>0.25</td><td>200</td><td>65.31</td></tr>
-            <tr><td>800</td><td>0.30</td><td>240</td><td>54.43</td></tr>
-            <tr><td>800</td><td>0.35</td><td>280</td><td>46.65</td></tr>
-          </tbody>
-        </table>
+        <h2>Valorant eDPI Examples</h2>
+        <p>These examples show why different DPI and sensitivity pairs can produce the same Valorant eDPI and a similar hip-fire turn distance.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Valorant eDPI examples">
+            <thead><tr><th>DPI</th><th>Valorant sens</th><th>eDPI</th><th>Approx. cm/360</th></tr></thead>
+            <tbody>
+              <tr><td>400</td><td>0.60</td><td>240</td><td>54.43</td></tr>
+              <tr><td>400</td><td>0.70</td><td>280</td><td>46.65</td></tr>
+              <tr><td>800</td><td>0.25</td><td>200</td><td>65.31</td></tr>
+              <tr><td>800</td><td>0.30</td><td>240</td><td>54.43</td></tr>
+              <tr><td>800</td><td>0.35</td><td>280</td><td>46.65</td></tr>
+              <tr><td>1600</td><td>0.125</td><td>200</td><td>65.31</td></tr>
+              <tr><td>1600</td><td>0.15</td><td>240</td><td>54.43</td></tr>
+              <tr><td>1600</td><td>0.175</td><td>280</td><td>46.65</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Equivalent Valorant Settings</h2>
+        <p>If your target is 240 eDPI, these settings are equivalent on paper:</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Equivalent Valorant settings for 240 eDPI">
+            <thead><tr><th>Mouse DPI</th><th>Valorant sensitivity</th><th>eDPI</th><th>Approx. cm/360</th></tr></thead>
+            <tbody>
+              <tr><td>400</td><td>0.600</td><td>240</td><td>54.43</td></tr>
+              <tr><td>800</td><td>0.300</td><td>240</td><td>54.43</td></tr>
+              <tr><td>1600</td><td>0.150</td><td>240</td><td>54.43</td></tr>
+            </tbody>
+          </table>
+        </div>
 
         <h2>How To Use The Result</h2>
         <ul>
@@ -155,20 +178,32 @@
           <li>Keep DPI stable while testing so each change is easy to understand.</li>
         </ul>
 
+        <h2>Common Mistakes</h2>
+        <ul>
+          <li>Using Valorant eDPI as a direct CS2, Apex, or Overwatch conversion. Different games can use different yaw values.</li>
+          <li>Changing DPI and Valorant sensitivity together without checking the final eDPI.</li>
+          <li>Copying a player's eDPI without considering mousepad space, role, or comfort.</li>
+          <li>Assuming scoped sensitivity will feel identical just because hip-fire eDPI matches.</li>
+        </ul>
+
         <h2>Common Questions</h2>
         <h3>Is Valorant eDPI enough for cross-game conversion?</h3>
         <p>No. Valorant eDPI is useful inside Valorant, but cross-game conversion should account for yaw values and cm/360.</p>
         <h3>What is a low Valorant eDPI?</h3>
         <p>A lower eDPI means slower aim, but the right value depends on mousepad space, role, and comfort. Use the number as a reference, not as a rule.</p>
+        <h3>How do I keep the same Valorant eDPI after changing DPI?</h3>
+        <p>Divide your target eDPI by the new mouse DPI. For example, 240 eDPI at 1600 DPI uses 0.150 sensitivity.</p>
         <h3>Why does cm/360 matter here?</h3>
         <p>cm/360 tells you how far the mouse physically travels for a full turn, which is easier to compare than raw sensitivity numbers.</p>
-        <p>Last reviewed: May 13, 2026.</p>
+        <p>Last reviewed: May 29, 2026.</p>
 
         <h2>Related Pages</h2>
         <div class="link-list">
           <a href="/valorant-cm-360-calculator">Valorant cm/360 calculator</a>
           <a href="/cs2-edpi-calculator">CS2 eDPI calculator</a>
           <a href="/cs2-to-valorant-sensitivity">CS2 to Valorant sensitivity converter</a>
+          <a href="/valorant-to-cs2-sensitivity">Valorant to CS2 sensitivity converter</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/best-cm-360-for-valorant">Best cm/360 range for Valorant</a>
           <a href="/methodology">How AimScale calculates sensitivity</a>
         </div>

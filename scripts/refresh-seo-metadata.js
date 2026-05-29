@@ -10,6 +10,7 @@ const UPDATED_LASTMOD = '2026-05-29';
 const updatedPages = new Set([
   '/',
   '/cs2-to-valorant-sensitivity',
+  '/valorant-edpi-calculator',
   '/valorant-to-cs2-sensitivity',
   '/fps-sensitivity-conversion-guide'
 ]);
