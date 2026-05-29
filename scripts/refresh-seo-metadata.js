@@ -18,7 +18,10 @@ const updatedPages = new Set([
   '/privacy',
   '/edpi-calculator',
   '/dpi-sensitivity-converter',
-  '/valorant-cm-360-calculator'
+  '/valorant-cm-360-calculator',
+  '/apex-legends-sensitivity-converter',
+  '/overwatch-2-sensitivity-converter',
+  '/rainbow-six-siege-sensitivity-converter'
 ]);
 
 const featuredPages = [
@@ -95,6 +98,30 @@ const toolPages = new Map([
       'Calculate Valorant cm/360 from DPI and sensitivity',
       'Estimate Valorant eDPI and inches/360',
       'Compare practical Valorant turn-distance ranges'
+    ]
+  }],
+  ['/apex-legends-sensitivity-converter', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Convert FPS sensitivity into Apex Legends',
+      'Adjust Apex conversion by source and target DPI',
+      'Copy the result or share a URL with calculator inputs'
+    ]
+  }],
+  ['/overwatch-2-sensitivity-converter', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Convert FPS sensitivity into Overwatch 2',
+      'Adjust Overwatch 2 conversion by source and target DPI',
+      'Copy the result or share a URL with calculator inputs'
+    ]
+  }],
+  ['/rainbow-six-siege-sensitivity-converter', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Convert FPS sensitivity into Rainbow Six Siege',
+      'Adjust Siege conversion by source and target DPI',
+      'Copy the result or share a URL with calculator inputs'
     ]
   }]
 ]);

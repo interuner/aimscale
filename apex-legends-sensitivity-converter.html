@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Apex Legends Sensitivity Converter - AimScale</title>
+  <title>Apex Legends Sensitivity Converter | DPI & cm/360 - AimScale</title>
   <meta name="description" content="Convert sensitivity from CS2, Valorant, Overwatch 2, or Rainbow Six Siege to Apex Legends with DPI adjustment, cm/360, and eDPI." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://aimscale.top/apex-legends-sensitivity-converter" />
@@ -20,7 +20,7 @@
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
-        "dateModified": "2026-05-28",
+        "dateModified": "2026-05-29",
         "inLanguage": "en"
       },
       {
@@ -39,6 +39,24 @@
             "name": "Apex Legends Sensitivity Converter",
             "item": "https://aimscale.top/apex-legends-sensitivity-converter"
           }
+        ]
+      },
+      {
+        "@type": [
+          "WebApplication",
+          "SoftwareApplication"
+        ],
+        "@id": "https://aimscale.top/apex-legends-sensitivity-converter#calculator",
+        "name": "Apex Legends Sensitivity Converter",
+        "url": "https://aimscale.top/apex-legends-sensitivity-converter",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "description": "Convert sensitivity from CS2, Valorant, Overwatch 2, or Rainbow Six Siege to Apex Legends with DPI adjustment, cm/360, and eDPI.",
+        "featureList": [
+          "Convert FPS sensitivity into Apex Legends",
+          "Adjust Apex conversion by source and target DPI",
+          "Copy the result or share a URL with calculator inputs"
         ]
       },
       {
@@ -67,6 +85,14 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "No. Treat this as a hip-fire conversion, then tune Apex ADS or per-optic settings separately if your scoped aim feels off."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should I copy if I only know my eDPI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "eDPI can help inside one game, but it does not translate cleanly across different yaw scales. Use DPI, sensitivity, and cm/360 together when moving into Apex."
             }
           }
         ]
@@ -103,10 +129,18 @@
     input:focus, select:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
     .result { margin-top: 20px; padding: 18px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklch, var(--bg) 70%, var(--surface)); }
     .result strong { display: block; font-family: var(--font-display); font-size: 46px; line-height: 1; margin-top: 8px; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .tool-button { min-height: 42px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--fg); font: inherit; cursor: pointer; }
+    .tool-button:hover, .tool-button:focus { border-color: var(--accent); outline: 2px solid var(--accent-soft); }
     .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
     .metric { border-top: 1px solid var(--border); padding-top: 10px; }
     .metric span { display: block; color: var(--muted); font-size: 13px; }
     .metric b, code { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
+    .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .table td:last-child, .table th:last-child { text-align: right; font-family: var(--font-mono); }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .link-list { display: grid; gap: 12px; margin-top: 18px; }
     .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
@@ -150,6 +184,42 @@
         <h2>How This Conversion Works</h2>
         <p>Apex Legends is commonly treated like other Source-based shooters for hip-fire yaw conversion. If you convert from CS2 at the same DPI, the value is usually close to the same sensitivity. Valorant and Overwatch 2 use different scales, so those values need conversion.</p>
         <p><code>Target sensitivity = source sensitivity x source DPI x source yaw / target DPI / Apex yaw</code></p>
+
+        <h2>Apex Conversion Examples At 800 DPI</h2>
+        <p>These examples use 800 DPI in both games. They are useful sanity checks before you test the calculator with your exact DPI.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Apex Legends sensitivity examples at 800 DPI">
+            <thead><tr><th>Source game</th><th>Source setting</th><th>Apex sens</th><th>cm/360</th></tr></thead>
+            <tbody>
+              <tr><td>CS2 / CS:GO</td><td>1.00 at 800 DPI</td><td>1.000</td><td>51.95</td></tr>
+              <tr><td>Valorant</td><td>0.30 at 800 DPI</td><td>0.955</td><td>54.43</td></tr>
+              <tr><td>Overwatch 2</td><td>4.00 at 800 DPI</td><td>1.200</td><td>43.30</td></tr>
+              <tr><td>Rainbow Six Siege</td><td>1.10 at 800 DPI</td><td>1.000</td><td>51.95</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>If Your Apex DPI Is Different</h2>
+        <p>If you keep the same physical turn distance but change mouse DPI, the raw Apex sensitivity changes in the opposite direction. This table converts CS2 1.00 at 800 DPI into Apex at common target DPI values.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Apex Legends target DPI examples">
+            <thead><tr><th>Source setting</th><th>Apex DPI</th><th>Apex sens</th><th>Same baseline</th></tr></thead>
+            <tbody>
+              <tr><td>CS2 1.00 at 800 DPI</td><td>400</td><td>2.000</td><td>51.95 cm/360</td></tr>
+              <tr><td>CS2 1.00 at 800 DPI</td><td>800</td><td>1.000</td><td>51.95 cm/360</td></tr>
+              <tr><td>CS2 1.00 at 800 DPI</td><td>1600</td><td>0.500</td><td>51.95 cm/360</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Apex Tuning Scenarios</h2>
+        <p>Apex has more sustained tracking, armor-swap pressure, vertical movement, and wide-angle fights than many tactical shooters. After conversion, test the setting in several real situations instead of only testing a wall flick.</p>
+        <ul>
+          <li>If close-range tracking feels late, raise the Apex value by a small step.</li>
+          <li>If mid-range recoil control feels shaky, lower the value slightly and retest.</li>
+          <li>If you changed from 400 to 800 or 1600 DPI, compare cm/360 instead of comparing only raw sensitivity.</li>
+          <li>If your ADS or optic sensitivity feels different, tune it separately from hip-fire.</li>
+        </ul>
         <h2>When To Adjust Manually</h2>
         <ul>
           <li>ADS sensitivity, FOV, and per-optic settings can change how tracking feels.</li>
@@ -163,12 +233,17 @@
         <p>Valorant uses a different sensitivity scale, so the raw number should not be copied directly into Apex. Matching cm/360 gives a cleaner baseline.</p>
         <h3>Should ADS use the same conversion?</h3>
         <p>No. Treat this as a hip-fire conversion, then tune Apex ADS or per-optic settings separately if your scoped aim feels off.</p>
-        <p>Last reviewed: May 13, 2026.</p>
+        <h3>What should I copy if I only know my eDPI?</h3>
+        <p>eDPI can help inside one game, but it does not translate cleanly across different yaw scales. Use DPI, sensitivity, and cm/360 together when moving into Apex.</p>
+        <p>Last reviewed: May 29, 2026.</p>
         <h2>Related Pages</h2>
         <div class="link-list">
-          <a href="/best-cm-360-for-valorant">Best cm/360 range for Valorant</a>
-          <a href="/best-cm-360-for-cs2">Best cm/360 range for CS2</a>
-          <a href="/dpi-vs-edpi">DPI vs eDPI for FPS games</a>
+          <a href="/cm-360-calculator">cm/360 calculator</a>
+          <a href="/edpi-calculator">eDPI calculator</a>
+          <a href="/dpi-sensitivity-converter">DPI sensitivity converter</a>
+          <a href="/overwatch-2-sensitivity-converter">Overwatch 2 sensitivity converter</a>
+          <a href="/rainbow-six-siege-sensitivity-converter">Rainbow Six Siege sensitivity converter</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/methodology">How AimScale calculates sensitivity</a>
         </div>
       </article>
@@ -205,6 +280,10 @@
             <div class="metric"><span>Source eDPI</span><b id="edpi">800</b></div>
           </div>
         </div>
+        <div class="actions">
+          <button class="tool-button" type="button" id="copy-result">Copy result</button>
+          <button class="tool-button" type="button" id="copy-link">Copy share URL</button>
+        </div>
       </aside>
     </div>
   </main>
@@ -231,7 +310,14 @@
     const targetSens = document.getElementById('target-sens');
     const cm360 = document.getElementById('cm360');
     const edpi = document.getElementById('edpi');
+    const copyResult = document.getElementById('copy-result');
+    const copyLink = document.getElementById('copy-link');
     function number(value) { const parsed = Number.parseFloat(String(value).replace(',', '.')); return Number.isFinite(parsed) ? parsed : 0; }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('from')) sourceGame.value = params.get('from');
+    if (params.get('sens')) sourceSens.value = params.get('sens');
+    if (params.get('sourceDpi')) sourceDpi.value = params.get('sourceDpi');
+    if (params.get('targetDpi')) targetDpi.value = params.get('targetDpi');
     function update() {
       const sens = number(sourceSens.value);
       const dpi = number(sourceDpi.value);
@@ -243,8 +329,51 @@
       cm360.textContent = (inches * 2.54).toFixed(2);
       edpi.textContent = Math.round(sens * dpi).toLocaleString('en-US');
     }
+    function sourceGameName() {
+      return sourceGame.options[sourceGame.selectedIndex].textContent;
+    }
+    function shareUrl() {
+      const url = new URL(window.location.href);
+      url.searchParams.set('from', sourceGame.value);
+      url.searchParams.set('sens', String(number(sourceSens.value) || ''));
+      url.searchParams.set('sourceDpi', String(number(sourceDpi.value) || ''));
+      url.searchParams.set('targetDpi', String(number(targetDpi.value) || ''));
+      return url.toString();
+    }
+    function resultText() {
+      return `${sourceGameName()} ${sourceSens.value} at ${sourceDpi.value} DPI = Apex Legends ${targetSens.textContent} at ${targetDpi.value} DPI (${cm360.textContent} cm/360).`;
+    }
+    async function writeClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.append(textarea);
+      textarea.select();
+      const copied = document.execCommand('copy');
+      textarea.remove();
+      if (!copied) throw new Error('Copy failed');
+    }
+    async function copyText(button, text, eventName) {
+      const original = button.textContent;
+      try {
+        await writeClipboard(text);
+        button.textContent = 'Copied';
+        if (typeof gtag === 'function') gtag('event', eventName, { tool: 'apex_converter' });
+      } catch (error) {
+        button.textContent = 'Copy failed';
+      }
+      window.setTimeout(() => { button.textContent = original; }, 1400);
+    }
     [sourceGame, sourceSens, sourceDpi, targetDpi].forEach((input) => input.addEventListener('input', update));
     [sourceGame, targetDpi].forEach((input) => input.addEventListener('change', update));
+    copyResult.addEventListener('click', () => copyText(copyResult, resultText(), 'result_copied'));
+    copyLink.addEventListener('click', () => copyText(copyLink, shareUrl(), 'share_url_copied'));
     update();
   </script>
 </body>

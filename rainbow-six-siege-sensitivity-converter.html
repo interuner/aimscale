@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rainbow Six Siege Sensitivity Converter - AimScale</title>
+  <title>Rainbow Six Siege Sensitivity Converter | DPI & cm/360 - AimScale</title>
   <meta name="description" content="Convert sensitivity from CS2, Valorant, Apex Legends, or Overwatch 2 to Rainbow Six Siege with DPI adjustment and cm/360." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://aimscale.top/rainbow-six-siege-sensitivity-converter" />
@@ -20,7 +20,7 @@
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
-        "dateModified": "2026-05-28",
+        "dateModified": "2026-05-29",
         "inLanguage": "en"
       },
       {
@@ -39,6 +39,24 @@
             "name": "Rainbow Six Siege Sensitivity Converter",
             "item": "https://aimscale.top/rainbow-six-siege-sensitivity-converter"
           }
+        ]
+      },
+      {
+        "@type": [
+          "WebApplication",
+          "SoftwareApplication"
+        ],
+        "@id": "https://aimscale.top/rainbow-six-siege-sensitivity-converter#calculator",
+        "name": "Rainbow Six Siege Sensitivity Converter",
+        "url": "https://aimscale.top/rainbow-six-siege-sensitivity-converter",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "description": "Convert sensitivity from CS2, Valorant, Apex Legends, or Overwatch 2 to Rainbow Six Siege with DPI adjustment and cm/360.",
+        "featureList": [
+          "Convert FPS sensitivity into Rainbow Six Siege",
+          "Adjust Siege conversion by source and target DPI",
+          "Copy the result or share a URL with calculator inputs"
         ]
       },
       {
@@ -67,6 +85,14 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Test quick clears and angle holds first. If close-range clears feel too slow, lower cm/360 slightly by raising sensitivity. If pixel holds feel unstable, do the opposite."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I compare Siege eDPI with CS2 eDPI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not directly. Siege and CS2 use different in-game scales, so eDPI alone is incomplete. Use a yaw-aware conversion and check the resulting cm/360."
             }
           }
         ]
@@ -103,10 +129,18 @@
     input:focus, select:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
     .result { margin-top: 20px; padding: 18px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklch, var(--bg) 70%, var(--surface)); }
     .result strong { display: block; font-family: var(--font-display); font-size: 46px; line-height: 1; margin-top: 8px; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .tool-button { min-height: 42px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--fg); font: inherit; cursor: pointer; }
+    .tool-button:hover, .tool-button:focus { border-color: var(--accent); outline: 2px solid var(--accent-soft); }
     .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
     .metric { border-top: 1px solid var(--border); padding-top: 10px; }
     .metric span { display: block; color: var(--muted); font-size: 13px; }
     .metric b, code { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
+    .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .table td:last-child, .table th:last-child { text-align: right; font-family: var(--font-mono); }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .link-list { display: grid; gap: 12px; margin-top: 18px; }
     .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
@@ -150,11 +184,48 @@
         <h2>What This Page Converts</h2>
         <p>The calculator focuses on the broad hip-fire turn distance. It does not replace Siege-specific ADS sensitivity, optic multipliers, or advanced configuration files.</p>
         <p><code>Target sensitivity = source sensitivity x source DPI x source yaw / target DPI / Siege yaw</code></p>
+
+        <h2>Siege Conversion Examples At 800 DPI</h2>
+        <p>These examples use 800 DPI in the source game and Siege. They are meant for hip-fire only, because Siege ADS and optic settings need their own tuning pass.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Rainbow Six Siege sensitivity examples at 800 DPI">
+            <thead><tr><th>Source game</th><th>Source setting</th><th>Siege sens</th><th>cm/360</th></tr></thead>
+            <tbody>
+              <tr><td>CS2 / CS:GO</td><td>1.00 at 800 DPI</td><td>1.100</td><td>51.95</td></tr>
+              <tr><td>Valorant</td><td>0.30 at 800 DPI</td><td>1.050</td><td>54.43</td></tr>
+              <tr><td>Apex Legends</td><td>1.00 at 800 DPI</td><td>1.100</td><td>51.95</td></tr>
+              <tr><td>Overwatch 2</td><td>4.00 at 800 DPI</td><td>1.320</td><td>43.30</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>If Your Siege DPI Is Different</h2>
+        <p>When you move a setting into Siege and change mouse DPI, use the DPI ratio to preserve the same baseline turn distance. This table converts CS2 1.00 at 800 DPI into Siege at common DPI values.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Rainbow Six Siege target DPI examples">
+            <thead><tr><th>Source setting</th><th>Siege DPI</th><th>Siege sens</th><th>Same baseline</th></tr></thead>
+            <tbody>
+              <tr><td>CS2 1.00 at 800 DPI</td><td>400</td><td>2.200</td><td>51.95 cm/360</td></tr>
+              <tr><td>CS2 1.00 at 800 DPI</td><td>800</td><td>1.100</td><td>51.95 cm/360</td></tr>
+              <tr><td>CS2 1.00 at 800 DPI</td><td>1600</td><td>0.550</td><td>51.95 cm/360</td></tr>
+            </tbody>
+          </table>
+        </div>
         <h2>Siege Tuning Notes</h2>
         <ul>
           <li>Keep hip-fire comfortable first, then tune ADS separately.</li>
           <li>Low sensitivity can help with angle holding, but too low may hurt quick clears.</li>
           <li>Record your old settings before changing multipliers or optic values.</li>
+          <li>Use the converted result for movement, quick clears, and general crosshair placement before touching per-optic settings.</li>
+          <li>If you use advanced ADS settings, document each optic value so you can undo experiments quickly.</li>
+        </ul>
+
+        <h2>Common Mistakes</h2>
+        <ul>
+          <li>Expecting a hip-fire converter to reproduce Siege ADS behavior.</li>
+          <li>Changing mouse DPI without reducing or increasing the Siege sensitivity to match.</li>
+          <li>Using a value that feels good for angle holding but is too slow for room clears.</li>
+          <li>Forgetting that FOV, aspect ratio, and optic settings can change how the same cm/360 feels.</li>
         </ul>
         <h2>Common Questions</h2>
         <h3>Does this convert Siege ADS sensitivity?</h3>
@@ -163,11 +234,17 @@
         <p>Siege has slower tactical pacing, lean-heavy fights, and separate ADS behavior. A matched hip-fire cm/360 is a starting point, not a full ADS profile.</p>
         <h3>How should I adjust after converting?</h3>
         <p>Test quick clears and angle holds first. If close-range clears feel too slow, lower cm/360 slightly by raising sensitivity. If pixel holds feel unstable, do the opposite.</p>
-        <p>Last reviewed: May 13, 2026.</p>
+        <h3>Can I compare Siege eDPI with CS2 eDPI?</h3>
+        <p>Not directly. Siege and CS2 use different in-game scales, so eDPI alone is incomplete. Use a yaw-aware conversion and check the resulting cm/360.</p>
+        <p>Last reviewed: May 29, 2026.</p>
         <h2>Related Pages</h2>
         <div class="link-list">
           <a href="/apex-legends-sensitivity-converter">Apex Legends sensitivity converter</a>
           <a href="/overwatch-2-sensitivity-converter">Overwatch 2 sensitivity converter</a>
+          <a href="/cm-360-calculator">cm/360 calculator</a>
+          <a href="/edpi-calculator">eDPI calculator</a>
+          <a href="/dpi-sensitivity-converter">DPI sensitivity converter</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/best-cm-360-for-cs2">Best cm/360 range for CS2</a>
           <a href="/methodology">How AimScale calculates sensitivity</a>
         </div>
@@ -196,6 +273,10 @@
             <div class="metric"><span>Source eDPI</span><b id="edpi">800</b></div>
           </div>
         </div>
+        <div class="actions">
+          <button class="tool-button" type="button" id="copy-result">Copy result</button>
+          <button class="tool-button" type="button" id="copy-link">Copy share URL</button>
+        </div>
       </aside>
     </div>
   </main>
@@ -222,7 +303,14 @@
     const targetSens = document.getElementById('target-sens');
     const cm360 = document.getElementById('cm360');
     const edpi = document.getElementById('edpi');
+    const copyResult = document.getElementById('copy-result');
+    const copyLink = document.getElementById('copy-link');
     function number(value) { const parsed = Number.parseFloat(String(value).replace(',', '.')); return Number.isFinite(parsed) ? parsed : 0; }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('from')) sourceGame.value = params.get('from');
+    if (params.get('sens')) sourceSens.value = params.get('sens');
+    if (params.get('sourceDpi')) sourceDpi.value = params.get('sourceDpi');
+    if (params.get('targetDpi')) targetDpi.value = params.get('targetDpi');
     function update() {
       const sens = number(sourceSens.value);
       const dpi = number(sourceDpi.value);
@@ -234,8 +322,51 @@
       cm360.textContent = (inches * 2.54).toFixed(2);
       edpi.textContent = Math.round(sens * dpi).toLocaleString('en-US');
     }
+    function sourceGameName() {
+      return sourceGame.options[sourceGame.selectedIndex].textContent;
+    }
+    function shareUrl() {
+      const url = new URL(window.location.href);
+      url.searchParams.set('from', sourceGame.value);
+      url.searchParams.set('sens', String(number(sourceSens.value) || ''));
+      url.searchParams.set('sourceDpi', String(number(sourceDpi.value) || ''));
+      url.searchParams.set('targetDpi', String(number(targetDpi.value) || ''));
+      return url.toString();
+    }
+    function resultText() {
+      return `${sourceGameName()} ${sourceSens.value} at ${sourceDpi.value} DPI = Rainbow Six Siege ${targetSens.textContent} at ${targetDpi.value} DPI (${cm360.textContent} cm/360).`;
+    }
+    async function writeClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.append(textarea);
+      textarea.select();
+      const copied = document.execCommand('copy');
+      textarea.remove();
+      if (!copied) throw new Error('Copy failed');
+    }
+    async function copyText(button, text, eventName) {
+      const original = button.textContent;
+      try {
+        await writeClipboard(text);
+        button.textContent = 'Copied';
+        if (typeof gtag === 'function') gtag('event', eventName, { tool: 'r6_converter' });
+      } catch (error) {
+        button.textContent = 'Copy failed';
+      }
+      window.setTimeout(() => { button.textContent = original; }, 1400);
+    }
     [sourceGame, sourceSens, sourceDpi, targetDpi].forEach((input) => input.addEventListener('input', update));
     [sourceGame, targetDpi].forEach((input) => input.addEventListener('change', update));
+    copyResult.addEventListener('click', () => copyText(copyResult, resultText(), 'result_copied'));
+    copyLink.addEventListener('click', () => copyText(copyLink, shareUrl(), 'share_url_copied'));
     update();
   </script>
 </body>
