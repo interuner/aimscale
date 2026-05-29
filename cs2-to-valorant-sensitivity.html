@@ -20,6 +20,7 @@
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
+        "dateModified": "2026-05-29",
         "inLanguage": "en"
       },
       {
@@ -184,7 +185,7 @@
     <div class="container grid">
       <article>
         <p class="eyebrow">CS2 to Valorant</p>
-        <h1>Convert CS2 sensitivity to Valorant.</h1>
+        <h1>CS2 to Valorant sensitivity converter.</h1>
         <p>Use this converter when you want to keep a similar 360 turn distance after moving from Counter-Strike 2 to Valorant. Enter your CS2 sensitivity and DPI, then adjust the target DPI if your Valorant setup uses a different mouse DPI.</p>
 
         <h2>Formula</h2>
@@ -260,6 +261,9 @@
         <h2>Related Pages</h2>
         <div class="link-list">
           <a href="/valorant-to-cs2-sensitivity">Valorant to CS2 sensitivity converter</a>
+          <a href="/valorant-edpi-calculator">Valorant eDPI calculator</a>
+          <a href="/cs2-edpi-calculator">CS2 eDPI calculator</a>
+          <a href="/cm-360-calculator">cm/360 calculator</a>
           <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/what-is-cm-360">What is cm/360?</a>
           <a href="/dpi-vs-edpi">DPI vs eDPI for FPS games</a>
@@ -349,10 +353,26 @@
     function resultText() {
       return `CS2 ${sourceSens.value} at ${sourceDpi.value} DPI = Valorant ${targetSens.textContent} at ${targetDpi.value} DPI (${cm360.textContent} cm/360).`;
     }
+    async function writeClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.append(textarea);
+      textarea.select();
+      const copied = document.execCommand('copy');
+      textarea.remove();
+      if (!copied) throw new Error('Copy failed');
+    }
     async function copyText(button, text, eventName) {
       const original = button.textContent;
       try {
-        await navigator.clipboard.writeText(text);
+        await writeClipboard(text);
         button.textContent = 'Copied';
         if (typeof gtag === 'function') gtag('event', eventName, { tool: 'cs2_to_valorant' });
       } catch (error) {

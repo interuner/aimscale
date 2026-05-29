@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Valorant cm/360 Calculator - AimScale</title>
+  <title>Valorant cm/360 Calculator | eDPI & Sensitivity - AimScale</title>
   <meta name="description" content="Calculate Valorant cm/360 from DPI and sensitivity, estimate eDPI, compare practical ranges, and tune Valorant sensitivity by turn distance." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://aimscale.top/valorant-cm-360-calculator" />
@@ -20,6 +20,7 @@
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
+        "dateModified": "2026-05-29",
         "inLanguage": "en"
       },
       {
@@ -38,6 +39,24 @@
             "name": "Valorant cm/360 Calculator",
             "item": "https://aimscale.top/valorant-cm-360-calculator"
           }
+        ]
+      },
+      {
+        "@type": [
+          "WebApplication",
+          "SoftwareApplication"
+        ],
+        "@id": "https://aimscale.top/valorant-cm-360-calculator#calculator",
+        "name": "Valorant cm/360 Calculator",
+        "url": "https://aimscale.top/valorant-cm-360-calculator",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "description": "Calculate Valorant cm/360 from DPI and sensitivity, estimate eDPI, compare practical ranges, and tune Valorant sensitivity by turn distance.",
+        "featureList": [
+          "Calculate Valorant cm/360 from DPI and sensitivity",
+          "Estimate Valorant eDPI and inches/360",
+          "Compare practical Valorant turn-distance ranges"
         ]
       },
       {
@@ -66,6 +85,14 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "You can use it as a starting point, then tune after testing Valorant movement, weapons, and scoped settings."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What Valorant sensitivity is close to 50 cm/360 at 800 DPI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "About 0.327 at 800 DPI. Treat it as a starting value because comfort, mousepad size, and role can change the best setting."
             }
           }
         ]
@@ -122,6 +149,8 @@
     .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
     .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
     .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-wrap .table { min-width: 640px; }
     .link-list { display: grid; gap: 12px; margin-top: 18px; }
     .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
@@ -169,20 +198,55 @@
         <p>The result is a useful starting point for hip-fire aim. Scoped sensitivity and FOV can still affect how a setting feels.</p>
 
         <h2>Quick Examples</h2>
-        <table class="table" aria-label="Valorant cm/360 examples">
-          <thead><tr><th>DPI</th><th>Valorant sens</th><th>eDPI</th><th>cm/360</th></tr></thead>
-          <tbody>
-            <tr><td>800</td><td>0.25</td><td>200</td><td>65.31</td></tr>
-            <tr><td>800</td><td>0.30</td><td>240</td><td>54.43</td></tr>
-            <tr><td>800</td><td>0.40</td><td>320</td><td>40.82</td></tr>
-          </tbody>
-        </table>
+        <p>These examples use Valorant's common hip-fire yaw value. They are useful for checking whether your setup is fast, medium, or slow by physical mouse distance.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Valorant cm/360 examples">
+            <thead><tr><th>DPI</th><th>Valorant sens</th><th>eDPI</th><th>cm/360</th><th>Feel</th></tr></thead>
+            <tbody>
+              <tr><td>800</td><td>0.20</td><td>160</td><td>81.64</td><td>Very slow</td></tr>
+              <tr><td>800</td><td>0.25</td><td>200</td><td>65.31</td><td>Slow</td></tr>
+              <tr><td>800</td><td>0.30</td><td>240</td><td>54.43</td><td>Medium-slow</td></tr>
+              <tr><td>800</td><td>0.35</td><td>280</td><td>46.65</td><td>Medium</td></tr>
+              <tr><td>800</td><td>0.40</td><td>320</td><td>40.82</td><td>Medium-fast</td></tr>
+              <tr><td>800</td><td>0.50</td><td>400</td><td>32.66</td><td>Fast</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Equivalent Valorant Settings</h2>
+        <p>These settings keep the same eDPI and the same estimated Valorant cm/360 while changing mouse DPI.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Equivalent Valorant settings by DPI">
+            <thead><tr><th>Mouse DPI</th><th>Valorant sens</th><th>eDPI</th><th>Approx. cm/360</th></tr></thead>
+            <tbody>
+              <tr><td>400</td><td>0.600</td><td>240</td><td>54.43</td></tr>
+              <tr><td>800</td><td>0.300</td><td>240</td><td>54.43</td></tr>
+              <tr><td>1600</td><td>0.150</td><td>240</td><td>54.43</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Valorant cm/360 Range At 800 DPI</h2>
+        <p>If you want a target turn distance, this table gives a quick sensitivity starting point at 800 DPI.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Valorant sensitivity by target cm/360 at 800 DPI">
+            <thead><tr><th>Target cm/360</th><th>Approx. Valorant sens</th><th>Approx. eDPI</th><th>Practical note</th></tr></thead>
+            <tbody>
+              <tr><td>35 cm</td><td>0.466</td><td>373</td><td>Fast turns, less margin for micro-correction</td></tr>
+              <tr><td>45 cm</td><td>0.363</td><td>290</td><td>Balanced starting point for many players</td></tr>
+              <tr><td>55 cm</td><td>0.297</td><td>238</td><td>Slower tactical baseline</td></tr>
+              <tr><td>65 cm</td><td>0.251</td><td>201</td><td>Precision-heavy, needs more mousepad space</td></tr>
+            </tbody>
+          </table>
+        </div>
 
         <h2>How To Tune Valorant Sensitivity</h2>
         <ul>
           <li>If you over-flick or shake during small corrections, try a higher cm/360.</li>
           <li>If angle clearing feels heavy or you run out of mousepad, try a lower cm/360.</li>
           <li>Change sensitivity in small steps and keep DPI unchanged while testing.</li>
+          <li>Test the value in the range first, then confirm it in deathmatch or unrated games.</li>
+          <li>Adjust scoped sensitivity separately after hip-fire feels stable.</li>
         </ul>
 
         <h2>Common Questions</h2>
@@ -192,14 +256,19 @@
         <p>They answer different questions. eDPI compares Valorant settings inside Valorant, while cm/360 is better for physical feel and cross-game comparison.</p>
         <h3>Can I use the same cm/360 from CS2?</h3>
         <p>You can use it as a starting point, then tune after testing Valorant movement, weapons, and scoped settings.</p>
-        <p>Last reviewed: May 13, 2026.</p>
+        <h3>What Valorant sensitivity is close to 50 cm/360 at 800 DPI?</h3>
+        <p>About 0.327 at 800 DPI. Treat it as a starting value because comfort, mousepad size, and role can change the best setting.</p>
+        <p>Last reviewed: May 29, 2026.</p>
 
         <h2>Related Pages</h2>
         <div class="link-list">
           <a href="/valorant-edpi-calculator">Valorant eDPI calculator</a>
           <a href="/best-cm-360-for-valorant">Best cm/360 range for Valorant</a>
+          <a href="/cm-360-calculator">cm/360 calculator for FPS games</a>
           <a href="/cs2-to-valorant-sensitivity">CS2 to Valorant sensitivity converter</a>
+          <a href="/valorant-to-cs2-sensitivity">Valorant to CS2 sensitivity converter</a>
           <a href="/what-is-cm-360">What is cm/360?</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/methodology">How AimScale calculates sensitivity</a>
         </div>
       </article>

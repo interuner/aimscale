@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DPI Sensitivity Converter - AimScale</title>
+  <title>DPI Sensitivity Converter | Mouse DPI & eDPI - AimScale</title>
   <meta name="description" content="Convert FPS sensitivity between two DPI settings while keeping the same eDPI and a similar in-game turn speed." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://aimscale.top/dpi-sensitivity-converter" />
@@ -20,6 +20,7 @@
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
+        "dateModified": "2026-05-29",
         "inLanguage": "en"
       },
       {
@@ -38,6 +39,24 @@
             "name": "DPI Sensitivity Converter",
             "item": "https://aimscale.top/dpi-sensitivity-converter"
           }
+        ]
+      },
+      {
+        "@type": [
+          "WebApplication",
+          "SoftwareApplication"
+        ],
+        "@id": "https://aimscale.top/dpi-sensitivity-converter#calculator",
+        "name": "DPI Sensitivity Converter",
+        "url": "https://aimscale.top/dpi-sensitivity-converter",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "description": "Convert FPS sensitivity between two DPI settings while keeping the same eDPI and a similar in-game turn speed.",
+        "featureList": [
+          "Convert sensitivity after changing mouse DPI",
+          "Keep eDPI consistent inside one FPS game",
+          "Compare equivalent 400, 800, and 1600 DPI settings"
         ]
       },
       {
@@ -66,6 +85,14 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Try to avoid frequent changes. Use this converter when you have a clear reason to change DPI, then test one new setting for several sessions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does my aim still feel different after matching eDPI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mouse sensor behavior, polling rate, desk space, grip, and in-game scoped settings can still affect feel. Matching eDPI is the first step, not the final tuning step."
             }
           }
         ]
@@ -122,6 +149,8 @@
     .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
     .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
     .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-wrap .table { min-width: 640px; }
     .link-list { display: grid; gap: 12px; margin-top: 18px; }
     .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
@@ -166,22 +195,53 @@
         <h2>Formula</h2>
         <p>The converter keeps eDPI the same:</p>
         <p><code>new sensitivity = old sensitivity x old DPI / new DPI</code></p>
+        <p>If your new DPI is higher, the in-game sensitivity number should go down. If your new DPI is lower, the in-game sensitivity number should go up.</p>
 
         <h2>Quick Examples</h2>
-        <table class="table" aria-label="DPI sensitivity examples">
-          <thead><tr><th>Old DPI</th><th>Old sensitivity</th><th>New DPI</th><th>New sensitivity</th></tr></thead>
-          <tbody>
-            <tr><td>400</td><td>2.00</td><td>800</td><td>1.00</td></tr>
-            <tr><td>800</td><td>1.00</td><td>1600</td><td>0.50</td></tr>
-            <tr><td>1600</td><td>0.50</td><td>800</td><td>1.00</td></tr>
-          </tbody>
-        </table>
+        <p>Use these examples when moving between common mouse DPI settings. The result keeps the same eDPI inside the same game.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="DPI sensitivity examples">
+            <thead><tr><th>Old DPI</th><th>Old sensitivity</th><th>New DPI</th><th>New sensitivity</th><th>eDPI kept</th></tr></thead>
+            <tbody>
+              <tr><td>400</td><td>2.00</td><td>800</td><td>1.000</td><td>800</td></tr>
+              <tr><td>400</td><td>2.00</td><td>1600</td><td>0.500</td><td>800</td></tr>
+              <tr><td>800</td><td>1.00</td><td>400</td><td>2.000</td><td>800</td></tr>
+              <tr><td>800</td><td>1.00</td><td>1600</td><td>0.500</td><td>800</td></tr>
+              <tr><td>1600</td><td>0.50</td><td>800</td><td>1.000</td><td>800</td></tr>
+              <tr><td>1600</td><td>0.15</td><td>800</td><td>0.300</td><td>240</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Equivalent DPI Settings</h2>
+        <p>This table shows how one target eDPI maps to different mouse DPI values. Pick the row closest to your current setup, then test in-game.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Equivalent DPI settings by eDPI">
+            <thead><tr><th>Target eDPI</th><th>400 DPI sens</th><th>800 DPI sens</th><th>1600 DPI sens</th><th>Use case</th></tr></thead>
+            <tbody>
+              <tr><td>200</td><td>0.500</td><td>0.250</td><td>0.125</td><td>Slow tactical baseline</td></tr>
+              <tr><td>240</td><td>0.600</td><td>0.300</td><td>0.150</td><td>Common Valorant-style baseline</td></tr>
+              <tr><td>320</td><td>0.800</td><td>0.400</td><td>0.200</td><td>Faster Valorant-style baseline</td></tr>
+              <tr><td>800</td><td>2.000</td><td>1.000</td><td>0.500</td><td>Common CS2-style baseline</td></tr>
+              <tr><td>1200</td><td>3.000</td><td>1.500</td><td>0.750</td><td>Fast CS2-style baseline</td></tr>
+            </tbody>
+          </table>
+        </div>
 
         <h2>When To Use This</h2>
         <ul>
           <li>You changed your mouse DPI in software or onboard memory.</li>
           <li>You want the same eDPI inside one FPS game.</li>
           <li>You want a clean starting point before fine tuning.</li>
+          <li>You are moving to a higher polling-rate mouse and want to keep your familiar in-game feel.</li>
+        </ul>
+
+        <h2>Before You Change DPI</h2>
+        <ul>
+          <li>Write down your old DPI and sensitivity before testing the new setup.</li>
+          <li>Change only DPI and sensitivity first; keep FOV, ADS, scoped settings, and Windows pointer settings stable.</li>
+          <li>Test one training routine or deathmatch before deciding whether the converted value feels right.</li>
+          <li>If the game has separate ADS or scope multipliers, check those after the hip-fire baseline is stable.</li>
         </ul>
 
         <h2>Limitations</h2>
@@ -193,13 +253,18 @@
         <p>Inside the same game, keeping eDPI constant usually keeps the same hip-fire turn speed. It does not handle cross-game yaw differences.</p>
         <h3>Should I change DPI and sensitivity often?</h3>
         <p>Try to avoid frequent changes. Use this converter when you have a clear reason to change DPI, then test one new setting for several sessions.</p>
-        <p>Last reviewed: May 13, 2026.</p>
+        <h3>Why does my aim still feel different after matching eDPI?</h3>
+        <p>Mouse sensor behavior, polling rate, desk space, grip, and in-game scoped settings can still affect feel. Matching eDPI is the first step, not the final tuning step.</p>
+        <p>Last reviewed: May 29, 2026.</p>
 
         <h2>Related Pages</h2>
         <div class="link-list">
           <a href="/edpi-calculator">eDPI calculator</a>
+          <a href="/valorant-edpi-calculator">Valorant eDPI calculator</a>
+          <a href="/cs2-edpi-calculator">CS2 eDPI calculator</a>
           <a href="/dpi-vs-edpi">DPI vs eDPI explained</a>
           <a href="/cm-360-calculator">cm/360 calculator</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/methodology">How AimScale calculates sensitivity</a>
         </div>
       </article>

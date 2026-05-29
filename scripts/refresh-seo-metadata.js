@@ -15,7 +15,10 @@ const updatedPages = new Set([
   '/valorant-edpi-calculator',
   '/valorant-to-cs2-sensitivity',
   '/fps-sensitivity-conversion-guide',
-  '/privacy'
+  '/privacy',
+  '/edpi-calculator',
+  '/dpi-sensitivity-converter',
+  '/valorant-cm-360-calculator'
 ]);
 
 const featuredPages = [
@@ -46,6 +49,22 @@ const toolPages = new Map([
       'Compare equivalent CS2 mouse settings'
     ]
   }],
+  ['/dpi-sensitivity-converter', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Convert sensitivity after changing mouse DPI',
+      'Keep eDPI consistent inside one FPS game',
+      'Compare equivalent 400, 800, and 1600 DPI settings'
+    ]
+  }],
+  ['/edpi-calculator', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Calculate eDPI from mouse DPI and in-game sensitivity',
+      'Compare equivalent DPI and sensitivity pairs',
+      'Check when eDPI is useful for FPS settings'
+    ]
+  }],
   ['/cs2-to-valorant-sensitivity', {
     applicationCategory: 'UtilitiesApplication',
     featureList: [
@@ -68,6 +87,14 @@ const toolPages = new Map([
       'Convert Valorant sensitivity to CS2 sensitivity',
       'Adjust conversion by source and target DPI',
       'Copy the result or share a URL with calculator inputs'
+    ]
+  }],
+  ['/valorant-cm-360-calculator', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Calculate Valorant cm/360 from DPI and sensitivity',
+      'Estimate Valorant eDPI and inches/360',
+      'Compare practical Valorant turn-distance ranges'
     ]
   }]
 ]);
@@ -114,6 +141,10 @@ function pageNameFromTitle(title) {
     .replace(/\s+-\s+AimScale$/i, '')
     .replace(/^AimScale\s+-\s+/i, '')
     .trim();
+}
+
+function lastmodForPage(pagePath) {
+  return updatedPages.has(pagePath) ? UPDATED_LASTMOD : DEFAULT_LASTMOD;
 }
 
 function decodeEntities(value) {
@@ -174,6 +205,16 @@ function homepageSchema(description) {
         }
       },
       {
+        '@type': 'WebPage',
+        '@id': `${SITE_URL}/#webpage`,
+        url: `${SITE_URL}/`,
+        name: 'AimScale',
+        description,
+        isPartOf: { '@id': `${SITE_URL}/#website` },
+        dateModified: lastmodForPage('/'),
+        inLanguage: 'en'
+      },
+      {
         '@type': 'WebApplication',
         '@id': `${SITE_URL}/#fps-sensitivity-calculator`,
         name: 'FPS Sensitivity Calculator and Converter',
@@ -209,6 +250,7 @@ function pageSchema(file, title, description, canonical, html) {
       name,
       description,
       isPartOf: { '@id': `${SITE_URL}/#website` },
+      dateModified: lastmodForPage(pagePath),
       inLanguage: 'en'
     },
     {

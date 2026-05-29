@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>eDPI Calculator for FPS Games - AimScale</title>
+  <title>eDPI Calculator for FPS Games | DPI & Sensitivity - AimScale</title>
   <meta name="description" content="Calculate eDPI from mouse DPI and in-game sensitivity, compare equivalent settings, and understand when eDPI is useful for FPS players." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://aimscale.top/edpi-calculator" />
@@ -20,6 +20,7 @@
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
+        "dateModified": "2026-05-29",
         "inLanguage": "en"
       },
       {
@@ -38,6 +39,24 @@
             "name": "eDPI Calculator for FPS Games",
             "item": "https://aimscale.top/edpi-calculator"
           }
+        ]
+      },
+      {
+        "@type": [
+          "WebApplication",
+          "SoftwareApplication"
+        ],
+        "@id": "https://aimscale.top/edpi-calculator#calculator",
+        "name": "eDPI Calculator for FPS Games",
+        "url": "https://aimscale.top/edpi-calculator",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "description": "Calculate eDPI from mouse DPI and in-game sensitivity, compare equivalent settings, and understand when eDPI is useful for FPS players.",
+        "featureList": [
+          "Calculate eDPI from mouse DPI and in-game sensitivity",
+          "Compare equivalent DPI and sensitivity pairs",
+          "Check when eDPI is useful for FPS settings"
         ]
       },
       {
@@ -66,6 +85,14 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "No. For cross-game conversion, use cm/360 or a converter that accounts for each game's yaw value."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I keep the same eDPI after changing DPI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Divide your current eDPI by the new DPI. For example, 240 eDPI at 1600 DPI uses 0.150 sensitivity."
             }
           }
         ]
@@ -115,9 +142,14 @@
     input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
     .result { margin-top: 20px; padding: 18px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklch, var(--bg) 70%, var(--surface)); }
     .result strong { display: block; font-family: var(--font-display); font-size: 46px; line-height: 1; margin-top: 8px; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .tool-button { min-height: 42px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--fg); font: inherit; cursor: pointer; }
+    .tool-button:hover, .tool-button:focus { border-color: var(--accent); outline: 2px solid var(--accent-soft); }
     .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
     .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
     .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-wrap .table { min-width: 620px; }
     .link-list { display: grid; gap: 12px; margin-top: 18px; }
     .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
@@ -162,22 +194,53 @@
         <h2>Formula</h2>
         <p>The formula is simple:</p>
         <p><code>eDPI = mouse DPI x in-game sensitivity</code></p>
+        <p>For example, 800 DPI with 0.30 sensitivity is 240 eDPI. If you move to 1600 DPI and want the same eDPI in the same game, use 0.15 sensitivity.</p>
 
         <h2>Quick Examples</h2>
-        <table class="table" aria-label="eDPI examples">
-          <thead><tr><th>DPI</th><th>Sensitivity</th><th>eDPI</th></tr></thead>
-          <tbody>
-            <tr><td>400</td><td>2.00</td><td>800</td></tr>
-            <tr><td>800</td><td>1.00</td><td>800</td></tr>
-            <tr><td>1600</td><td>0.50</td><td>800</td></tr>
-          </tbody>
-        </table>
+        <p>These examples show how different DPI and sensitivity pairs can produce the same eDPI. The comparison is most useful inside one game.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="eDPI examples">
+            <thead><tr><th>DPI</th><th>Sensitivity</th><th>eDPI</th><th>Equivalent note</th></tr></thead>
+            <tbody>
+              <tr><td>400</td><td>0.60</td><td>240</td><td>Same as 800 DPI at 0.30</td></tr>
+              <tr><td>800</td><td>0.30</td><td>240</td><td>Common Valorant-style example</td></tr>
+              <tr><td>1600</td><td>0.15</td><td>240</td><td>Same in-game eDPI as above</td></tr>
+              <tr><td>400</td><td>2.00</td><td>800</td><td>Same as 800 DPI at 1.00</td></tr>
+              <tr><td>800</td><td>1.00</td><td>800</td><td>Common CS2-style example</td></tr>
+              <tr><td>1600</td><td>0.50</td><td>800</td><td>Same in-game eDPI as above</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Equivalent Sensitivity Table</h2>
+        <p>If you know your target eDPI, divide it by your mouse DPI. This table gives quick reference values for common DPI settings.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Equivalent sensitivity by eDPI and DPI">
+            <thead><tr><th>Target eDPI</th><th>400 DPI sens</th><th>800 DPI sens</th><th>1600 DPI sens</th></tr></thead>
+            <tbody>
+              <tr><td>200</td><td>0.500</td><td>0.250</td><td>0.125</td></tr>
+              <tr><td>240</td><td>0.600</td><td>0.300</td><td>0.150</td></tr>
+              <tr><td>320</td><td>0.800</td><td>0.400</td><td>0.200</td></tr>
+              <tr><td>800</td><td>2.000</td><td>1.000</td><td>0.500</td></tr>
+              <tr><td>1200</td><td>3.000</td><td>1.500</td><td>0.750</td></tr>
+            </tbody>
+          </table>
+        </div>
 
         <h2>When eDPI Helps</h2>
         <ul>
           <li>Comparing two settings inside the same game.</li>
           <li>Changing mouse DPI while keeping the same in-game feel.</li>
           <li>Understanding why 400 DPI at 2.0 can match 800 DPI at 1.0.</li>
+          <li>Checking whether a copied player setting is actually fast or slow for your DPI.</li>
+        </ul>
+
+        <h2>Common Mistakes</h2>
+        <ul>
+          <li>Using eDPI as a direct cross-game converter. Valorant eDPI and CS2 eDPI do not share the same game scale.</li>
+          <li>Changing DPI and sensitivity together without calculating the final eDPI.</li>
+          <li>Copying a player's sensitivity but forgetting their DPI, which can make the copied setting completely different.</li>
+          <li>Ignoring cm/360 when the real question is physical mouse travel.</li>
         </ul>
 
         <h2>Important Limitation</h2>
@@ -189,13 +252,18 @@
         <p>DPI is your mouse setting. eDPI is DPI multiplied by in-game sensitivity, which makes it easier to compare two settings in the same game.</p>
         <h3>Can I convert games with eDPI only?</h3>
         <p>No. For cross-game conversion, use cm/360 or a converter that accounts for each game's yaw value.</p>
-        <p>Last reviewed: May 13, 2026.</p>
+        <h3>How do I keep the same eDPI after changing DPI?</h3>
+        <p>Divide your current eDPI by the new DPI. For example, 240 eDPI at 1600 DPI uses 0.150 sensitivity.</p>
+        <p>Last reviewed: May 29, 2026.</p>
 
         <h2>Related Pages</h2>
         <div class="link-list">
+          <a href="/valorant-edpi-calculator">Valorant eDPI calculator</a>
+          <a href="/cs2-edpi-calculator">CS2 eDPI calculator</a>
           <a href="/dpi-vs-edpi">DPI vs eDPI explained</a>
           <a href="/dpi-sensitivity-converter">DPI sensitivity converter</a>
           <a href="/cm-360-calculator">cm/360 calculator</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/methodology">How AimScale calculates sensitivity</a>
         </div>
       </article>
@@ -214,6 +282,10 @@
         <div class="result" aria-live="polite">
           <span>eDPI</span>
           <strong id="edpi">800</strong>
+        </div>
+        <div class="actions">
+          <button class="tool-button" type="button" id="copy-result">Copy result</button>
+          <button class="tool-button" type="button" id="copy-link">Copy share URL</button>
         </div>
       </aside>
     </div>
@@ -236,15 +308,58 @@
     const dpi = document.getElementById('dpi');
     const sens = document.getElementById('sens');
     const edpi = document.getElementById('edpi');
+    const copyResult = document.getElementById('copy-result');
+    const copyLink = document.getElementById('copy-link');
     function number(value) {
       const parsed = Number.parseFloat(String(value).replace(',', '.'));
       return Number.isFinite(parsed) ? parsed : 0;
     }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('dpi')) dpi.value = params.get('dpi');
+    if (params.get('sens')) sens.value = params.get('sens');
     function update() {
       const next = number(dpi.value) * number(sens.value);
       edpi.textContent = next > 0 ? Math.round(next).toLocaleString('en-US') : '-';
     }
+    function shareUrl() {
+      const url = new URL(window.location.href);
+      url.searchParams.set('dpi', String(number(dpi.value) || ''));
+      url.searchParams.set('sens', String(number(sens.value) || ''));
+      return url.toString();
+    }
+    function resultText() {
+      return `eDPI ${edpi.textContent} = ${dpi.value} DPI x ${sens.value} sensitivity.`;
+    }
+    async function writeClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.append(textarea);
+      textarea.select();
+      const copied = document.execCommand('copy');
+      textarea.remove();
+      if (!copied) throw new Error('Copy failed');
+    }
+    async function copyText(button, text, eventName) {
+      const original = button.textContent;
+      try {
+        await writeClipboard(text);
+        button.textContent = 'Copied';
+        if (typeof gtag === 'function') gtag('event', eventName, { tool: 'edpi_calculator' });
+      } catch (error) {
+        button.textContent = 'Copy failed';
+      }
+      window.setTimeout(() => { button.textContent = original; }, 1400);
+    }
     [dpi, sens].forEach((input) => input.addEventListener('input', update));
+    copyResult.addEventListener('click', () => copyText(copyResult, resultText(), 'result_copied'));
+    copyLink.addEventListener('click', () => copyText(copyLink, shareUrl(), 'share_url_copied'));
     update();
   </script>
 </body>
