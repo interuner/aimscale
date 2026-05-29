@@ -14,7 +14,8 @@ const updatedPages = new Set([
   '/cs2-to-valorant-sensitivity',
   '/valorant-edpi-calculator',
   '/valorant-to-cs2-sensitivity',
-  '/fps-sensitivity-conversion-guide'
+  '/fps-sensitivity-conversion-guide',
+  '/privacy'
 ]);
 
 const featuredPages = [
