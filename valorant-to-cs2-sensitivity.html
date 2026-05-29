@@ -93,6 +93,8 @@
     .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
     .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
     .table td:last-child, .table th:last-child { text-align: right; font-family: var(--font-mono); }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-wrap .table { min-width: 640px; }
     .link-list { display: grid; gap: 12px; margin-top: 18px; }
     .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
@@ -139,15 +141,45 @@
         <p><code>CS2 sensitivity = Valorant sensitivity x 3.181818</code></p>
         <p>If you change DPI at the same time, multiply by <code>source DPI / target DPI</code>.</p>
 
-        <h2>Quick Examples</h2>
-        <table class="table" aria-label="Valorant to CS2 examples">
-          <thead><tr><th>Valorant sens</th><th>DPI</th><th>CS2 sens</th></tr></thead>
-          <tbody>
-            <tr><td>0.25</td><td>800</td><td>0.795</td></tr>
-            <tr><td>0.30</td><td>800</td><td>0.955</td></tr>
-            <tr><td>0.40</td><td>800</td><td>1.273</td></tr>
-          </tbody>
-        </table>
+        <h2>Valorant To CS2 Table At 800 DPI</h2>
+        <p>Use this table for quick checks when both games use 800 DPI. The calculator is still better if your CS2 DPI is different.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Valorant to CS2 conversion table at 800 DPI">
+            <thead><tr><th>Valorant sens</th><th>CS2 sens</th><th>cm/360</th><th>Valorant eDPI</th><th>CS2 eDPI</th></tr></thead>
+            <tbody>
+              <tr><td>0.15</td><td>0.477</td><td>108.86</td><td>120</td><td>382</td></tr>
+              <tr><td>0.20</td><td>0.636</td><td>81.64</td><td>160</td><td>509</td></tr>
+              <tr><td>0.25</td><td>0.795</td><td>65.31</td><td>200</td><td>636</td></tr>
+              <tr><td>0.30</td><td>0.955</td><td>54.43</td><td>240</td><td>764</td></tr>
+              <tr><td>0.35</td><td>1.114</td><td>46.65</td><td>280</td><td>891</td></tr>
+              <tr><td>0.40</td><td>1.273</td><td>40.82</td><td>320</td><td>1018</td></tr>
+              <tr><td>0.45</td><td>1.432</td><td>36.29</td><td>360</td><td>1145</td></tr>
+              <tr><td>0.50</td><td>1.591</td><td>32.66</td><td>400</td><td>1273</td></tr>
+              <tr><td>0.60</td><td>1.909</td><td>27.21</td><td>480</td><td>1527</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>If Your CS2 DPI Is Different</h2>
+        <p>If you use a different DPI in CS2, adjust the result by the DPI ratio. For example, Valorant 0.30 at 800 DPI is about CS2 0.955 at 800 DPI, but about CS2 0.477 at 1600 DPI.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Valorant 0.30 conversion with target DPI changes">
+            <thead><tr><th>Valorant setting</th><th>CS2 DPI</th><th>CS2 sens</th><th>Same baseline</th></tr></thead>
+            <tbody>
+              <tr><td>0.30 at 800 DPI</td><td>400</td><td>1.909</td><td>54.43 cm/360</td></tr>
+              <tr><td>0.30 at 800 DPI</td><td>800</td><td>0.955</td><td>54.43 cm/360</td></tr>
+              <tr><td>0.30 at 800 DPI</td><td>1600</td><td>0.477</td><td>54.43 cm/360</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Common Conversion Mistakes</h2>
+        <ul>
+          <li>Keeping the same raw sensitivity number in CS2. Valorant and CS2 use different sensitivity scales.</li>
+          <li>Comparing Valorant eDPI and CS2 eDPI as if they mean the same thing across games.</li>
+          <li>Changing DPI and sensitivity at the same time without checking the final cm/360.</li>
+          <li>Expecting scoped or ADS feel to match from a hip-fire conversion alone.</li>
+        </ul>
 
         <h2>How To Tune After Converting</h2>
         <ul>
@@ -163,11 +195,12 @@
         <p>No. eDPI is useful inside one game, but Valorant and CS2 use different sensitivity scales. Use a yaw-aware conversion or cm/360 instead.</p>
         <h3>What if CS2 feels slower after converting?</h3>
         <p>Raise the CS2 sensitivity in small steps if clearing angles or turning from flashes feels too heavy. Keep the same DPI while testing so you know what changed.</p>
-        <p>Last reviewed: May 13, 2026.</p>
+        <p>Last reviewed: May 29, 2026.</p>
 
         <h2>Related Pages</h2>
         <div class="link-list">
           <a href="/cs2-to-valorant-sensitivity">CS2 to Valorant sensitivity converter</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/what-is-cm-360">What is cm/360?</a>
           <a href="/dpi-vs-edpi">DPI vs eDPI for FPS games</a>
           <a href="/methodology">How AimScale calculates sensitivity</a>

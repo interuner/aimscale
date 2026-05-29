@@ -7,7 +7,12 @@ const ROOT = path.resolve(__dirname, '..');
 const SITE_URL = 'https://aimscale.top';
 const DEFAULT_LASTMOD = '2026-05-28';
 const UPDATED_LASTMOD = '2026-05-29';
-const updatedPages = new Set(['/', '/cs2-to-valorant-sensitivity', '/fps-sensitivity-conversion-guide']);
+const updatedPages = new Set([
+  '/',
+  '/cs2-to-valorant-sensitivity',
+  '/valorant-to-cs2-sensitivity',
+  '/fps-sensitivity-conversion-guide'
+]);
 
 const featuredPages = [
   ['/', 'FPS sensitivity calculator'],
