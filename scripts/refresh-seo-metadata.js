@@ -23,7 +23,9 @@ const updatedPages = new Set([
   '/overwatch-2-sensitivity-converter',
   '/rainbow-six-siege-sensitivity-converter',
   '/best-cm-360-for-valorant',
-  '/best-cm-360-for-cs2'
+  '/best-cm-360-for-cs2',
+  '/about',
+  '/contact'
 ]);
 
 const featuredPages = [

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact AimScale</title>
-  <meta name="description" content="Contact AimScale for corrections, feedback, privacy requests, or questions about the FPS sensitivity calculator." />
+  <title>Contact AimScale | Corrections & Privacy Requests - AimScale</title>
+  <meta name="description" content="Contact AimScale for calculator corrections, missing game requests, privacy questions, page feedback, and FPS sensitivity tool issues." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://aimscale.top/contact" />
   <script type="application/ld+json">
@@ -16,11 +16,11 @@
         "@id": "https://aimscale.top/contact#webpage",
         "url": "https://aimscale.top/contact",
         "name": "Contact AimScale",
-        "description": "Contact AimScale for corrections, feedback, privacy requests, or questions about the FPS sensitivity calculator.",
+        "description": "Contact AimScale for calculator corrections, missing game requests, privacy questions, page feedback, and FPS sensitivity tool issues.",
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
-        "dateModified": "2026-05-28",
+        "dateModified": "2026-05-29",
         "inLanguage": "en"
       },
       {
@@ -38,6 +38,36 @@
             "position": 2,
             "name": "Contact AimScale",
             "item": "https://aimscale.top/contact"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://aimscale.top/contact#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can I request a new game?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Include the game name and any reliable public sensitivity references you found. Games are easier to add when yaw values or conversion behavior can be reviewed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I request a correction?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Include the page URL, input values, current output, and expected output so the issue can be reproduced."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where should privacy requests go?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Send privacy requests to contact@aimscale.top and mention that the message is privacy-related in the subject or first sentence."
+            }
           }
         ]
       }
@@ -68,15 +98,20 @@
     nav a:hover, .pagefoot a:hover { color: var(--fg); }
     main { padding: clamp(56px, 10vw, 112px) 0; }
     .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--accent); margin: 0 0 20px; }
-    h1, h2 { font-family: var(--font-display); letter-spacing: 0; line-height: 1.08; margin: 0; }
+    h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0; line-height: 1.08; margin: 0; }
     h1 { font-size: clamp(42px, 6vw, 70px); max-width: 12ch; }
     h2 { font-size: clamp(28px, 4vw, 42px); margin-top: 56px; }
+    h3 { font-size: 22px; margin-top: 28px; }
     p { color: var(--muted); font-size: 17px; margin: 18px 0 0; max-width: 68ch; text-wrap: pretty; }
+    ul { margin: 18px 0 0; padding-left: 22px; color: var(--muted); }
+    li + li { margin-top: 8px; }
     .card { margin-top: 32px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
     .contact-list { display: grid; gap: 14px; margin-top: 24px; }
     .contact-row { display: flex; justify-content: space-between; gap: 18px; padding: 16px 0; border-top: 1px solid var(--border); }
     .contact-row a { color: var(--accent); overflow-wrap: anywhere; }
     .meta { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+    .link-list { display: grid; gap: 12px; margin-top: 18px; }
+    .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
     .footer-inner { max-width: 1160px; margin: 0 auto; padding: 0 28px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
     .footlinks { display: flex; gap: 18px; flex-wrap: wrap; }
@@ -114,7 +149,7 @@
     <div class="container">
       <p class="eyebrow">Contact</p>
       <h1>Send a correction or request.</h1>
-      <p>Use this page for calculation feedback, missing game requests, privacy questions, or reports about a page that needs to be updated.</p>
+      <p>Use this page for calculation feedback, missing game requests, privacy questions, or reports about a page that needs to be updated. The most useful messages include enough detail to reproduce the issue.</p>
 
       <section class="card" aria-labelledby="ways-to-contact">
         <h2 id="ways-to-contact">Ways To Contact</h2>
@@ -130,11 +165,57 @@
         </div>
       </section>
 
+      <section aria-labelledby="what-to-send">
+        <h2 id="what-to-send">What To Include</h2>
+        <p>If you are reporting a conversion issue, include the details below. This makes it possible to compare the calculator result against the formula and the current game constants.</p>
+        <ul>
+          <li>Source game and target game.</li>
+          <li>Source sensitivity, source DPI, and target DPI.</li>
+          <li>The result shown by AimScale and the result you expected.</li>
+          <li>The page URL where the issue happened.</li>
+          <li>Any public reference that supports a different yaw value or method.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="request-types">
+        <h2 id="request-types">Request Types</h2>
+        <ul>
+          <li>Calculator correction: formula, rounding, page copy, or broken input behavior.</li>
+          <li>Missing game request: a game that should be added once reliable public references are available.</li>
+          <li>Privacy request: analytics, contact email, or data handling questions.</li>
+          <li>Page feedback: unclear wording, stale examples, broken links, or mobile layout issues.</li>
+          <li>Business inquiry: advertising, sponsorship, or other site operation questions.</li>
+        </ul>
+      </section>
+
       <section aria-labelledby="response">
-        <h2 id="response">Before You Send</h2>
-        <p>If you are reporting a conversion issue, include the source game, target game, DPI, sensitivity, result shown, and the result you expected. AimScale can review calculation constants and update pages when better public references are available.</p>
-        <p>Email is the preferred route for privacy requests, page corrections, missing game requests, general feedback, and reproducible calculator problems. Do not include passwords, account secrets, or other private information in feedback messages.</p>
-        <p class="meta">Last reviewed: May 15, 2026.</p>
+        <h2 id="response">Response Expectations</h2>
+        <p>Email is the preferred route for privacy requests, page corrections, missing game requests, general feedback, and reproducible calculator problems. Do not include passwords, account secrets, payment details, or other private information in feedback messages.</p>
+        <p>AimScale is a small independent project, so response time can vary. Clear correction reports and privacy requests are prioritized over general feature suggestions.</p>
+        <p>When a report leads to a page or calculator update, the relevant page should receive a new review date and the change should be reflected in the site checks before deployment.</p>
+      </section>
+
+      <section aria-labelledby="faq">
+        <h2 id="faq">Common Questions</h2>
+        <h3>Can I request a new game?</h3>
+        <p>Yes. Include the game name and any reliable public sensitivity references you found. Games are easier to add when yaw values or conversion behavior can be reviewed.</p>
+        <h3>Can I request a correction?</h3>
+        <p>Yes. Include the page URL, input values, current output, and expected output so the issue can be reproduced.</p>
+        <h3>Where should privacy requests go?</h3>
+        <p>Send privacy requests to contact@aimscale.top and mention that the message is privacy-related in the subject or first sentence.</p>
+        <p class="meta">Last reviewed: May 29, 2026.</p>
+      </section>
+
+      <section aria-labelledby="related">
+        <h2 id="related">Related Pages</h2>
+        <div class="link-list">
+          <a href="/about">About AimScale</a>
+          <a href="/privacy">Privacy policy</a>
+          <a href="/terms">Terms of use</a>
+          <a href="/methodology">How AimScale calculates sensitivity</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
+          <a href="/cm-360-calculator">cm/360 calculator</a>
+        </div>
       </section>
     </div>
   </main>

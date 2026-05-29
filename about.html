@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About AimScale</title>
-  <meta name="description" content="Learn what AimScale is building: practical FPS mouse sensitivity tools, conversion guides, and clear references for players." />
+  <title>About AimScale | FPS Sensitivity Tools - AimScale</title>
+  <meta name="description" content="Learn how AimScale builds FPS sensitivity converters, eDPI calculators, cm/360 guides, and clear methodology notes for players." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://aimscale.top/about" />
   <script type="application/ld+json">
@@ -16,11 +16,11 @@
         "@id": "https://aimscale.top/about#webpage",
         "url": "https://aimscale.top/about",
         "name": "About AimScale",
-        "description": "Learn what AimScale is building: practical FPS mouse sensitivity tools, conversion guides, and clear references for players.",
+        "description": "Learn how AimScale builds FPS sensitivity converters, eDPI calculators, cm/360 guides, and clear methodology notes for players.",
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
-        "dateModified": "2026-05-28",
+        "dateModified": "2026-05-29",
         "inLanguage": "en"
       },
       {
@@ -38,6 +38,36 @@
             "position": 2,
             "name": "About AimScale",
             "item": "https://aimscale.top/about"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://aimscale.top/about#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Who is AimScale for?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "AimScale is for FPS players who want a clean starting point when changing games, DPI, or sensitivity systems."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are AimScale results exact recommendations?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The calculators match a mathematical baseline, usually hip-fire cm/360. Players should test the result in real game situations and adjust for FOV, ADS, scoped modes, role, and comfort."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I report an issue?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the contact page and include the source game, target game, DPI, sensitivity, result shown, and what looked wrong."
+            }
           }
         ]
       }
@@ -68,13 +98,17 @@
     nav a:hover, .pagefoot a:hover { color: var(--fg); }
     main { padding: clamp(56px, 10vw, 112px) 0; }
     .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--accent); margin: 0 0 20px; }
-    h1, h2 { font-family: var(--font-display); letter-spacing: 0; line-height: 1.08; margin: 0; }
+    h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0; line-height: 1.08; margin: 0; }
     h1 { font-size: clamp(42px, 6vw, 70px); max-width: 11ch; }
     h2 { font-size: clamp(28px, 4vw, 42px); margin-top: 56px; }
+    h3 { font-size: 22px; margin-top: 28px; }
     p { color: var(--muted); font-size: 17px; margin: 18px 0 0; max-width: 68ch; text-wrap: pretty; }
     ul { margin: 18px 0 0; padding-left: 22px; color: var(--muted); }
     li + li { margin-top: 8px; }
     .card { margin-top: 32px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+    .link-list { display: grid; gap: 12px; margin-top: 18px; }
+    .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
+    .meta { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
     .footer-inner { max-width: 1160px; margin: 0 auto; padding: 0 28px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
     .footlinks { display: flex; gap: 18px; flex-wrap: wrap; }
@@ -112,7 +146,8 @@
     <div class="container">
       <p class="eyebrow">About</p>
       <h1>Practical aim tools for FPS players.</h1>
-      <p>AimScale is an independent utility site for players who want clear mouse sensitivity conversions, eDPI references, and cm/360 explanations without digging through forum threads.</p>
+      <p>AimScale is an independent utility site for players who want clear mouse sensitivity conversions, eDPI references, and cm/360 explanations without digging through scattered forum threads.</p>
+      <p>The goal is simple: give players a transparent starting point, show the numbers behind it, and make the limitations obvious before someone copies a setting into a game.</p>
 
       <section class="card" aria-labelledby="what-we-build">
         <h2 id="what-we-build">What We Build</h2>
@@ -122,15 +157,55 @@
           <li>eDPI and cm/360 references.</li>
           <li>Short guides that explain settings in plain English.</li>
           <li>Game-specific pages for common conversion paths.</li>
+          <li>Practical tables for common DPI values such as 400, 800, and 1600 DPI.</li>
         </ul>
       </section>
 
       <section aria-labelledby="editorial">
         <h2 id="editorial">Editorial Approach</h2>
-        <p>We aim to publish useful, original pages that solve a specific player problem. Conversion values are treated as practical starting points because FOV, scoped sensitivity, raw input, acceleration, and game updates can affect how a setting feels.</p>
+        <p>We aim to publish useful, original pages that solve a specific player problem. Conversion values are treated as practical starting points because FOV, scoped sensitivity, raw input, acceleration, display setup, and game updates can affect how a setting feels.</p>
         <p>The <a href="/methodology">methodology page</a> explains the formulas, limitations, and review process used for AimScale calculators.</p>
+        <p>Pages are reviewed for clear titles, a single canonical URL, internal links, structured data, and consistent language around limits. When better public references or bug reports appear, the relevant game data and page copy can be updated.</p>
+      </section>
+
+      <section aria-labelledby="quality">
+        <h2 id="quality">Quality Principles</h2>
+        <ul>
+          <li>Show formulas and assumptions instead of hiding the conversion behind a black box.</li>
+          <li>Separate hip-fire conversion from ADS, scoped, per-optic, or hero-specific tuning.</li>
+          <li>Prefer clear examples and tables over vague claims.</li>
+          <li>Use user feedback to find broken pages, confusing wording, missing games, or stale references.</li>
+          <li>Keep the calculator experience fast, readable, and usable before adding monetization features.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="independence">
+        <h2 id="independence">Independence And Trademarks</h2>
         <p>AimScale is not affiliated with Valve, Riot Games, Electronic Arts, Blizzard Entertainment, Ubisoft, Embark Studios, or any other game publisher. Game names are used only to identify compatible settings and conversion examples.</p>
-        <p>Last reviewed: May 11, 2026.</p>
+        <p>Advertising or affiliate experiments may be added later, but they should not interfere with calculator controls, copy buttons, or the main content. The site should remain useful even before any ad unit loads.</p>
+      </section>
+
+      <section aria-labelledby="faq">
+        <h2 id="faq">Common Questions</h2>
+        <h3>Who is AimScale for?</h3>
+        <p>AimScale is for FPS players who want a clean starting point when changing games, DPI, or sensitivity systems.</p>
+        <h3>Are AimScale results exact recommendations?</h3>
+        <p>No. The calculators match a mathematical baseline, usually hip-fire cm/360. Players should test the result in real game situations and adjust for FOV, ADS, scoped modes, role, and comfort.</p>
+        <h3>How can I report an issue?</h3>
+        <p>Use the <a href="/contact">contact page</a> and include the source game, target game, DPI, sensitivity, result shown, and what looked wrong.</p>
+        <p class="meta">Last reviewed: May 29, 2026.</p>
+      </section>
+
+      <section aria-labelledby="related">
+        <h2 id="related">Related Pages</h2>
+        <div class="link-list">
+          <a href="/methodology">How AimScale calculates sensitivity</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
+          <a href="/cm-360-calculator">cm/360 calculator</a>
+          <a href="/edpi-calculator">eDPI calculator</a>
+          <a href="/privacy">Privacy policy</a>
+          <a href="/contact">Contact AimScale</a>
+        </div>
       </section>
     </div>
   </main>
