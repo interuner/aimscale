@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Valorant to CS2 Sensitivity Converter - AimScale</title>
+  <title>Valorant to CS2 Sensitivity Converter | DPI & cm/360 - AimScale</title>
   <meta name="description" content="Convert Valorant sensitivity to CS2 sensitivity with DPI adjustment, cm/360, eDPI, formula, and quick examples." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://aimscale.top/valorant-to-cs2-sensitivity" />
@@ -37,6 +37,54 @@
             "position": 2,
             "name": "Valorant to CS2 Sensitivity Converter",
             "item": "https://aimscale.top/valorant-to-cs2-sensitivity"
+          }
+        ]
+      },
+      {
+        "@type": [
+          "WebApplication",
+          "SoftwareApplication"
+        ],
+        "@id": "https://aimscale.top/valorant-to-cs2-sensitivity#calculator",
+        "name": "Valorant to CS2 Sensitivity Converter",
+        "url": "https://aimscale.top/valorant-to-cs2-sensitivity",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "description": "Convert Valorant sensitivity to CS2 sensitivity with DPI adjustment, cm/360, eDPI, formula, and quick examples.",
+        "featureList": [
+          "Convert Valorant sensitivity to CS2 sensitivity",
+          "Adjust conversion by source and target DPI",
+          "Copy the result or share a URL with calculator inputs"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://aimscale.top/valorant-to-cs2-sensitivity#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is Valorant 0.30 close to CS2 0.955?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "At the same DPI, yes. That value is a practical hip-fire starting point based on matching cm/360 between Valorant and CS2."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I keep my Valorant eDPI in CS2?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. eDPI is useful inside one game, but Valorant and CS2 use different sensitivity scales. Use a yaw-aware conversion or cm/360 instead."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if CS2 feels slower after converting?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Raise the CS2 sensitivity in small steps if clearing angles or turning from flashes feels too heavy. Keep the same DPI while testing so you know what changed."
+            }
           }
         ]
       }
@@ -85,6 +133,9 @@
     input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
     .result { margin-top: 20px; padding: 18px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklch, var(--bg) 70%, var(--surface)); }
     .result strong { display: block; font-family: var(--font-display); font-size: 46px; line-height: 1; margin-top: 8px; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .tool-button { min-height: 42px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--fg); font: inherit; cursor: pointer; }
+    .tool-button:hover, .tool-button:focus { border-color: var(--accent); outline: 2px solid var(--accent-soft); }
     .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
     .metric { border-top: 1px solid var(--border); padding-top: 10px; }
     .metric span { display: block; color: var(--muted); font-size: 13px; }
@@ -173,7 +224,21 @@
           </table>
         </div>
 
+        <h2>Equivalent Settings</h2>
+        <p>These settings keep the same Valorant baseline as Valorant 0.30 at 800 DPI before converting to CS2. They help when you changed mouse DPI but want the same physical turn distance.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Equivalent Valorant settings before converting to CS2">
+            <thead><tr><th>Valorant DPI</th><th>Valorant sens</th><th>Valorant eDPI</th><th>CS2 at 800 DPI</th><th>cm/360</th></tr></thead>
+            <tbody>
+              <tr><td>400</td><td>0.600</td><td>240</td><td>0.955</td><td>54.43</td></tr>
+              <tr><td>800</td><td>0.300</td><td>240</td><td>0.955</td><td>54.43</td></tr>
+              <tr><td>1600</td><td>0.150</td><td>240</td><td>0.955</td><td>54.43</td></tr>
+            </tbody>
+          </table>
+        </div>
+
         <h2>Common Conversion Mistakes</h2>
+        <p>Most mistakes happen when players move from Valorant's tactical pacing into CS2's angle clearing, utility pressure, and recoil control:</p>
         <ul>
           <li>Keeping the same raw sensitivity number in CS2. Valorant and CS2 use different sensitivity scales.</li>
           <li>Comparing Valorant eDPI and CS2 eDPI as if they mean the same thing across games.</li>
@@ -230,6 +295,10 @@
             <div class="metric"><span>Valorant eDPI</span><b id="edpi">240</b></div>
           </div>
         </div>
+        <div class="actions">
+          <button class="tool-button" type="button" id="copy-result">Copy result</button>
+          <button class="tool-button" type="button" id="copy-link">Copy share URL</button>
+        </div>
       </aside>
     </div>
   </main>
@@ -254,10 +323,16 @@
     const targetSens = document.getElementById('target-sens');
     const cm360 = document.getElementById('cm360');
     const edpi = document.getElementById('edpi');
+    const copyResult = document.getElementById('copy-result');
+    const copyLink = document.getElementById('copy-link');
     function number(value) {
       const parsed = Number.parseFloat(String(value).replace(',', '.'));
       return Number.isFinite(parsed) ? parsed : 0;
     }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('sens')) sourceSens.value = params.get('sens');
+    if (params.get('sourceDpi')) sourceDpi.value = params.get('sourceDpi');
+    if (params.get('targetDpi')) targetDpi.value = params.get('targetDpi');
     function update() {
       const sens = number(sourceSens.value);
       const dpi = number(sourceDpi.value);
@@ -269,7 +344,30 @@
       cm360.textContent = (inches * 2.54).toFixed(2);
       edpi.textContent = Math.round(sens * dpi).toLocaleString('en-US');
     }
+    function shareUrl() {
+      const url = new URL(window.location.href);
+      url.searchParams.set('sens', String(number(sourceSens.value) || ''));
+      url.searchParams.set('sourceDpi', String(number(sourceDpi.value) || ''));
+      url.searchParams.set('targetDpi', String(number(targetDpi.value) || ''));
+      return url.toString();
+    }
+    function resultText() {
+      return `Valorant ${sourceSens.value} at ${sourceDpi.value} DPI = CS2 ${targetSens.textContent} at ${targetDpi.value} DPI (${cm360.textContent} cm/360).`;
+    }
+    async function copyText(button, text, eventName) {
+      const original = button.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        button.textContent = 'Copied';
+        if (typeof gtag === 'function') gtag('event', eventName, { tool: 'valorant_to_cs2' });
+      } catch (error) {
+        button.textContent = 'Copy failed';
+      }
+      window.setTimeout(() => { button.textContent = original; }, 1400);
+    }
     [sourceSens, sourceDpi, targetDpi].forEach((input) => input.addEventListener('input', update));
+    copyResult.addEventListener('click', () => copyText(copyResult, resultText(), 'result_copied'));
+    copyLink.addEventListener('click', () => copyText(copyLink, shareUrl(), 'share_url_copied'));
     update();
   </script>
 </body>

@@ -22,6 +22,13 @@ const EARLY_STAGE_PATTERNS = [
   /email address above should be routed/i,
   /pagead2\.googlesyndication\.com/i
 ];
+const FLAGSHIP_PAGE_FILES = new Set([
+  'cm-360-calculator.html',
+  'cs2-edpi-calculator.html',
+  'cs2-to-valorant-sensitivity.html',
+  'valorant-edpi-calculator.html',
+  'valorant-to-cs2-sensitivity.html'
+]);
 
 function read(filePath) {
   return fs.readFileSync(filePath, 'utf8');
@@ -157,6 +164,14 @@ function checkHtmlPage(file, sitemapUrls, htmlFiles, errors) {
     } else {
       for (const type of ['WebPage', 'BreadcrumbList']) {
         if (!schemaTypes.includes(type)) fail(errors, file, `missing page schema type: ${type}`);
+      }
+      if (FLAGSHIP_PAGE_FILES.has(file)) {
+        if (!schemaTypes.includes('FAQPage')) {
+          fail(errors, file, 'missing flagship schema type: FAQPage');
+        }
+        if (!schemaTypes.includes('WebApplication') && !schemaTypes.includes('SoftwareApplication')) {
+          fail(errors, file, 'missing flagship schema type: WebApplication or SoftwareApplication');
+        }
       }
     }
   }

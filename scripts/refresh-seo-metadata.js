@@ -28,6 +28,49 @@ const featuredPages = [
   ['/fps-sensitivity-conversion-guide', 'FPS sensitivity conversion guide']
 ];
 
+const toolPages = new Map([
+  ['/cm-360-calculator', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Calculate cm/360 from DPI, sensitivity, and yaw',
+      'Compare FPS mouse settings by physical turn distance',
+      'Estimate inches/360 and eDPI'
+    ]
+  }],
+  ['/cs2-edpi-calculator', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Calculate CS2 eDPI from DPI and sensitivity',
+      'Estimate CS2 cm/360',
+      'Compare equivalent CS2 mouse settings'
+    ]
+  }],
+  ['/cs2-to-valorant-sensitivity', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Convert CS2 sensitivity to Valorant sensitivity',
+      'Adjust conversion by source and target DPI',
+      'Copy the result or share a URL with calculator inputs'
+    ]
+  }],
+  ['/valorant-edpi-calculator', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Calculate Valorant eDPI from DPI and sensitivity',
+      'Estimate Valorant cm/360',
+      'Compare equivalent Valorant mouse settings'
+    ]
+  }],
+  ['/valorant-to-cs2-sensitivity', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Convert Valorant sensitivity to CS2 sensitivity',
+      'Adjust conversion by source and target DPI',
+      'Copy the result or share a URL with calculator inputs'
+    ]
+  }]
+]);
+
 function listHtmlFiles() {
   return fs.readdirSync(ROOT).filter((file) => file.endsWith('.html')).sort();
 }
@@ -66,9 +109,44 @@ function jsonScript(data) {
 
 function pageNameFromTitle(title) {
   return title
+    .replace(/\s+\|\s+.*$/, '')
     .replace(/\s+-\s+AimScale$/i, '')
     .replace(/^AimScale\s+-\s+/i, '')
     .trim();
+}
+
+function decodeEntities(value) {
+  return value
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
+}
+
+function cleanText(value) {
+  return decodeEntities(value.replace(/<[^>]+>/g, ' '))
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function extractFaqs(html) {
+  const start = html.search(/<h2[^>]*>\s*Common Questions\s*<\/h2>/i);
+  if (start === -1) return [];
+
+  const rest = html.slice(start);
+  const end = rest.search(/<h2[^>]*>\s*Related Pages\s*<\/h2>/i);
+  const section = end === -1 ? rest : rest.slice(0, end);
+  const faqs = [];
+  const pattern = /<h3[^>]*>([\s\S]*?)<\/h3>\s*<p[^>]*>([\s\S]*?)<\/p>/gi;
+  let match;
+  while ((match = pattern.exec(section))) {
+    const question = cleanText(match[1]);
+    const answer = cleanText(match[2]);
+    if (question && answer) faqs.push({ question, answer });
+  }
+  return faqs;
 }
 
 function homepageSchema(description) {
@@ -119,39 +197,73 @@ function homepageSchema(description) {
   };
 }
 
-function pageSchema(title, description, canonical) {
+function pageSchema(file, title, description, canonical, html) {
+  const pagePath = pagePathFromFile(file);
   const name = pageNameFromTitle(title);
+  const graph = [
+    {
+      '@type': 'WebPage',
+      '@id': `${canonical}#webpage`,
+      url: canonical,
+      name,
+      description,
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      inLanguage: 'en'
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${canonical}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'AimScale',
+          item: `${SITE_URL}/`
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name,
+          item: canonical
+        }
+      ]
+    }
+  ];
+
+  const toolPage = toolPages.get(pagePath);
+  if (toolPage) {
+    graph.push({
+      '@type': ['WebApplication', 'SoftwareApplication'],
+      '@id': `${canonical}#calculator`,
+      name,
+      url: canonical,
+      applicationCategory: toolPage.applicationCategory,
+      operatingSystem: 'Any',
+      isAccessibleForFree: true,
+      description,
+      featureList: toolPage.featureList
+    });
+  }
+
+  const faqs = extractFaqs(html);
+  if (faqs.length) {
+    graph.push({
+      '@type': 'FAQPage',
+      '@id': `${canonical}#faq`,
+      mainEntity: faqs.map(({ question, answer }) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: answer
+        }
+      }))
+    });
+  }
+
   return {
     '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'WebPage',
-        '@id': `${canonical}#webpage`,
-        url: canonical,
-        name,
-        description,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        inLanguage: 'en'
-      },
-      {
-        '@type': 'BreadcrumbList',
-        '@id': `${canonical}#breadcrumb`,
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'AimScale',
-            item: `${SITE_URL}/`
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name,
-            item: canonical
-          }
-        ]
-      }
-    ]
+    '@graph': graph
   };
 }
 
@@ -166,7 +278,7 @@ function upsertJsonLd(file) {
 
   const schema = file === 'index.html'
     ? homepageSchema(description)
-    : pageSchema(title, description, canonical);
+    : pageSchema(file, title, description, canonical, html);
   const script = jsonScript(schema);
 
   const withoutExisting = html.replace(/\n\s*<script type="application\/ld\+json">[\s\S]*?<\/script>\n?/g, '\n');
