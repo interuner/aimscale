@@ -6,26 +6,27 @@ const path = require('node:path');
 const ROOT = path.resolve(__dirname, '..');
 const SITE_URL = 'https://aimscale.top';
 const DEFAULT_LASTMOD = '2026-05-28';
-const UPDATED_LASTMOD = '2026-05-29';
-const updatedPages = new Set([
-  '/',
-  '/cm-360-calculator',
-  '/cs2-edpi-calculator',
-  '/cs2-to-valorant-sensitivity',
-  '/valorant-edpi-calculator',
-  '/valorant-to-cs2-sensitivity',
-  '/fps-sensitivity-conversion-guide',
-  '/privacy',
-  '/edpi-calculator',
-  '/dpi-sensitivity-converter',
-  '/valorant-cm-360-calculator',
-  '/apex-legends-sensitivity-converter',
-  '/overwatch-2-sensitivity-converter',
-  '/rainbow-six-siege-sensitivity-converter',
-  '/best-cm-360-for-valorant',
-  '/best-cm-360-for-cs2',
-  '/about',
-  '/contact'
+const updatedPages = new Map([
+  ['/', '2026-05-29'],
+  ['/cm-360-calculator', '2026-05-29'],
+  ['/cs2-edpi-calculator', '2026-05-29'],
+  ['/cs2-to-valorant-sensitivity', '2026-05-29'],
+  ['/valorant-edpi-calculator', '2026-05-29'],
+  ['/valorant-to-cs2-sensitivity', '2026-05-29'],
+  ['/fps-sensitivity-conversion-guide', '2026-05-29'],
+  ['/privacy', '2026-05-29'],
+  ['/edpi-calculator', '2026-05-29'],
+  ['/dpi-sensitivity-converter', '2026-05-29'],
+  ['/valorant-cm-360-calculator', '2026-05-29'],
+  ['/apex-legends-sensitivity-converter', '2026-05-29'],
+  ['/overwatch-2-sensitivity-converter', '2026-05-29'],
+  ['/rainbow-six-siege-sensitivity-converter', '2026-05-29'],
+  ['/best-cm-360-for-valorant', '2026-05-29'],
+  ['/best-cm-360-for-cs2', '2026-05-29'],
+  ['/about', '2026-05-29'],
+  ['/contact', '2026-05-29'],
+  ['/what-is-cm-360', '2026-06-01'],
+  ['/dpi-vs-edpi', '2026-06-01']
 ]);
 
 const featuredPages = [
@@ -175,7 +176,7 @@ function pageNameFromTitle(title) {
 }
 
 function lastmodForPage(pagePath) {
-  return updatedPages.has(pagePath) ? UPDATED_LASTMOD : DEFAULT_LASTMOD;
+  return updatedPages.get(pagePath) || DEFAULT_LASTMOD;
 }
 
 function decodeEntities(value) {
@@ -373,7 +374,7 @@ function refreshSitemap() {
     /(<url>\s*<loc>([^<]+)<\/loc>\s*<lastmod>)([^<]+)(<\/lastmod>)/g,
     (match, prefix, loc, currentLastmod, suffix) => {
       const pagePath = loc.replace(SITE_URL, '') || '/';
-      const nextLastmod = updatedPages.has(pagePath) ? UPDATED_LASTMOD : DEFAULT_LASTMOD;
+      const nextLastmod = updatedPages.get(pagePath) || DEFAULT_LASTMOD;
       return `${prefix}${nextLastmod}${suffix}`;
     }
   );

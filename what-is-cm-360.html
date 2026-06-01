@@ -20,7 +20,7 @@
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
-        "dateModified": "2026-05-28",
+        "dateModified": "2026-06-01",
         "inLanguage": "en"
       },
       {
@@ -68,6 +68,14 @@
               "@type": "Answer",
               "text": "Change it only when you have a clear problem to solve, such as running out of mousepad or missing small corrections. Test small changes before replacing your whole setup."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between cm/360 and eDPI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "cm/360 measures physical mouse travel for a full turn. eDPI multiplies DPI by in-game sensitivity and is most useful when comparing settings inside the same game."
+            }
           }
         ]
       }
@@ -101,7 +109,7 @@
     .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--accent); margin: 0 0 20px; }
     h1 { font-size: clamp(42px, 6vw, 72px); line-height: 1.04; margin: 0; max-width: 12ch; }
     h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.12; margin: 56px 0 0; }
-    h3 { font-size: 22px; margin: 0; }
+    h3 { font-size: 22px; margin: 28px 0 0; }
     p, li { color: var(--muted); font-size: 16px; }
     p { margin: 16px 0 0; max-width: 72ch; text-wrap: pretty; }
     ul { margin: 16px 0 0; padding-left: 22px; }
@@ -111,6 +119,8 @@
     .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
     .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
     .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .table td:last-child, .table th:last-child { text-align: right; font-family: var(--font-mono); }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .link-list { display: grid; gap: 12px; margin-top: 18px; }
     .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
@@ -165,15 +175,35 @@
 
       <section aria-labelledby="ranges">
         <h2 id="ranges">Example Ranges</h2>
-        <table class="table" aria-label="cm/360 example ranges">
-          <thead><tr><th>cm/360</th><th>Feel</th><th>Common tradeoff</th></tr></thead>
-          <tbody>
-            <tr><td>20 to 30 cm</td><td>Fast</td><td>Easier turns, harder micro control</td></tr>
-            <tr><td>30 to 50 cm</td><td>Medium</td><td>Balanced for many players</td></tr>
-            <tr><td>50 cm and higher</td><td>Slow</td><td>Precise aim, bigger arm movement</td></tr>
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <table class="table" aria-label="cm/360 example ranges">
+            <thead><tr><th>cm/360</th><th>Feel</th><th>Common tradeoff</th></tr></thead>
+            <tbody>
+              <tr><td>20 to 30 cm</td><td>Fast</td><td>Easier turns, harder micro control</td></tr>
+              <tr><td>30 to 50 cm</td><td>Medium</td><td>Balanced for many players</td></tr>
+              <tr><td>50 cm and higher</td><td>Slow</td><td>Precise aim, bigger arm movement</td></tr>
+            </tbody>
+          </table>
+        </div>
         <p>These ranges are not rules. Desk space, mousepad size, role, FOV, and personal comfort matter more than copying a number from another player.</p>
+      </section>
+
+      <section aria-labelledby="equivalent">
+        <h2 id="equivalent">Same cm/360 Across Different Games</h2>
+        <p>A game-aware converter changes the raw sensitivity number so the physical turn distance stays similar. This table shows an approximate 51.95 cm/360 baseline at 800 DPI.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Equivalent 51.95 cm/360 settings across FPS games at 800 DPI">
+            <thead><tr><th>Game</th><th>Sensitivity at 800 DPI</th><th>Approx. cm/360</th></tr></thead>
+            <tbody>
+              <tr><td>CS2 / CS:GO</td><td>1.000</td><td>51.95</td></tr>
+              <tr><td>Valorant</td><td>0.314</td><td>51.95</td></tr>
+              <tr><td>Apex Legends</td><td>1.000</td><td>51.95</td></tr>
+              <tr><td>Overwatch 2</td><td>3.333</td><td>51.95</td></tr>
+              <tr><td>Rainbow Six Siege</td><td>1.100</td><td>51.95</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The in-game values look different because each game uses its own sensitivity scale. Matching cm/360 is a baseline for hip-fire, not a promise that ADS, scoped modes, FOV, or movement will feel identical.</p>
       </section>
 
       <section aria-labelledby="use">
@@ -185,6 +215,28 @@
         </ul>
       </section>
 
+      <section aria-labelledby="measure">
+        <h2 id="measure">How To Measure cm/360 Manually</h2>
+        <p>A calculator is faster, but a manual check is useful when a game has unusual settings or you want to validate your setup.</p>
+        <ul>
+          <li>Place your mouse at a clear starting point on the mousepad and line up the in-game camera with a visible reference.</li>
+          <li>Move the mouse horizontally until your camera completes one full 360-degree turn.</li>
+          <li>Measure the mouse travel distance in centimeters.</li>
+          <li>Repeat the test two or three times and use the average if your measurements vary.</li>
+          <li>Keep acceleration and pointer settings consistent while comparing games.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="mistakes">
+        <h2 id="mistakes">Common Mistakes</h2>
+        <ul>
+          <li>Comparing raw in-game sensitivity values between games without accounting for yaw.</li>
+          <li>Using eDPI as a cross-game unit even though sensitivity scales differ.</li>
+          <li>Expecting hip-fire cm/360 to reproduce ADS or scoped behavior.</li>
+          <li>Changing DPI, in-game sensitivity, FOV, and acceleration at the same time.</li>
+        </ul>
+      </section>
+
       <section aria-labelledby="faq">
         <h2 id="faq">Common Questions</h2>
         <h3>Is lower cm/360 better?</h3>
@@ -193,7 +245,9 @@
         <p>You can use the same cm/360 as a starting baseline, but FOV, ADS behavior, and movement speed can still make the result feel different.</p>
         <h3>How often should I change cm/360?</h3>
         <p>Change it only when you have a clear problem to solve, such as running out of mousepad or missing small corrections. Test small changes before replacing your whole setup.</p>
-        <p>Last reviewed: May 13, 2026.</p>
+        <h3>What is the difference between cm/360 and eDPI?</h3>
+        <p>cm/360 measures physical mouse travel for a full turn. eDPI multiplies DPI by in-game sensitivity and is most useful when comparing settings inside the same game.</p>
+        <p>Last reviewed: June 1, 2026.</p>
       </section>
 
       <section aria-labelledby="related">
@@ -201,9 +255,13 @@
         <div class="link-list">
           <a href="/cm-360-calculator">cm/360 calculator</a>
           <a href="/edpi-calculator">eDPI calculator</a>
+          <a href="/valorant-cm-360-calculator">Valorant cm/360 calculator</a>
           <a href="/cs2-to-valorant-sensitivity">CS2 to Valorant sensitivity converter</a>
           <a href="/valorant-to-cs2-sensitivity">Valorant to CS2 sensitivity converter</a>
+          <a href="/best-cm-360-for-valorant">Best cm/360 range for Valorant</a>
+          <a href="/best-cm-360-for-cs2">Best cm/360 range for CS2</a>
           <a href="/dpi-vs-edpi">DPI vs eDPI for FPS games</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/methodology">How AimScale calculates sensitivity</a>
         </div>
       </section>

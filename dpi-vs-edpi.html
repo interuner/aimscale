@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DPI vs eDPI for FPS Games - AimScale</title>
+  <title>DPI vs eDPI for FPS Games | Sensitivity Guide - AimScale</title>
   <meta name="description" content="Learn the difference between DPI and eDPI in FPS games, how to calculate eDPI, and why cm/360 is better for cross-game comparison." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://aimscale.top/dpi-vs-edpi" />
@@ -20,7 +20,7 @@
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
-        "dateModified": "2026-05-28",
+        "dateModified": "2026-06-01",
         "inLanguage": "en"
       },
       {
@@ -68,6 +68,14 @@
               "@type": "Answer",
               "text": "Use cm/360 when comparing different games. Use eDPI when comparing DPI and sensitivity pairs inside the same game."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I keep the same eDPI after changing DPI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Change in-game sensitivity in the opposite direction. For example, 400 DPI at 2.00 sensitivity, 800 DPI at 1.00, and 1600 DPI at 0.50 all equal 800 eDPI inside the same game."
+            }
           }
         ]
       }
@@ -101,7 +109,7 @@
     .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--accent); margin: 0 0 20px; }
     h1 { font-size: clamp(42px, 6vw, 72px); line-height: 1.04; margin: 0; max-width: 12ch; }
     h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.12; margin: 56px 0 0; }
-    h3 { font-size: 22px; margin: 0; }
+    h3 { font-size: 22px; margin: 28px 0 0; }
     p, li { color: var(--muted); font-size: 16px; }
     p { margin: 16px 0 0; max-width: 72ch; text-wrap: pretty; }
     ul { margin: 16px 0 0; padding-left: 22px; }
@@ -111,6 +119,8 @@
     .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
     .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
     .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
+    .table td:last-child, .table th:last-child { text-align: right; font-family: var(--font-mono); }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .link-list { display: grid; gap: 12px; margin-top: 18px; }
     .link-list a { padding: 14px 0; border-top: 1px solid var(--border); color: var(--fg); }
     .pagefoot { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 13px; }
@@ -160,14 +170,16 @@
         <h2 id="edpi">What Is eDPI?</h2>
         <p>eDPI means effective DPI. The basic formula is:</p>
         <p><code>eDPI = mouse DPI x in-game sensitivity</code></p>
-        <table class="table" aria-label="eDPI examples">
-          <thead><tr><th>DPI</th><th>In-game sensitivity</th><th>eDPI</th></tr></thead>
-          <tbody>
-            <tr><td>400</td><td>2.00</td><td>800</td></tr>
-            <tr><td>800</td><td>1.00</td><td>800</td></tr>
-            <tr><td>1600</td><td>0.50</td><td>800</td></tr>
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <table class="table" aria-label="eDPI examples">
+            <thead><tr><th>DPI</th><th>In-game sensitivity</th><th>eDPI</th></tr></thead>
+            <tbody>
+              <tr><td>400</td><td>2.00</td><td>800</td></tr>
+              <tr><td>800</td><td>1.00</td><td>800</td></tr>
+              <tr><td>1600</td><td>0.50</td><td>800</td></tr>
+            </tbody>
+          </table>
+        </div>
         <p>These three rows have the same eDPI inside the same game, so they should produce a similar turn speed if the game handles input consistently.</p>
       </section>
 
@@ -175,6 +187,36 @@
         <h2 id="limits">The Limit Of eDPI</h2>
         <p>eDPI is useful inside one game, but it is not enough for cross-game conversion. Different games use different sensitivity scales and yaw values. That is why a Valorant eDPI and a CS2 eDPI should not be compared as if they were the same unit.</p>
         <p>For comparing between games, <a href="/what-is-cm-360">cm/360</a> is usually clearer because it measures physical mouse movement for a full turn.</p>
+      </section>
+
+      <section aria-labelledby="cross-game">
+        <h2 id="cross-game">Why The Same eDPI Can Differ Between Games</h2>
+        <p>This table uses 800 DPI and 1.00 in-game sensitivity in each title. Every row has 800 eDPI, but the approximate cm/360 differs because the games use different yaw values.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Same eDPI with different cm/360 across games">
+            <thead><tr><th>Game</th><th>Setting</th><th>eDPI</th><th>Approx. cm/360</th></tr></thead>
+            <tbody>
+              <tr><td>CS2 / CS:GO</td><td>1.00 at 800 DPI</td><td>800</td><td>51.95</td></tr>
+              <tr><td>Valorant</td><td>1.00 at 800 DPI</td><td>800</td><td>16.33</td></tr>
+              <tr><td>Apex Legends</td><td>1.00 at 800 DPI</td><td>800</td><td>51.95</td></tr>
+              <tr><td>Overwatch 2</td><td>1.00 at 800 DPI</td><td>800</td><td>173.18</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="choose-metric">
+        <h2 id="choose-metric">Which Metric Should You Use?</h2>
+        <div class="table-wrap">
+          <table class="table" aria-label="When to use DPI, eDPI, and cm/360">
+            <thead><tr><th>Metric</th><th>Use it for</th><th>Do not use it alone for</th></tr></thead>
+            <tbody>
+              <tr><td>DPI</td><td>Mouse hardware setup and desktop cursor feel</td><td>Describing final in-game turn speed</td></tr>
+              <tr><td>eDPI</td><td>Comparing settings inside the same game</td><td>Comparing different FPS sensitivity scales</td></tr>
+              <tr><td>cm/360</td><td>Comparing physical hip-fire turn distance</td><td>Predicting ADS, scoped, FOV, or role-specific feel</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section aria-labelledby="practical">
@@ -187,6 +229,18 @@
         </ul>
       </section>
 
+      <section aria-labelledby="migration">
+        <h2 id="migration">DPI Change Checklist</h2>
+        <p>If you want to move from 400 DPI to 800 or 1600 DPI without changing your turn speed, use the <a href="/dpi-sensitivity-converter">DPI sensitivity converter</a> and verify the result in your game.</p>
+        <ul>
+          <li>Write down your current DPI and in-game sensitivity.</li>
+          <li>Choose the new DPI before editing the in-game value.</li>
+          <li>Reduce sensitivity when DPI goes up; increase sensitivity when DPI goes down.</li>
+          <li>Check the resulting eDPI inside the same game.</li>
+          <li>Use cm/360 when you also move into a different game.</li>
+        </ul>
+      </section>
+
       <section aria-labelledby="faq">
         <h2 id="faq">Common Questions</h2>
         <h3>Is higher DPI more accurate?</h3>
@@ -195,18 +249,24 @@
         <p>Yes. Mouse shape, grip, FOV, resolution, sensitivity scale, and game behavior can all change how the same eDPI feels.</p>
         <h3>When should I use cm/360 instead of eDPI?</h3>
         <p>Use cm/360 when comparing different games. Use eDPI when comparing DPI and sensitivity pairs inside the same game.</p>
-        <p>Last reviewed: May 13, 2026.</p>
+        <h3>How do I keep the same eDPI after changing DPI?</h3>
+        <p>Change in-game sensitivity in the opposite direction. For example, 400 DPI at 2.00 sensitivity, 800 DPI at 1.00, and 1600 DPI at 0.50 all equal 800 eDPI inside the same game.</p>
+        <p>Last reviewed: June 1, 2026.</p>
       </section>
 
       <section aria-labelledby="related">
         <h2 id="related">Related Pages</h2>
         <div class="link-list">
           <a href="/edpi-calculator">eDPI calculator</a>
+          <a href="/valorant-edpi-calculator">Valorant eDPI calculator</a>
+          <a href="/cs2-edpi-calculator">CS2 eDPI calculator</a>
           <a href="/dpi-sensitivity-converter">DPI sensitivity converter</a>
           <a href="/cm-360-calculator">cm/360 calculator</a>
+          <a href="/valorant-cm-360-calculator">Valorant cm/360 calculator</a>
           <a href="/what-is-cm-360">What is cm/360?</a>
           <a href="/cs2-to-valorant-sensitivity">CS2 to Valorant sensitivity converter</a>
           <a href="/valorant-to-cs2-sensitivity">Valorant to CS2 sensitivity converter</a>
+          <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/methodology">How AimScale calculates sensitivity</a>
         </div>
       </section>
