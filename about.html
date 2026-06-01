@@ -114,19 +114,27 @@
     .footlinks { display: flex; gap: 18px; flex-wrap: wrap; }
     @media (max-width: 720px) { nav { gap: 16px; } h1 { max-width: 100%; } }
   </style>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FMTDQMDKNS"></script>
   <script>
+    const isProductionHost = ["aimscale.top", "www.aimscale.top"].includes(window.location.hostname);
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date());
-    gtag("config", "G-FMTDQMDKNS");
+    if (isProductionHost) {
+      const analyticsScript = document.createElement("script");
+      analyticsScript.async = true;
+      analyticsScript.src = "https://www.googletagmanager.com/gtag/js?id=G-FMTDQMDKNS";
+      document.head.appendChild(analyticsScript);
+      gtag("js", new Date());
+      gtag("config", "G-FMTDQMDKNS");
+    }
   </script>
   <script>
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wqzi6cdcrr");
+    if (isProductionHost) {
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "wqzi6cdcrr");
+    }
   </script>
 </head>
 <body>

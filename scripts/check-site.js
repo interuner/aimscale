@@ -188,6 +188,12 @@ function checkHtmlPage(file, sitemapUrls, htmlFiles, errors) {
   if (!html.includes(`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`)) {
     fail(errors, file, 'missing GA4 script tag');
   }
+  if (!html.includes('const isProductionHost = ["aimscale.top", "www.aimscale.top"].includes(window.location.hostname);')) {
+    fail(errors, file, 'missing production-only analytics host guard');
+  }
+  if (html.includes(`<script async src="https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"></script>`)) {
+    fail(errors, file, 'GA4 script should load only after the production host guard');
+  }
   if (!html.includes(`gtag("config", "${GA_MEASUREMENT_ID}")`)) {
     fail(errors, file, 'missing GA4 config call');
   }
