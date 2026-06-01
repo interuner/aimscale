@@ -24,6 +24,7 @@ const EARLY_STAGE_PATTERNS = [
 ];
 const FLAGSHIP_PAGE_FILES = new Set([
   'apex-legends-sensitivity-converter.html',
+  'apex-edpi-calculator.html',
   'cm-360-calculator.html',
   'cs2-edpi-calculator.html',
   'cs2-to-apex-sensitivity.html',

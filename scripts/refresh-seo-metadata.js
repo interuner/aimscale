@@ -9,9 +9,9 @@ const DEFAULT_LASTMOD = '2026-05-28';
 const updatedPages = new Map([
   ['/', '2026-06-01'],
   ['/cm-360-calculator', '2026-05-29'],
-  ['/cs2-edpi-calculator', '2026-05-29'],
+  ['/cs2-edpi-calculator', '2026-06-01'],
   ['/cs2-to-valorant-sensitivity', '2026-05-29'],
-  ['/valorant-edpi-calculator', '2026-05-29'],
+  ['/valorant-edpi-calculator', '2026-06-01'],
   ['/valorant-to-cs2-sensitivity', '2026-05-29'],
   ['/fps-sensitivity-conversion-guide', '2026-06-01'],
   ['/privacy', '2026-05-29'],
@@ -28,7 +28,8 @@ const updatedPages = new Map([
   ['/what-is-cm-360', '2026-06-01'],
   ['/dpi-vs-edpi', '2026-06-01'],
   ['/cs2-to-apex-sensitivity', '2026-06-01'],
-  ['/valorant-to-apex-sensitivity', '2026-06-01']
+  ['/valorant-to-apex-sensitivity', '2026-06-01'],
+  ['/apex-edpi-calculator', '2026-06-01']
 ]);
 
 const featuredPages = [
@@ -40,6 +41,7 @@ const featuredPages = [
   ['/valorant-to-cs2-sensitivity', 'Valorant to CS2 sensitivity converter'],
   ['/cs2-to-apex-sensitivity', 'CS2 to Apex sensitivity converter'],
   ['/valorant-to-apex-sensitivity', 'Valorant to Apex sensitivity converter'],
+  ['/apex-edpi-calculator', 'Apex Legends eDPI calculator'],
   ['/rainbow-six-siege-sensitivity-converter', 'Rainbow Six Siege sensitivity converter'],
   ['/fps-sensitivity-conversion-guide', 'FPS sensitivity conversion guide']
 ];
@@ -51,6 +53,14 @@ const toolPages = new Map([
       'Calculate cm/360 from DPI, sensitivity, and yaw',
       'Compare FPS mouse settings by physical turn distance',
       'Estimate inches/360 and eDPI'
+    ]
+  }],
+  ['/apex-edpi-calculator', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Calculate Apex Legends eDPI from DPI and sensitivity',
+      'Estimate Apex Legends cm/360',
+      'Copy the result or share a URL with calculator inputs'
     ]
   }],
   ['/cs2-edpi-calculator', {

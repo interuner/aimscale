@@ -20,7 +20,7 @@
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
-        "dateModified": "2026-05-29",
+        "dateModified": "2026-06-01",
         "inLanguage": "en"
       },
       {
@@ -142,6 +142,9 @@
     input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
     .result { margin-top: 20px; padding: 18px; border: 1px solid var(--border); border-radius: 8px; background: color-mix(in oklch, var(--bg) 70%, var(--surface)); }
     .result strong { display: block; font-family: var(--font-display); font-size: 46px; line-height: 1; margin-top: 8px; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .tool-button { min-height: 42px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--fg); font: inherit; cursor: pointer; }
+    .tool-button:hover, .tool-button:focus { border-color: var(--accent); outline: 2px solid var(--accent-soft); }
     .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
     .metric { border-top: 1px solid var(--border); padding-top: 10px; }
     .metric span { display: block; color: var(--muted); font-size: 13px; }
@@ -252,12 +255,13 @@
         <p>Divide your target eDPI by the new mouse DPI. For example, 240 eDPI at 1600 DPI uses 0.150 sensitivity.</p>
         <h3>Why does cm/360 matter here?</h3>
         <p>cm/360 tells you how far the mouse physically travels for a full turn, which is easier to compare than raw sensitivity numbers.</p>
-        <p>Last reviewed: May 29, 2026.</p>
+        <p>Last reviewed: June 1, 2026.</p>
 
         <h2>Related Pages</h2>
         <div class="link-list">
           <a href="/valorant-cm-360-calculator">Valorant cm/360 calculator</a>
           <a href="/cs2-edpi-calculator">CS2 eDPI calculator</a>
+          <a href="/apex-edpi-calculator">Apex Legends eDPI calculator</a>
           <a href="/cs2-to-valorant-sensitivity">CS2 to Valorant sensitivity converter</a>
           <a href="/valorant-to-cs2-sensitivity">Valorant to CS2 sensitivity converter</a>
           <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
@@ -285,6 +289,10 @@
             <div class="metric"><span>inches/360</span><b id="inches">21.43</b></div>
           </div>
         </div>
+        <div class="actions">
+          <button class="tool-button" type="button" id="copy-result">Copy result</button>
+          <button class="tool-button" type="button" id="copy-link">Copy share URL</button>
+        </div>
       </aside>
     </div>
   </main>
@@ -308,10 +316,15 @@
     const edpi = document.getElementById('edpi');
     const cm360 = document.getElementById('cm360');
     const inches = document.getElementById('inches');
+    const copyResult = document.getElementById('copy-result');
+    const copyLink = document.getElementById('copy-link');
     function number(value) {
       const parsed = Number.parseFloat(String(value).replace(',', '.'));
       return Number.isFinite(parsed) ? parsed : 0;
     }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('dpi')) dpi.value = params.get('dpi');
+    if (params.get('sens')) sens.value = params.get('sens');
     function update() {
       const nextDpi = number(dpi.value);
       const nextSens = number(sens.value);
@@ -326,7 +339,45 @@
       inches.textContent = inchValue.toFixed(2);
       cm360.textContent = (inchValue * 2.54).toFixed(2);
     }
+    function shareUrl() {
+      const url = new URL(window.location.href);
+      url.searchParams.set('dpi', String(number(dpi.value) || ''));
+      url.searchParams.set('sens', String(number(sens.value) || ''));
+      return url.toString();
+    }
+    function resultText() {
+      return `Valorant eDPI ${edpi.textContent} = ${dpi.value} DPI x ${sens.value} sensitivity (${cm360.textContent} cm/360).`;
+    }
+    async function writeClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.append(textarea);
+      textarea.select();
+      const copied = document.execCommand('copy');
+      textarea.remove();
+      if (!copied) throw new Error('Copy failed');
+    }
+    async function copyText(button, text, eventName) {
+      const original = button.textContent;
+      try {
+        await writeClipboard(text);
+        button.textContent = 'Copied';
+        if (typeof gtag === 'function') gtag('event', eventName, { tool: 'valorant_edpi_calculator' });
+      } catch (error) {
+        button.textContent = 'Copy failed';
+      }
+      window.setTimeout(() => { button.textContent = original; }, 1400);
+    }
     [dpi, sens].forEach((input) => input.addEventListener('input', update));
+    copyResult.addEventListener('click', () => copyText(copyResult, resultText(), 'result_copied'));
+    copyLink.addEventListener('click', () => copyText(copyLink, shareUrl(), 'share_url_copied'));
     update();
   </script>
 </body>
