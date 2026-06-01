@@ -76,6 +76,16 @@ function run() {
     0.15714285714285714
   );
 
+  approx(
+    convertSensitivity({ from: 'cs2', to: 'apex', sensitivity: 1.2, dpi: 800 }),
+    1.2
+  );
+
+  approx(
+    convertSensitivity({ from: 'valorant', to: 'apex', sensitivity: 0.3, dpi: 800 }),
+    0.9545454545454546
+  );
+
   assert.throws(() => edpi(0, 1), /dpi must be positive/);
   assert.throws(() => edpi(800, -1), /sensitivity must be positive/);
   assert.throws(

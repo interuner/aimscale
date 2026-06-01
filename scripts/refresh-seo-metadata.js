@@ -7,18 +7,18 @@ const ROOT = path.resolve(__dirname, '..');
 const SITE_URL = 'https://aimscale.top';
 const DEFAULT_LASTMOD = '2026-05-28';
 const updatedPages = new Map([
-  ['/', '2026-05-29'],
+  ['/', '2026-06-01'],
   ['/cm-360-calculator', '2026-05-29'],
   ['/cs2-edpi-calculator', '2026-05-29'],
   ['/cs2-to-valorant-sensitivity', '2026-05-29'],
   ['/valorant-edpi-calculator', '2026-05-29'],
   ['/valorant-to-cs2-sensitivity', '2026-05-29'],
-  ['/fps-sensitivity-conversion-guide', '2026-05-29'],
+  ['/fps-sensitivity-conversion-guide', '2026-06-01'],
   ['/privacy', '2026-05-29'],
   ['/edpi-calculator', '2026-05-29'],
   ['/dpi-sensitivity-converter', '2026-05-29'],
   ['/valorant-cm-360-calculator', '2026-05-29'],
-  ['/apex-legends-sensitivity-converter', '2026-05-29'],
+  ['/apex-legends-sensitivity-converter', '2026-06-01'],
   ['/overwatch-2-sensitivity-converter', '2026-05-29'],
   ['/rainbow-six-siege-sensitivity-converter', '2026-05-29'],
   ['/best-cm-360-for-valorant', '2026-05-29'],
@@ -26,7 +26,9 @@ const updatedPages = new Map([
   ['/about', '2026-05-29'],
   ['/contact', '2026-05-29'],
   ['/what-is-cm-360', '2026-06-01'],
-  ['/dpi-vs-edpi', '2026-06-01']
+  ['/dpi-vs-edpi', '2026-06-01'],
+  ['/cs2-to-apex-sensitivity', '2026-06-01'],
+  ['/valorant-to-apex-sensitivity', '2026-06-01']
 ]);
 
 const featuredPages = [
@@ -36,6 +38,8 @@ const featuredPages = [
   ['/dpi-sensitivity-converter', 'DPI sensitivity converter'],
   ['/cs2-to-valorant-sensitivity', 'CS2 to Valorant sensitivity converter'],
   ['/valorant-to-cs2-sensitivity', 'Valorant to CS2 sensitivity converter'],
+  ['/cs2-to-apex-sensitivity', 'CS2 to Apex sensitivity converter'],
+  ['/valorant-to-apex-sensitivity', 'Valorant to Apex sensitivity converter'],
   ['/rainbow-six-siege-sensitivity-converter', 'Rainbow Six Siege sensitivity converter'],
   ['/fps-sensitivity-conversion-guide', 'FPS sensitivity conversion guide']
 ];
@@ -81,6 +85,14 @@ const toolPages = new Map([
       'Copy the result or share a URL with calculator inputs'
     ]
   }],
+  ['/cs2-to-apex-sensitivity', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Convert CS2 sensitivity to Apex Legends sensitivity',
+      'Adjust conversion by source and target DPI',
+      'Copy the result or share a URL with calculator inputs'
+    ]
+  }],
   ['/valorant-edpi-calculator', {
     applicationCategory: 'UtilitiesApplication',
     featureList: [
@@ -93,6 +105,14 @@ const toolPages = new Map([
     applicationCategory: 'UtilitiesApplication',
     featureList: [
       'Convert Valorant sensitivity to CS2 sensitivity',
+      'Adjust conversion by source and target DPI',
+      'Copy the result or share a URL with calculator inputs'
+    ]
+  }],
+  ['/valorant-to-apex-sensitivity', {
+    applicationCategory: 'UtilitiesApplication',
+    featureList: [
+      'Convert Valorant sensitivity to Apex Legends sensitivity',
       'Adjust conversion by source and target DPI',
       'Copy the result or share a URL with calculator inputs'
     ]

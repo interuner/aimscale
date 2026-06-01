@@ -26,6 +26,7 @@ const FLAGSHIP_PAGE_FILES = new Set([
   'apex-legends-sensitivity-converter.html',
   'cm-360-calculator.html',
   'cs2-edpi-calculator.html',
+  'cs2-to-apex-sensitivity.html',
   'cs2-to-valorant-sensitivity.html',
   'dpi-sensitivity-converter.html',
   'edpi-calculator.html',
@@ -33,6 +34,7 @@ const FLAGSHIP_PAGE_FILES = new Set([
   'rainbow-six-siege-sensitivity-converter.html',
   'valorant-edpi-calculator.html',
   'valorant-cm-360-calculator.html',
+  'valorant-to-apex-sensitivity.html',
   'valorant-to-cs2-sensitivity.html'
 ]);
 
