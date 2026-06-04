@@ -21,7 +21,7 @@ const updatedPages = new Map([
   ['/valorant-cm-360-calculator', '2026-05-29'],
   ['/apex-legends-sensitivity-converter', '2026-06-01'],
   ['/overwatch-2-sensitivity-converter', '2026-05-29'],
-  ['/rainbow-six-siege-sensitivity-converter', '2026-05-29'],
+  ['/rainbow-six-siege-sensitivity-converter', '2026-06-04'],
   ['/best-cm-360-for-valorant', '2026-05-29'],
   ['/best-cm-360-for-cs2', '2026-05-29'],
   ['/about', '2026-05-29'],

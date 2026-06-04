@@ -20,7 +20,7 @@
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
-        "dateModified": "2026-05-29",
+        "dateModified": "2026-06-04",
         "inLanguage": "en"
       },
       {
@@ -69,6 +69,14 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "No. This page converts a hip-fire baseline. Siege ADS, optic multipliers, and advanced settings should be tuned after the base turn distance feels usable."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this a Rainbow Six Siege mouse sensitivity converter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, for mouse and keyboard hip-fire sensitivity. It does not convert controller sensitivity, ADS multipliers, optic values, or advanced Siege configuration files."
             }
           },
           {
@@ -193,6 +201,14 @@
         <p>The calculator focuses on the broad hip-fire turn distance. It does not replace Siege-specific ADS sensitivity, optic multipliers, or advanced configuration files.</p>
         <p><code>Target sensitivity = source sensitivity x source DPI x source yaw / target DPI / Siege yaw</code></p>
 
+        <h2>When To Use This Siege Converter</h2>
+        <p>Use this Rainbow Six Siege mouse sensitivity converter when you are bringing a hip-fire baseline from CS2, Valorant, Apex Legends, or Overwatch 2 into Siege. It is built for mouse and keyboard settings, not controller sensitivity.</p>
+        <ul>
+          <li>Use it before you edit ADS or optic settings, so the base turn distance is stable first.</li>
+          <li>Use the target DPI field if your Siege mouse DPI is different from your source game DPI.</li>
+          <li>Use the cm/360 output to compare the physical turn distance with your old setup.</li>
+        </ul>
+
         <h2>Siege Conversion Examples At 800 DPI</h2>
         <p>These examples use 800 DPI in the source game and Siege. They are meant for hip-fire only, because Siege ADS and optic settings need their own tuning pass.</p>
         <div class="table-wrap">
@@ -235,18 +251,24 @@
           <li>Using a value that feels good for angle holding but is too slow for room clears.</li>
           <li>Forgetting that FOV, aspect ratio, and optic settings can change how the same cm/360 feels.</li>
         </ul>
+        <h2>First Test Routine In Siege</h2>
+        <p>After copying the converted value, test one small routine before changing anything else. Do a 180-degree turn check, clear two nearby rooms, hold a long angle, and then ADS with the optic you use most often. If hip-fire movement feels right but ADS feels wrong, leave the base sensitivity alone and tune ADS separately.</p>
+        <p>For cross-game context, compare the same setting inside the <a href="/mouse-sensitivity-converter">mouse sensitivity converter matrix</a> or read the <a href="/methodology">AimScale methodology</a>.</p>
         <h2>Common Questions</h2>
         <h3>Does this convert Siege ADS sensitivity?</h3>
         <p>No. This page converts a hip-fire baseline. Siege ADS, optic multipliers, and advanced settings should be tuned after the base turn distance feels usable.</p>
+        <h3>Is this a Rainbow Six Siege mouse sensitivity converter?</h3>
+        <p>Yes, for mouse and keyboard hip-fire sensitivity. It does not convert controller sensitivity, ADS multipliers, optic values, or advanced Siege configuration files.</p>
         <h3>Why can Siege feel different after matching cm/360?</h3>
         <p>Siege has slower tactical pacing, lean-heavy fights, and separate ADS behavior. A matched hip-fire cm/360 is a starting point, not a full ADS profile.</p>
         <h3>How should I adjust after converting?</h3>
         <p>Test quick clears and angle holds first. If close-range clears feel too slow, lower cm/360 slightly by raising sensitivity. If pixel holds feel unstable, do the opposite.</p>
         <h3>Can I compare Siege eDPI with CS2 eDPI?</h3>
         <p>Not directly. Siege and CS2 use different in-game scales, so eDPI alone is incomplete. Use a yaw-aware conversion and check the resulting cm/360.</p>
-        <p>Last reviewed: May 29, 2026.</p>
+        <p>Last reviewed: June 4, 2026.</p>
         <h2>Related Pages</h2>
         <div class="link-list">
+          <a href="/mouse-sensitivity-converter">Mouse sensitivity converter matrix</a>
           <a href="/apex-legends-sensitivity-converter">Apex Legends sensitivity converter</a>
           <a href="/overwatch-2-sensitivity-converter">Overwatch 2 sensitivity converter</a>
           <a href="/cm-360-calculator">cm/360 calculator</a>
