@@ -16,6 +16,7 @@ AimScale is a small static website experiment for English search traffic. The fi
 - `cm-360-calculator.html` - focused cm/360 calculator and guide.
 - `valorant-cm-360-calculator.html` - Valorant-specific cm/360 calculator.
 - `dpi-sensitivity-converter.html` - DPI change sensitivity converter.
+- `mouse-sensitivity-converter.html` - converter matrix entry page for broad FPS sensitivity converter searches.
 - `AGENTS.md` - maintenance rules for Codex and other coding agents.
 - `README.md` - deployment and launch notes.
 

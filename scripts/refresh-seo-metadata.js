@@ -7,13 +7,14 @@ const ROOT = path.resolve(__dirname, '..');
 const SITE_URL = 'https://aimscale.top';
 const DEFAULT_LASTMOD = '2026-05-28';
 const updatedPages = new Map([
-  ['/', '2026-06-01'],
+  ['/', '2026-06-04'],
+  ['/mouse-sensitivity-converter', '2026-06-04'],
   ['/cm-360-calculator', '2026-05-29'],
   ['/cs2-edpi-calculator', '2026-06-01'],
   ['/cs2-to-valorant-sensitivity', '2026-05-29'],
   ['/valorant-edpi-calculator', '2026-06-01'],
   ['/valorant-to-cs2-sensitivity', '2026-05-29'],
-  ['/fps-sensitivity-conversion-guide', '2026-06-01'],
+  ['/fps-sensitivity-conversion-guide', '2026-06-04'],
   ['/privacy', '2026-05-29'],
   ['/edpi-calculator', '2026-05-29'],
   ['/dpi-sensitivity-converter', '2026-05-29'],
@@ -29,7 +30,8 @@ const updatedPages = new Map([
   ['/dpi-vs-edpi', '2026-06-01'],
   ['/cs2-to-apex-sensitivity', '2026-06-01'],
   ['/valorant-to-apex-sensitivity', '2026-06-01'],
-  ['/apex-edpi-calculator', '2026-06-01']
+  ['/apex-edpi-calculator', '2026-06-01'],
+  ['/methodology', '2026-06-04']
 ]);
 
 const featuredPages = [
@@ -37,6 +39,7 @@ const featuredPages = [
   ['/cm-360-calculator', 'cm/360 calculator'],
   ['/edpi-calculator', 'eDPI calculator'],
   ['/dpi-sensitivity-converter', 'DPI sensitivity converter'],
+  ['/mouse-sensitivity-converter', 'Mouse sensitivity converter matrix'],
   ['/cs2-to-valorant-sensitivity', 'CS2 to Valorant sensitivity converter'],
   ['/valorant-to-cs2-sensitivity', 'Valorant to CS2 sensitivity converter'],
   ['/cs2-to-apex-sensitivity', 'CS2 to Apex sensitivity converter'],

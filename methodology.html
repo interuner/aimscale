@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>How AimScale Calculates FPS Sensitivity</title>
-  <meta name="description" content="Learn how AimScale calculates FPS mouse sensitivity, eDPI, cm/360, yaw values, and why converted sensitivity can still feel different across games." />
+  <title>AimScale Methodology | FPS Sensitivity Formulas & Sources</title>
+  <meta name="description" content="Review AimScale FPS sensitivity formulas, yaw source policy, confidence levels, update process, and limits for eDPI and cm/360 conversion." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://aimscale.top/methodology" />
   <script type="application/ld+json">
@@ -15,12 +15,12 @@
         "@type": "WebPage",
         "@id": "https://aimscale.top/methodology#webpage",
         "url": "https://aimscale.top/methodology",
-        "name": "How AimScale Calculates FPS Sensitivity",
-        "description": "Learn how AimScale calculates FPS mouse sensitivity, eDPI, cm/360, yaw values, and why converted sensitivity can still feel different across games.",
+        "name": "AimScale Methodology | FPS Sensitivity Formulas & Sources",
+        "description": "Review AimScale FPS sensitivity formulas, yaw source policy, confidence levels, update process, and limits for eDPI and cm/360 conversion.",
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
-        "dateModified": "2026-05-28",
+        "dateModified": "2026-06-04",
         "inLanguage": "en"
       },
       {
@@ -36,7 +36,7 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "How AimScale Calculates FPS Sensitivity",
+            "name": "AimScale Methodology | FPS Sensitivity Formulas & Sources",
             "item": "https://aimscale.top/methodology"
           }
         ]
@@ -121,6 +121,7 @@
       <a class="logo" href="/">AimScale</a>
       <nav aria-label="Primary">
         <a href="/">Calculator</a>
+        <a href="/mouse-sensitivity-converter">Converters</a>
         <a href="/what-is-cm-360">cm/360</a>
         <a href="/dpi-vs-edpi">DPI vs eDPI</a>
         <a href="/contact">Contact</a>
@@ -133,6 +134,7 @@
       <p class="eyebrow">Methodology</p>
       <h1>How AimScale calculates FPS sensitivity.</h1>
       <p>AimScale is designed to give players a clean starting point when moving mouse sensitivity between FPS games. The calculator focuses on hip-fire turn distance, eDPI, and cm/360 rather than promising that every in-game aiming mode will feel identical.</p>
+      <p>This page explains the formulas, the source policy behind game constants, how confidence levels are assigned, and what should happen when a player reports a mismatch.</p>
 
       <section class="card" aria-labelledby="scope">
         <h2 id="scope">What The Calculator Covers</h2>
@@ -221,11 +223,76 @@
         <p class="notice">The Finals is currently kept out of the primary homepage converter because the yaw baseline is not strong enough for first-round promotion pages.</p>
       </section>
 
+      <section aria-labelledby="source-policy">
+        <h2 id="source-policy">Source Policy</h2>
+        <p>Game sensitivity conversion depends on small constants, so AimScale treats those constants as maintained product data. A value should not be promoted just because it appears in one forum post or one unsourced converter.</p>
+        <div class="table-scroll">
+          <table class="confidence-table" aria-label="AimScale source policy">
+            <thead>
+              <tr><th>Status</th><th>What it means</th><th>Where it can appear</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Verified</td>
+                <td>The value is backed by official documentation, developer references, console variables, or strong public technical agreement.</td>
+                <td>Main calculator, dedicated landing pages, examples, and internal guides.</td>
+              </tr>
+              <tr>
+                <td>Reviewed</td>
+                <td>The value is consistent across credible converter references and manual sanity checks, but not fully documented by the game publisher.</td>
+                <td>Main calculator and dedicated pages, with clear scope limits.</td>
+              </tr>
+              <tr>
+                <td>Experimental</td>
+                <td>The value is plausible but has weaker source agreement, changing game behavior, or special settings that can affect interpretation.</td>
+                <td>Only with visible caveats, or kept out of primary SEO pages until reviewed.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="review-process">
+        <h2 id="review-process">Review Process</h2>
+        <p>When a game or converter page is added, the review work should be explicit enough that another maintainer can repeat it later.</p>
+        <ol>
+          <li>Identify the game setting being converted: hip-fire, ADS, scoped, controller, or a separate multiplier.</li>
+          <li>Check whether the game exposes an official yaw value, console variable, or publisher note.</li>
+          <li>Compare the value against at least one independent converter or technical reference when official documentation is not available.</li>
+          <li>Run example conversions at 400, 800, and 1600 DPI and compare the resulting cm/360 against expected ranges.</li>
+          <li>Mark the confidence level and write the limitation in plain language on the relevant page.</li>
+          <li>Update the page's last reviewed date and sitemap `lastmod` when the content or source basis changes materially.</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="worked-example">
+        <h2 id="worked-example">Worked Example</h2>
+        <p>For a CS2 to Valorant conversion at 800 DPI and CS2 sensitivity 1.00, AimScale first calculates the CS2 physical turn distance using the source yaw value. It then solves for the Valorant sensitivity that keeps the same cm/360 at the target DPI.</p>
+        <div class="formula">
+          <code>source eDPI = 800 * 1.00 = 800</code>
+          <code>source cm/360 = 360 / (800 * 1.00 * source yaw) * 2.54</code>
+          <code>target sensitivity = 360 / (800 * target yaw * source inches/360)</code>
+        </div>
+        <p>The result is a hip-fire baseline. A player should still test ADS and scoped modes separately because those settings often use their own multipliers.</p>
+      </section>
+
+      <section aria-labelledby="quality-checks">
+        <h2 id="quality-checks">Quality Checks Before A Page Is Promoted</h2>
+        <ul>
+          <li>The page has one clear title, one H1, a canonical URL, and a matching sitemap entry.</li>
+          <li>The page explains the game scope, formula limit, and when a player should adjust manually.</li>
+          <li>Examples cover common DPI values instead of relying only on abstract formulas.</li>
+          <li>Related pages link back into the same topic cluster, such as eDPI, cm/360, DPI conversion, and pair converters.</li>
+          <li>Calculator controls are tested for invalid inputs, copy actions, and shareable URLs when the page includes an interactive tool.</li>
+        </ul>
+      </section>
+
       <section aria-labelledby="maintenance">
         <h2 id="maintenance">How Constants Are Maintained</h2>
         <p>Each game constant should have a review status, source references, and a last reviewed date before it becomes part of a serious converter page. If a constant is uncertain, it should be marked experimental or kept out of SEO pages until reviewed.</p>
         <p>To report a calculation issue, send the source game, target game, DPI, sensitivity, result shown, and the result you expected through the <a href="/contact">contact page</a>.</p>
-        <p class="notice">Last reviewed: May 14, 2026.</p>
+        <p>Useful supporting pages include the <a href="/mouse-sensitivity-converter">mouse sensitivity converter matrix</a>, <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>, <a href="/edpi-calculator">eDPI calculator</a>, and <a href="/cm-360-calculator">cm/360 calculator</a>.</p>
+        <p class="notice">Last reviewed: June 4, 2026.</p>
       </section>
     </div>
   </main>
