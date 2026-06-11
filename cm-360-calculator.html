@@ -20,7 +20,7 @@
         "isPartOf": {
           "@id": "https://aimscale.top/#website"
         },
-        "dateModified": "2026-05-29",
+        "dateModified": "2026-06-11",
         "inLanguage": "en"
       },
       {
@@ -138,6 +138,9 @@
     .metric { border-top: 1px solid var(--border); padding-top: 10px; }
     .metric span { display: block; color: var(--muted); font-size: 13px; }
     .metric b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .tool-button { min-height: 42px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--fg); font: inherit; cursor: pointer; }
+    .tool-button:hover, .tool-button:focus { border-color: var(--accent); outline: 2px solid var(--accent-soft); }
     .table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; }
     .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
     .table th { color: var(--muted); font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; }
@@ -191,6 +194,7 @@
         <p class="eyebrow">Turn distance</p>
         <h1>cm/360 calculator for FPS games.</h1>
         <p>Use this calculator to estimate how many centimeters your mouse must travel for a full 360-degree turn. cm/360 is useful because it describes a physical distance instead of only an in-game number.</p>
+        <p>If you searched for sens to cm 360, cm/360 calculator, or mouse sensitivity distance, choose the game yaw preset first, then enter your sensitivity and DPI. For unsupported games, use the result only when you know the correct yaw value.</p>
 
         <h2>Formula</h2>
         <p>AimScale uses this hip-fire baseline formula:</p>
@@ -240,6 +244,19 @@
 
         <h2>Limitations</h2>
         <p>This calculator matches hip-fire cm/360. It does not guarantee identical feel across games because FOV, ADS sensitivity, scoped sensitivity, mouse acceleration, resolution, and game engine behavior can affect aiming feel.</p>
+        <h2>When To Use Another Tool</h2>
+        <p>Use cm/360 when the question is physical turn distance. Use eDPI when the question is DPI and sensitivity inside one game. Use a pair converter when you are moving from one FPS game to another.</p>
+        <div class="table-wrap">
+          <table class="table" aria-label="Choose between cm/360, eDPI, and converter tools">
+            <thead><tr><th>Search intent</th><th>Best page</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td>cm/360 calculator</td><td><a href="/cm-360-calculator">This cm/360 calculator</a></td><td>Physical mouse travel for one full turn.</td></tr>
+              <tr><td>edpi calculator</td><td><a href="/edpi-calculator">eDPI calculator</a></td><td>DPI multiplied by sensitivity inside one game scale.</td></tr>
+              <tr><td>sensitivity converter</td><td><a href="/mouse-sensitivity-converter">Mouse sensitivity converter matrix</a></td><td>Pick the right game-pair or calculator page.</td></tr>
+              <tr><td>DPI change</td><td><a href="/dpi-sensitivity-converter">DPI sensitivity converter</a></td><td>Keep the same feel after changing mouse DPI.</td></tr>
+            </tbody>
+          </table>
+        </div>
         <h2>Common Questions</h2>
         <h3>Why is cm/360 better than raw sensitivity?</h3>
         <p>Raw sensitivity numbers use each game's own scale. cm/360 turns that setting into a physical mouse distance, which is easier to compare across games.</p>
@@ -247,11 +264,12 @@
         <p>Choose the game you are measuring. If you are unsure about a game's exact behavior, treat the result as a baseline and confirm it in a training range.</p>
         <h3>Does a higher cm/360 mean slower aim?</h3>
         <p>Yes. A higher cm/360 means you need more mousepad distance for one full turn, so the sensitivity feels slower.</p>
-        <p>Last reviewed: May 29, 2026.</p>
+        <p>Last reviewed: June 11, 2026.</p>
 
         <h2>Related Pages</h2>
         <div class="link-list">
           <a href="/what-is-cm-360">What is cm/360?</a>
+          <a href="/mouse-sensitivity-converter">Mouse sensitivity converter matrix</a>
           <a href="/edpi-calculator">eDPI calculator</a>
           <a href="/fps-sensitivity-conversion-guide">FPS sensitivity conversion guide</a>
           <a href="/cs2-to-valorant-sensitivity">CS2 to Valorant sensitivity converter</a>
@@ -289,6 +307,10 @@
             <div class="metric"><span>eDPI</span><b id="edpi">800</b></div>
           </div>
         </div>
+        <div class="actions">
+          <button class="tool-button" type="button" id="copy-result">Copy result</button>
+          <button class="tool-button" type="button" id="copy-link">Copy share URL</button>
+        </div>
       </aside>
     </div>
   </main>
@@ -313,6 +335,8 @@
     const cm360 = document.getElementById('cm360');
     const inches = document.getElementById('inches');
     const edpi = document.getElementById('edpi');
+    const copyResult = document.getElementById('copy-result');
+    const copyLink = document.getElementById('copy-link');
     function number(value) {
       const parsed = Number.parseFloat(String(value).replace(',', '.'));
       return Number.isFinite(parsed) ? parsed : 0;
@@ -332,7 +356,50 @@
       cm360.textContent = (inchValue * 2.54).toFixed(2);
       edpi.textContent = Math.round(nextDpi * nextSens).toLocaleString('en-US');
     }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('yaw')) game.value = params.get('yaw');
+    if (params.get('sens')) sens.value = params.get('sens');
+    if (params.get('dpi')) dpi.value = params.get('dpi');
+    function shareUrl() {
+      const url = new URL(window.location.href);
+      url.searchParams.set('yaw', String(number(game.value) || ''));
+      url.searchParams.set('sens', String(number(sens.value) || ''));
+      url.searchParams.set('dpi', String(number(dpi.value) || ''));
+      return url.toString();
+    }
+    function resultText() {
+      return `${cm360.textContent} cm/360 at ${dpi.value} DPI and ${sens.value} sensitivity. eDPI: ${edpi.textContent}.`;
+    }
+    async function writeClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.append(textarea);
+      textarea.select();
+      const copied = document.execCommand('copy');
+      textarea.remove();
+      if (!copied) throw new Error('Copy failed');
+    }
+    async function copyText(button, text, eventName) {
+      const original = button.textContent;
+      try {
+        await writeClipboard(text);
+        button.textContent = 'Copied';
+        if (typeof gtag === 'function') gtag('event', eventName, { tool: 'cm360_calculator' });
+      } catch (error) {
+        button.textContent = 'Copy failed';
+      }
+      window.setTimeout(() => { button.textContent = original; }, 1400);
+    }
     [game, sens, dpi].forEach((input) => input.addEventListener('input', update));
+    copyResult.addEventListener('click', () => copyText(copyResult, resultText(), 'result_copied'));
+    copyLink.addEventListener('click', () => copyText(copyLink, shareUrl(), 'share_url_copied'));
     update();
   </script>
 </body>
